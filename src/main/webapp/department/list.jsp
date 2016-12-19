@@ -136,7 +136,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>用户管理</h1>
+        <h1>组织机构</h1>
         <ol class="breadcrumb">
           <li>
             <a href="#">
@@ -181,9 +181,9 @@
               <!-- 提示框 END -->
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">用户列表</h3>
+                <h3 class="box-title">部门列表</h3>
                 <div class="box-tools pull-right">
-                  <a href="${ctxroot}/user/form" class="btn btn-default btn-sm">添加用户</a>
+                  <a href="${ctxroot}/department/form" class="btn btn-default btn-sm">添加部门</a>
                 </div>
               </div>
               <!-- /.box-header -->
@@ -192,23 +192,23 @@
                   <thead>
                     <tr>
                       <th>序号</th>
-                      <th>登录名</th>
-                      <th>姓名</th>
-                      <th>最近登录时间</th>
+                      <th>部门名</th>
+                      <th>编码</th>
+                      <th>备注</th>
                       <th>操作</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach items="${userlist}" var="user" varStatus="sn">
+                    <c:forEach items="${departmentlist}" var="department" varStatus="sn">
                       <tr>
                         <td>${sn.index+1}</td>
-                        <td>${user.loginName}</td>
-                        <td>${user.turename}</td>
-                        <td>${user.logindate}</td>
+                        <td>${department.dname}</td>
+                        <td>${department.did}</td>
+                        <td>${department.remarks}</td>
                         <td>
                           <div class="btn-group">
-                            <a href="${ctxroot}/user/form/${user.uid}" class="btn btn-xs btn-default" onclick="">修改</a>
-                            <button class="btn btn-xs btn-default" onclick="del(${user.uid});">删除</button>
+                            <a href="${ctxroot}/department/form/${department.did}" class="btn btn-xs btn-default" onclick="">修改</a>
+                            <a href="#" class="btn btn-xs btn-default" onclick="del(${department.did});">删除</a>
                           </div>
                         </td>
                       </tr>
@@ -343,23 +343,24 @@
     function selectdepartment(event, treeId, treeNode, clickFlag){
       //console.log(treeNode.id);
       did = treeNode.id
-      url = rooturl + "/user/list/"+did;
+      url = rooturl + "/department/list/"+did;
       window.location.href = url;
     };
 
-    function del(uid){
-      var purl = rooturl + "/user/delete";
-      $.post(purl, {"uid":uid}, function(data){
-            if(data == '1'){
-              Alert("删除成功",refresh);
-            }else{
-              Alert("删除失败",refresh);
-            }
+    function del(did){
+      url = rooturl + "/department/delete/"+did;
+      jQuery.post(url, {'did':did}, function(data){
+        console.log(data);
+        if(data == '1'){
+          Alert("删除成功",refresh);
+        }else{
+          Alert("删除失败",refresh);
+        }
       });
-    };
-    var refresh = function(){
-      window.location.href = rooturl + "/user";
     }
+        var refresh = function(){
+  window.location.href = rooturl + "/menu";
+}
   </script>
 </body>
 </html>

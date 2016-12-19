@@ -33,6 +33,9 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style type="text/css">
+    /*ul.ztree {margin-top: 10px;border: 1px solid #617775;background: #f0f6e4;width:600px;height:360px;overflow-y:scroll;overflow-x:auto;}*/
+  </style>
   <script type="text/javascript">
     var rooturl = '${ctxroot}'; 
   </script>
@@ -136,7 +139,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>用户管理</h1>
+        <h1>菜单管理</h1>
         <ol class="breadcrumb">
           <li>
             <a href="#">
@@ -154,15 +157,7 @@
       <!-- Main content -->
       <section class="content">
         <div class="row">
-          <div class="col-md-2">
-
-            <div class="box">
-              <div class="box-body">
-                <ul id="treeDemo" class="ztree"></ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-10">
+           <div class="col-md-12">
 
               <!-- 提示框 START -->
               <c:if test="${requestScope.errormsg != null}">
@@ -181,62 +176,15 @@
               <!-- 提示框 END -->
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">用户列表</h3>
+                <h3 class="box-title">菜单列表</h3>
                 <div class="box-tools pull-right">
-                  <a href="${ctxroot}/user/form" class="btn btn-default btn-sm">添加用户</a>
+                  <a href="${ctxroot}/menu/form" class="btn btn-default btn-sm">添加菜单</a>
                 </div>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
-                <table id="userlist" class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>序号</th>
-                      <th>登录名</th>
-                      <th>姓名</th>
-                      <th>最近登录时间</th>
-                      <th>操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <c:forEach items="${userlist}" var="user" varStatus="sn">
-                      <tr>
-                        <td>${sn.index+1}</td>
-                        <td>${user.loginName}</td>
-                        <td>${user.turename}</td>
-                        <td>${user.logindate}</td>
-                        <td>
-                          <div class="btn-group">
-                            <a href="${ctxroot}/user/form/${user.uid}" class="btn btn-xs btn-default" onclick="">修改</a>
-                            <button class="btn btn-xs btn-default" onclick="del(${user.uid});">删除</button>
-                          </div>
-                        </td>
-                      </tr>
-                    </c:forEach>
-                  </tbody>
-                </table>
+                <ul id="treeDemo" class="ztree"></ul>
               </div>
-              <!-- /.box-body -->
-              <!--               <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li>
-                  <a href="#">&laquo;</a>
-                </li>
-                <li>
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">&raquo;</a>
-                </li>
-              </ul>
-            </div>
-            -->
           </div>
           <!-- /.box --> </div>
       </div>
@@ -287,11 +235,11 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-      var did = ${did};
 
       var setting = {
         view:{
-          selectedMulti:false
+          selectedMulti:false,
+          addDiyDom: addDiyDom
         },
         data: {
           simpleData: {
@@ -299,7 +247,7 @@
           }
         },
         callback: {
-          onClick: selectdepartment
+          //onClick: selectdepartment
         }
       };
 
@@ -311,11 +259,22 @@
       }
 
       //默认选中
-      var node = tree.getNodeByParam("id", did, null);
-      tree.selectNode(node);
+      //var node = tree.getNodeByParam("id", did, null);
+      //tree.selectNode(node);
 
     });
 
+    function addDiyDom(treeId, treeNode){
+      if (treeNode.id == 1) return;
+      var aObj = $("#" + treeNode.tId + '_a');
+      //var editStr = "<span class='demoIcon' id='diyBtn_" +treeNode.id+ "' title='"+treeNode.name+"' onfocus=''>&nbsp;&nbsp;&nbsp;&nbsp;修改</span>";
+      var editStr = '&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"${ctxroot}/menu/form/'+treeNode.id+'\" class=\"btn btn-default btn-sm\">修改</a>';
+      editStr += '&nbsp;<button class=\"btn btn-default btn-sm\" onClick=\"del('+treeNode.id+');\">删除</button>';
+      aObj.append(editStr);
+      //var btn = $("#diyBtn_"+treeNode.id);
+      //if (btn) btn.bind("click", function(){alert("diy Button for " + treeNode.name);});
+    }
+/*
       //datatable 数据表格
     $('#userlist').DataTable({
       "paging": true,
@@ -346,20 +305,20 @@
       url = rooturl + "/user/list/"+did;
       window.location.href = url;
     };
-
-    function del(uid){
-      var purl = rooturl + "/user/delete";
-      $.post(purl, {"uid":uid}, function(data){
-            if(data == '1'){
-              Alert("删除成功",refresh);
-            }else{
-              Alert("删除失败",refresh);
-            }
-      });
-    };
-    var refresh = function(){
-      window.location.href = rooturl + "/user";
-    }
+*/
+function del(menuid){
+  var purl = rooturl + "/menu/delete";
+  $.post(purl, {"menuid":menuid}, function(data){
+        if(data == '1'){
+          Alert("删除成功",refresh);
+        }else{
+          Alert("删除失败",refresh);
+        }
+  });
+};
+var refresh = function(){
+  window.location.href = rooturl + "/menu";
+}
   </script>
 </body>
 </html>

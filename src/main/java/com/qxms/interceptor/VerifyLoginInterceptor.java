@@ -14,7 +14,9 @@ public class VerifyLoginInterceptor implements Interceptor {
 		
 		if(user == null){
 			System.out.println("---未登录---");
-			inv.getController().redirect("/login");
+			//inv.getController().redirect("/login");
+			inv.getController().setAttr("msg1", "登录失效请重新登录");
+			inv.getController().forwardAction("/login");
 		}else{
 			inv.invoke();
 		}

@@ -136,7 +136,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>用户管理</h1>
+        <h1>角色管理</h1>
         <ol class="breadcrumb">
           <li>
             <a href="#">
@@ -154,15 +154,7 @@
       <!-- Main content -->
       <section class="content">
         <div class="row">
-          <div class="col-md-2">
-
-            <div class="box">
-              <div class="box-body">
-                <ul id="treeDemo" class="ztree"></ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-10">
+          <div class="col-md-12">
 
               <!-- 提示框 START -->
               <c:if test="${requestScope.errormsg != null}">
@@ -181,9 +173,9 @@
               <!-- 提示框 END -->
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">用户列表</h3>
+                <h3 class="box-title">角色管理</h3>
                 <div class="box-tools pull-right">
-                  <a href="${ctxroot}/user/form" class="btn btn-default btn-sm">添加用户</a>
+                  <a href="${ctxroot}/role/form" class="btn btn-default btn-sm">添加角色</a>
                 </div>
               </div>
               <!-- /.box-header -->
@@ -192,23 +184,24 @@
                   <thead>
                     <tr>
                       <th>序号</th>
-                      <th>登录名</th>
-                      <th>姓名</th>
-                      <th>最近登录时间</th>
+                      <th>角色名称</th>
+                      <th>角色编号</th>
+                      <th>备注</th>
                       <th>操作</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach items="${userlist}" var="user" varStatus="sn">
+                    <c:forEach items="${rolelist}" var="role" varStatus="sn">
                       <tr>
                         <td>${sn.index+1}</td>
-                        <td>${user.loginName}</td>
-                        <td>${user.turename}</td>
-                        <td>${user.logindate}</td>
+                        <td>${role.rolename}</td>
+                        <td>${role.roleid}</td>
+                        <td>${role.remarks}</td>
                         <td>
                           <div class="btn-group">
-                            <a href="${ctxroot}/user/form/${user.uid}" class="btn btn-xs btn-default" onclick="">修改</a>
-                            <button class="btn btn-xs btn-default" onclick="del(${user.uid});">删除</button>
+                            <a href="${ctxroot}/role/form/${role.roleid}" class="btn btn-xs btn-default" onclick="">修改</a>
+                            <a href="#" class="btn btn-xs btn-default" onclick="del(${role.roleid});">删除</a>
+                            <a href="${ctxroot}/role/grantform/${role.roleid}" class="btn btn-xs btn-default" onclick="">授权</a>
                           </div>
                         </td>
                       </tr>
@@ -286,80 +279,20 @@
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(function(){
-      var did = ${did};
-
-      var setting = {
-        view:{
-          selectedMulti:false
-        },
-        data: {
-          simpleData: {
-            enable: true
-          }
-        },
-        callback: {
-          onClick: selectdepartment
+    function del(did){
+      url = rooturl + "/role/delete/"+did;
+      jQuery.post(url, {'did':did}, function(data){
+        console.log(data);
+        if(data == '1'){
+          Alert("删除成功",refresh);
+        }else{
+          Alert("删除失败",refresh);
         }
-      };
-
-      var zNodes = ${treejson}; 
-      var tree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-      var nodes = tree.getNodesByParam("level", 0);
-      for(var i=0; i<nodes.length; i++) {
-        tree.expandNode(nodes[i], true, true, false);
-      }
-
-      //默认选中
-      var node = tree.getNodeByParam("id", did, null);
-      tree.selectNode(node);
-
-    });
-
-      //datatable 数据表格
-    $('#userlist').DataTable({
-      "paging": true,
-      "pageLength": 20,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": false,
-      "info": true,
-      "autoWidth": false,
-      "language": {
-        "lengthMenu": "每页 _MENU_ 条记录",
-        "zeroRecords": "没有找到记录",
-        "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-        "infoEmpty": "无记录",
-        "infoFiltered": "(从 _MAX_ 条记录过滤)",
-        "oPaginate": {
-          "sFirst": "首页",
-          "sPrevious": "上页",
-          "sNext": "下页",
-          "sLast": "末页"
-        }
-      }
-    });
-
-    function selectdepartment(event, treeId, treeNode, clickFlag){
-      //console.log(treeNode.id);
-      did = treeNode.id
-      url = rooturl + "/user/list/"+did;
-      window.location.href = url;
-    };
-
-    function del(uid){
-      var purl = rooturl + "/user/delete";
-      $.post(purl, {"uid":uid}, function(data){
-            if(data == '1'){
-              Alert("删除成功",refresh);
-            }else{
-              Alert("删除失败",refresh);
-            }
       });
-    };
-    var refresh = function(){
-      window.location.href = rooturl + "/user";
     }
+    var refresh = function(){
+  window.location.href = rooturl + "/menu";
+}
   </script>
 </body>
 </html>

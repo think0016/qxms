@@ -10,7 +10,10 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
+import com.qxms.controller.DepartmentController;
 import com.qxms.controller.IndexController;
+import com.qxms.controller.MenuController;
+import com.qxms.controller.RoleController;
 import com.qxms.controller.TestController;
 import com.qxms.controller.UserController;
 import com.qxms.interceptor.VerifyLoginInterceptor;
@@ -37,6 +40,9 @@ public class DemoConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class, "/index");	// 第三个参数为该Controller的视图存放路径
 		me.add("/user", UserController.class);
+		me.add("/department", DepartmentController.class);
+		me.add("/role", RoleController.class);
+		me.add("/menu", MenuController.class);
 		me.add("/test", TestController.class);
 	}
 	

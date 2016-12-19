@@ -36,7 +36,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">${msg1}</p>
 
-    <form action="login1" method="post">
+    <form action="${ctxroot}/login1" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="username" value="${username}" placeholder="用户名">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>

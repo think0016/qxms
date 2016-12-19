@@ -5,6 +5,7 @@ import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 import com.qxms.interceptor.LoginValidator;
 import com.qxms.model.User;
+import com.qxms.service.SystemService;
 import com.qxms.service.UserService;
 
 public class IndexController extends Controller {
@@ -25,8 +26,10 @@ public class IndexController extends Controller {
 	public void login1() {
 		String username = getPara("username");
 		String password = getPara("password");
-		User user = userService.findByup(username, password);
-		if(user == null){
+		
+		User user = userService.findByloginname(username);
+		//User user = userService.findByup(username, password);
+		if(user == null || !SystemService.validatePassword(password, user.getPassword())){
 			setAttr("msg1", "用户名或密码不正确");
 			//setAttr("msg1", "用户名或密码不正确");
 			keepPara();

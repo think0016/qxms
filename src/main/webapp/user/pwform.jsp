@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="${ctxStatic}/plugins/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="${ctxStatic}/plugins/other/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="${ctxStatic}/plugins/datatables/dataTables.bootstrap.css">
+  <!-- ztree -->
+  <link rel="stylesheet" href="${ctxStatic}/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
   <!-- Theme style -->
   <link rel="stylesheet" href="${ctxStatic}/dist/css/admincore.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -27,6 +31,10 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style type="text/css">
+    ul.ztree {margin-top: 10px;border: 1px solid #617775;background: #f0f6e4;width:220px;height:360px;overflow-y:scroll;overflow-x:auto;}
+  </style>
+  <script type="text/javascript">var rooturl = '${ctxroot}'; </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <!-- Site wrapper -->
@@ -126,7 +134,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>主页</h1>
+        <h1>用户管理</h1>
         <ol class="breadcrumb">
           <li>
             <a href="#">
@@ -144,7 +152,8 @@
       <!-- Main content -->
       <section class="content">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
             <!-- 提示框 START -->
             <c:if test="${requestScope.errormsg != null}">
               <div class="alert alert-danger alert-dismissible">
@@ -165,44 +174,125 @@
                 </h4>
               </div>
             </c:if>
-            <!-- 提示框 END --> </div>
+            <!-- 提示框 END -->
+            <form action="${ctxroot}/user/resetpassword" class="form-horizontal"  method="post" id="form1">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">用户添加</h3>
+                </div>
+                <div class="box-body">
+                  <input type="hidden" name="uid" value="${user.uid}">
+                  <input type="hidden" name="loginname" value="${user.loginName}">
+                  <div class="form-group">
+                    <label for="input1" class="col-sm-2 control-label">登录名：</label>
+
+                    <div class="col-sm-8">
+                      <input type="text" name="loginnamex" class="form-control" id="input1" value="${user.loginName}"></div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="input1" class="col-sm-2 control-label">旧密码：</label>
+
+                    <div class="col-sm-8">
+                      <input type="password" name="opassword" class="form-control" id="input1" placeholder="密码" value=""></div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="input1" class="col-sm-2 control-label">新密码：</label>
+
+                    <div class="col-sm-8">
+                      <input type="password" name="npassword" class="form-control" id="input1" placeholder="密码" value=""></div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="input1" class="col-sm-2 control-label">新密码确认：</label>
+
+                    <div class="col-sm-8">
+                      <input type="password" name="npassword2" class="form-control" id="input1" placeholder="密码确认" value=""></div>
+                    <div class="col-sm-2"></div>
+                  </div>
+
+                </div>
+                <div class="box-footer">
+                  <div class="col-sm-10">
+                    <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
+                    <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button>
+                  -->
+                </div>
+                <div class="col-sm-2"></div>
+              </div>
+            </div>
+          </form>
         </div>
+        <div class="col-md-1"></div>
+      </div>
 
-      </section>
-      <!-- /.content --> </div>
-    <!-- /.content-wrapper -->
+      <!-- 下拉菜单START -->
+      <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+        <ul id="treeDemo" class="ztree" style=""></ul>
+      </div>
+      <!-- 下拉菜单END --> </section>
+    <!-- /.content --> </div>
+  <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-      <div class="pull-right hidden-xs">
-        <b>Version</b>
-        2.3.7
-      </div> <strong>Copyright &copy; 2014-2016
-        <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
-        .</strong> 
-      All rights
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b>
+      2.3.7
+    </div> <strong>Copyright &copy; 2014-2016
+      <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
+      .</strong> 
+    All rights
     reserved.
-    </footer>
+  </footer>
 
-    <!-- Control Sidebar -->
+  <!-- Control Sidebar -->
 
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
 
-  <!-- jQuery 2.2.3 -->
-  <script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-  <!-- Bootstrap 3.3.6 -->
-  <script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
-  <!-- SlimScroll -->
-  <script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-  <!-- FastClick -->
-  <script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
-  <!-- AdminLTE App -->
-  <script src="${ctxStatic}/dist/js/app.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="${ctxStatic}/dist/js/demo.js"></script>
+<!-- jQuery 2.2.3 -->
+<script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
+<!-- DataTables -->
+<script src="${ctxStatic}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- ztree -->
+<script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<!-- AdminLTE App -->
+<script src="${ctxStatic}/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="${ctxStatic}/dist/js/demo.js"></script>
+<script type="text/javascript">
+   
+
+    //表单提交
+    function saveform(){
+      //验证表单
+      var opassword = $("input[name='opassword']").val();
+      var npassword = $("input[name='npassword']").val();
+      var npassword2 = $("input[name='npassword2']").val();
+
+      if(opassword == ''){
+        alert("旧密码不能为空");
+      }else if(npassword != npassword2){
+        alert("两次密码输入不相同");
+      }else{
+        $('#form1')[0].submit();  
+      }
+
+      
+    };
+
+  </script>
 </body>
 </html>

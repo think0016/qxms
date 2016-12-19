@@ -1,0 +1,12 @@
+/**
+    样式如果自己觉得黑乎乎不好看可以修改
+    **/
+.ec_tip {
+	display: none;
+	padding: 5px;
+	position: absolute;
+	background: #555;
+	color: #fff;
+	border: 3px solid #555;
+	z-index: 9999;
+}

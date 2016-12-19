@@ -134,7 +134,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>用户管理</h1>
+        <h1>部门管理</h1>
         <ol class="breadcrumb">
           <li>
             <a href="#">
@@ -154,154 +154,151 @@
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-10">
-              <!-- 提示框 START -->
-              <c:if test="${requestScope.errormsg != null}">
-                <div class="alert alert-danger alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-ban"></i> 发生错误!</h4>${requestScope.errormsg}
-                </div>
-              </c:if>
-              <c:if test="${requestScope.infomsg != null}">
-                <div class="alert alert-success alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-check"></i> ${requestScope.infomsg}</h4>
-                </div>
-              </c:if>
-              <!-- 提示框 END -->
-            <form action="${ctxroot}/user/saveuser" class="form-horizontal"  method="post" id="form1">
-            <div class="box">
-              <div class="box-header with-border">
-                <h3 class="box-title">用户添加</h3>
+            <!-- 提示框 START -->
+            <c:if test="${requestScope.errormsg != null}">
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>
+                  <i class="icon fa fa-ban"></i>
+                  发生错误!
+                </h4>
+                ${requestScope.errormsg}
               </div>
-              <div class="box-body">
-                  <input type="hidden" name="uid" value="${user.uid}">
-                  <input type="hidden" name="did" value="">
+            </c:if>
+            <c:if test="${requestScope.infomsg != null}">
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>
+                  <i class="icon fa fa-check"></i>
+                  ${requestScope.infomsg}
+                </h4>
+              </div>
+            </c:if>
+            <!-- 提示框 END -->
+            <form action="${ctxroot}/department/savedepartment" class="form-horizontal"  method="post" id="form1">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">部门添加</h3>
+                </div>
+                <div class="box-body">
+                  <input type="hidden" name="did" value="${department.did}">
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">所属部门：</label>
+                    <label for="input1" class="col-sm-2 control-label">上级部门：</label>
 
                     <div class="col-sm-7">
-                      <input type="text" id="citySel" name="dname" class="form-control" id="input1" value="" disabled></div>
-                    <div class="col-sm-3">
-                      <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
+                      <select class="form-control" name="pid">                      
+                        <!-- <option value="0">顶级部门</option> -->
+                        <c:forEach items="${dlist}" var="dept" varStatus="sn">
+<!--                           <c:choose>
+                            <c:when test="${dept.did eq department.parentDid}">
+                              <option value="${dept.did}" selected="">${dept.dname}</option>
+                            </c:when>
+                            <c:otherwise>
+                              <option value="${dept.did}">${dept.dname}</option>
+                            </c:otherwise>
+                          </c:choose> -->
+                          <option value="${dept.did}">${dept.dname}</option>
+                        </c:forEach>
+                      </select>
                     </div>
+                    <div class="col-sm-3"></div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">登录名：</label>
+                    <label for="input1" class="col-sm-2 control-label">部门名称：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="loginname" class="form-control" id="input1" placeholder="登录名" value="${user.loginName}" <c:if test="${user.uid != null}">disabled</c:if>></div>
-                    <div class="col-sm-2"></div>
-                  </div>
-                  <c:if test="${user.uid == null}">   
-                    <div class="form-group">
-                      <label for="input1" class="col-sm-2 control-label">密码：</label>
-
-                      <div class="col-sm-8">
-                        <input type="password" name="password" class="form-control" id="input1" placeholder="密码" value=""></div>
-                      <div class="col-sm-2"></div>
-                    </div>
-                    <div class="form-group">
-                      <label for="input1" class="col-sm-2 control-label">密码确认：</label>
-
-                      <div class="col-sm-8">
-                        <input type="password" name="password2" class="form-control" id="input1" placeholder="密码确认" value=""></div>
-                      <div class="col-sm-2"></div>
-                    </div>
-                  </c:if>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">姓名：</label>
-
-                    <div class="col-sm-8">
-                      <input type="text" name="truename" class="form-control" id="input1" placeholder="姓名" value="${user.turename}"></div>
+                      <input type="text" name="dname" class="form-control" id="input1" placeholder="部门名称" value="${department.dname}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">邮箱：</label>
+                    <label for="input1" class="col-sm-2 control-label">负责人：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="email" class="form-control" id="input1" placeholder="邮箱" value="${user.email}"></div>
+                      <input type="text" name="manager" class="form-control" id="input1" placeholder="负责人" value="${department.manager}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">角色：</label>
+                    <label for="input1" class="col-sm-2 control-label">排序：</label>
 
                     <div class="col-sm-8">
-                      <c:forEach items="${roles}" var="role" varStatus="sn">
-                        <span class="pull-left">
-                        <input type="checkbox" name="role" value="${role.roleid}">&nbsp;${role.rolename}&nbsp;</span>
-                      </c:forEach>
-                    </div>
+                      <input type="number" name="sort" class="form-control" id="input1" placeholder="(0-255)" value="${department.sort}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">备注：</label>
 
                     <div class="col-sm-8">
-                        <textarea id="input9" name="remark" class="form-control" rows="3" >${user.remarks}</textarea>
+                      <textarea id="input9" name="remarks" class="form-control" rows="3" >${department.remarks}</textarea>
                     </div>
                     <div class="col-sm-2"></div>
                   </div>
-                
-              </div>
-              <div class="box-footer">
-                <div class="col-sm-10">
-                  <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
-                  <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button> -->
+
+                </div>
+                <div class="box-footer">
+                  <div class="col-sm-10">
+                    <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
+                    <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button>
+                  -->
                 </div>
                 <div class="col-sm-2"></div>
               </div>
             </div>
-            </form>
-          </div>
-          <div class="col-md-1"></div>
+          </form>
         </div>
+        <div class="col-md-1"></div>
+      </div>
 
-        <!-- 下拉菜单START -->
-        <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-          <ul id="treeDemo" class="ztree" style=""></ul>
-        </div>
-        <!-- 下拉菜单END --> </section>
-      <!-- /.content --> </div>
-    <!-- /.content-wrapper -->
+      <!-- 下拉菜单START -->
+      <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+        <ul id="treeDemo" class="ztree" style=""></ul>
+      </div>
+      <!-- 下拉菜单END --> </section>
+    <!-- /.content --> </div>
+  <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-      <div class="pull-right hidden-xs">
-        <b>Version</b>
-        2.3.7
-      </div> <strong>Copyright &copy; 2014-2016
-        <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
-        .</strong> 
-      All rights
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b>
+      2.3.7
+    </div> <strong>Copyright &copy; 2014-2016
+      <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
+      .</strong> 
+    All rights
     reserved.
-    </footer>
+  </footer>
 
-    <!-- Control Sidebar -->
+  <!-- Control Sidebar -->
 
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
 
-  <!-- jQuery 2.2.3 -->
-  <script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-  <!-- Bootstrap 3.3.6 -->
-  <script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
-  <!-- SlimScroll -->
-  <script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-  <!-- FastClick -->
-  <script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
-  <!-- DataTables -->
-  <script src="${ctxStatic}/plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
-  <!-- ztree -->
-  <script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="${ctxStatic}/dist/js/app.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="${ctxStatic}/dist/js/demo.js"></script>
-  <script type="text/javascript">
+<!-- jQuery 2.2.3 -->
+<script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
+<!-- DataTables -->
+<script src="${ctxStatic}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- ztree -->
+<script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<!-- AdminLTE App -->
+<script src="${ctxStatic}/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="${ctxStatic}/dist/js/demo.js"></script>
+<script type="text/javascript">
+  var pid = '${department.parentDid}';
+  if(pid != ''){
+    $("select[name='pid']").val(pid);
+  }
+  /*
     var setting = {
       view: {
         selectedMulti:false
@@ -314,7 +311,6 @@
       },
       callback: {
         //beforeClick: beforeClick,
-        onDblClick:hideMenu,
         onClick: onClick
       }
     };
@@ -366,31 +362,20 @@
         tree.expandNode(nodes[i], true, true, false);
       }
     });
-
+  */
 
     //表单提交
     function saveform(){
       //验证表单
-      var did = $("input[name='did']").val();
-      var loginname = $("input[name='loginname']").val();
-      var password = $("input[name='password']").val();
-      var password2 = $("input[name='password2']").val();
-      var rolenum = $("input[name='role']:checked").length;
+      var dname = $("input[name='dname']").val();
+      var sort = $("input[name='sort']").val();
 
-      if(did == ''){
-        alert("所属部门不能为空");
-      }else if(loginname == ''){
-        alert("登录名不能为空");
-      }else if(password == ''){
-        alert("密码不能为空");
-      }else if(rolenum == 0){
-        alert("角色不能为空");
-      }else if(password != password2){
-        alert("两次密码输入不相同");
+
+      if(dname == ''){
+        alert("部门名称不能为空");
       }else{
         $('#form1')[0].submit();  
       }
-
       
     };
 
