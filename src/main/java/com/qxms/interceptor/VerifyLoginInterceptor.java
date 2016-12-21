@@ -10,7 +10,7 @@ public class VerifyLoginInterceptor implements Interceptor {
 	public void intercept(Invocation inv) {
 		// TODO Auto-generated method stub		
 		
-		User user = (User)inv.getController().getSession().getAttribute("user");
+		User user = (User)inv.getController().getSession().getAttribute("cache_user");
 		
 		if(user == null){
 			System.out.println("---未登录---");

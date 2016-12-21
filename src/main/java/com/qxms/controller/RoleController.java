@@ -45,7 +45,7 @@ public class RoleController extends Controller {
 	}
 	
 	public void saverole(){
-		User cuser = (User)getSession().getAttribute("user");
+		User cuser = (User)getSession().getAttribute("cache_user");
 		
 		String roleid = getPara("roleid");
 		String rolename = getPara("rolename");

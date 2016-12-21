@@ -74,7 +74,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">${sessionScope.user.turename}</span>
+                <span class="hidden-xs">${sessionScope.cache_user.turename}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -82,7 +82,7 @@
                   <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                   <p>
-                    ${sessionScope.user.turename} - Web Developer
+                    ${sessionScope.cache_user.turename} - Web Developer
                     <small>Member since Nov. 2012</small>
                   </p>
                 </li>
@@ -103,7 +103,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                    <a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
                   </div>
                   <div class="pull-right">
                     <a href="logout" class="btn btn-default btn-flat">登出</a>
@@ -124,8 +124,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%>
-      </section>
+        <%@ include file="../common/nav.jsp"%></section>
       <!-- /.sidebar --> </aside>
 
     <!-- =============================================== -->
@@ -137,8 +136,7 @@
         <h1>部门管理</h1>
         <ol class="breadcrumb">
           <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
+            <a href="#"> <i class="fa fa-dashboard"></i>
               Home
             </a>
           </li>
@@ -158,8 +156,7 @@
             <c:if test="${requestScope.errormsg != null}">
               <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>
-                  <i class="icon fa fa-ban"></i>
+                <h4> <i class="icon fa fa-ban"></i>
                   发生错误!
                 </h4>
                 ${requestScope.errormsg}
@@ -182,97 +179,93 @@
                 </div>
                 <div class="box-body">
                   <input type="hidden" name="did" value="${department.did}">
-                  <div class="form-group">
+                  <input type="hidden" name="pid" value="${department.parentDid}">
+<!--                   <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">上级部门：</label>
 
                     <div class="col-sm-7">
-                      <select class="form-control" name="pid">                      
-                        <!-- <option value="0">顶级部门</option> -->
-                        <c:forEach items="${dlist}" var="dept" varStatus="sn">
-<!--                           <c:choose>
-                            <c:when test="${dept.did eq department.parentDid}">
-                              <option value="${dept.did}" selected="">${dept.dname}</option>
-                            </c:when>
-                            <c:otherwise>
-                              <option value="${dept.did}">${dept.dname}</option>
-                            </c:otherwise>
-                          </c:choose> -->
-                          <option value="${dept.did}">${dept.dname}</option>
-                        </c:forEach>
-                      </select>
-                    </div>
-                    <div class="col-sm-3"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">部门名称：</label>
-
-                    <div class="col-sm-8">
-                      <input type="text" name="dname" class="form-control" id="input1" placeholder="部门名称" value="${department.dname}"></div>
-                    <div class="col-sm-2"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">负责人：</label>
-
-                    <div class="col-sm-8">
-                      <input type="text" name="manager" class="form-control" id="input1" placeholder="负责人" value="${department.manager}"></div>
-                    <div class="col-sm-2"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">排序：</label>
-
-                    <div class="col-sm-8">
-                      <input type="number" name="sort" class="form-control" id="input1" placeholder="(0-255)" value="${department.sort}"></div>
-                    <div class="col-sm-2"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">备注：</label>
-
-                    <div class="col-sm-8">
-                      <textarea id="input9" name="remarks" class="form-control" rows="3" >${department.remarks}</textarea>
-                    </div>
-                    <div class="col-sm-2"></div>
-                  </div>
-
+                      <select class="form-control" name="pid">
+                      <c:forEach items="${dlist}" var="dept" varStatus="sn">
+                      <option value="${dept.did}">${dept.dname}</option>
+                    </c:forEach>
+                  </select>
                 </div>
-                <div class="box-footer">
-                  <div class="col-sm-10">
-                    <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
-                    <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button>
-                  -->
+                <div class="col-sm-3"></div>
+              </div> -->
+              <div class="form-group">
+                <label for="input1" class="col-sm-2 control-label">上级部门：</label>
+
+                <div class="col-sm-7">
+                  <input type="text" id="citySel" name="" class="form-control" id="input1" value="" disabled></div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="input1" class="col-sm-2 control-label">部门名称：</label>
+
+                <div class="col-sm-8">
+                  <input type="text" name="dname" class="form-control" id="input1" placeholder="部门名称" value="${department.dname}"></div>
+                <div class="col-sm-2"></div>
+              </div>
+              <div class="form-group">
+                <label for="input1" class="col-sm-2 control-label">负责人：</label>
+
+                <div class="col-sm-8">
+                  <input type="text" name="manager" class="form-control" id="input1" placeholder="负责人" value="${department.manager}"></div>
+                <div class="col-sm-2"></div>
+              </div>
+              <div class="form-group">
+                <label for="input1" class="col-sm-2 control-label">排序：</label>
+
+                <div class="col-sm-8">
+                  <input type="number" name="sort" class="form-control" id="input1" placeholder="(0-255)" value="${department.sort}"></div>
+                <div class="col-sm-2"></div>
+              </div>
+              <div class="form-group">
+                <label for="input1" class="col-sm-2 control-label">备注：</label>
+
+                <div class="col-sm-8">
+                  <textarea id="input9" name="remarks" class="form-control" rows="3" >${department.remarks}</textarea>
                 </div>
                 <div class="col-sm-2"></div>
               </div>
+
             </div>
-          </form>
+            <div class="box-footer">
+              <div class="col-sm-9">
+                <a href="${ctxroot}/department" class="btn btn-default pull-right">返回</a>
+                <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button>
+              -->
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
         </div>
-        <div class="col-md-1"></div>
-      </div>
+      </form>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
 
-      <!-- 下拉菜单START -->
-      <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-        <ul id="treeDemo" class="ztree" style=""></ul>
-      </div>
-      <!-- 下拉菜单END --> </section>
-    <!-- /.content --> </div>
-  <!-- /.content-wrapper -->
+  <!-- 下拉菜单START -->
+  <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    <ul id="treeDemo" class="ztree" style=""></ul>
+  </div>
+  <!-- 下拉菜单END -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<%@ include file="../common/footer.jsp"%>
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b>
-      2.3.7
-    </div> <strong>Copyright &copy; 2014-2016
-      <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
-      .</strong> 
-    All rights
-    reserved.
-  </footer>
+<!-- Control Sidebar -->
 
-  <!-- Control Sidebar -->
-
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
+<!-- /.control-sidebar -->
+<!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+<div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
@@ -293,13 +286,14 @@
 <script src="${ctxStatic}/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${ctxStatic}/dist/js/demo.js"></script>
+<script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
+  menu_active('2,8');
   var pid = '${department.parentDid}';
-  if(pid != ''){
-    $("select[name='pid']").val(pid);
-  }
-  /*
-    var setting = {
+  // if(pid != ''){
+  //   $("select[name='pid']").val(pid);
+  // }
+   var setting = {
       view: {
         selectedMulti:false
         //dblClickExpand: false
@@ -311,7 +305,8 @@
       },
       callback: {
         //beforeClick: beforeClick,
-        onClick: onClick
+        onClick: onClick,
+        onDblClick : hideMenu
       }
     };
 
@@ -334,7 +329,7 @@
       // if (v.length > 0 ) v = v.substring(0, v.length-1);
       var cityObj = $("#citySel");
       cityObj.attr("value", treeNode.name);
-      $("input[name='did']").val(treeNode.id);
+      $("input[name='pid']").val(treeNode.id);
     }
 
     function showMenu() {
@@ -362,7 +357,6 @@
         tree.expandNode(nodes[i], true, true, false);
       }
     });
-  */
 
     //表单提交
     function saveform(){

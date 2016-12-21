@@ -76,7 +76,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">${sessionScope.user.turename}</span>
+                <span class="hidden-xs">${sessionScope.cache_user.turename}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -84,7 +84,7 @@
                   <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                   <p>
-                    ${sessionScope.user.turename} - Web Developer
+                    ${sessionScope.cache_user.turename} - Web Developer
                     <small>Member since Nov. 2012</small>
                   </p>
                 </li>
@@ -105,7 +105,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                    <a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
                   </div>
                   <div class="pull-right">
                     <a href="logout" class="btn btn-default btn-flat">登出</a>
@@ -126,8 +126,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%>
-      </section>
+        <%@ include file="../common/nav.jsp"%></section>
       <!-- /.sidebar --> </aside>
 
     <!-- =============================================== -->
@@ -139,8 +138,7 @@
         <h1>角色管理</h1>
         <ol class="breadcrumb">
           <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
+            <a href="#"> <i class="fa fa-dashboard"></i>
               Home
             </a>
           </li>
@@ -160,8 +158,7 @@
             <c:if test="${requestScope.errormsg != null}">
               <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>
-                  <i class="icon fa fa-ban"></i>
+                <h4> <i class="icon fa fa-ban"></i>
                   发生错误!
                 </h4>
                 ${requestScope.errormsg}
@@ -202,66 +199,70 @@
                   </div>
 
                 </div>
-                <div class="box-footer">
-                  <div class="col-sm-10">
-                    <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
+              <div class="box-footer">
+                <div class="col-sm-9">                  
+                  <a href="${ctxroot}/role" class="btn btn-default pull-right">返回</a>
+                  <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button> -->
                 </div>
+                <div class="col-sm-1"><button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button></div>
                 <div class="col-sm-2"></div>
               </div>
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
-      </div>
 
-      <!-- 下拉菜单START -->
-      <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-        <ul id="treeDemo" class="ztree" style=""></ul>
-      </div>
-      <!-- 下拉菜单END --> </section>
-    <!-- /.content --> </div>
-  <!-- /.content-wrapper -->
+        <!-- 下拉菜单START -->
+        <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+          <ul id="treeDemo" class="ztree" style=""></ul>
+        </div>
+        <!-- 下拉菜单END --> </section>
+      <!-- /.content --> </div>
+    <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b>
-      2.3.7
-    </div> <strong>Copyright &copy; 2014-2016
-      <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
-      .</strong> 
-    All rights
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b>
+        2.3.7
+      </div> <strong>Copyright &copy; 2014-2016
+        <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
+        .</strong> 
+      All rights
     reserved.
-  </footer>
+    </footer>
 
-  <!-- Control Sidebar -->
+    <!-- Control Sidebar -->
 
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
+    <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- ./wrapper -->
 
-<!-- jQuery 2.2.3 -->
-<script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
-<!-- DataTables -->
-<script src="${ctxStatic}/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<!-- ztree -->
-<script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
-<!-- Alert -->
-<script type="text/javascript" src="${ctxStatic}/plugins/Alert/Alert.js"></script>
-<!-- AdminLTE App -->
-<script src="${ctxStatic}/dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${ctxStatic}/dist/js/demo.js"></script>
-<script type="text/javascript">
+  <!-- jQuery 2.2.3 -->
+  <script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
+  <!-- SlimScroll -->
+  <script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
+  <!-- DataTables -->
+  <script src="${ctxStatic}/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
+  <!-- ztree -->
+  <script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+  <!-- Alert -->
+  <script type="text/javascript" src="${ctxStatic}/plugins/Alert/Alert.js"></script>
+  <!-- AdminLTE App -->
+  <script src="${ctxStatic}/dist/js/app.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="${ctxStatic}/dist/js/demo.js"></script>
+  <script src="${ctxStatic}/qxms/js/menu.js"></script>
+  <script type="text/javascript">
+  menu_active('2,4');
   /*
     var setting = {
       view: {

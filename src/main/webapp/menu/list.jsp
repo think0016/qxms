@@ -78,7 +78,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">${sessionScope.user.turename}</span>
+                <span class="hidden-xs">${sessionScope.cache_user.turename}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -86,7 +86,7 @@
                   <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                   <p>
-                    ${sessionScope.user.turename} - Web Developer
+                    ${sessionScope.cache_user.turename} - Web Developer
                     <small>Member since Nov. 2012</small>
                   </p>
                 </li>
@@ -107,7 +107,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                    <a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
                   </div>
                   <div class="pull-right">
                     <a href="${ctxroot}/logout" class="btn btn-default btn-flat">登出</a>
@@ -232,7 +232,9 @@
 <script src="${ctxStatic}/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${ctxStatic}/dist/js/demo.js"></script>
+<script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
+    menu_active('2,9');
 
     $(document).ready(function(){
 

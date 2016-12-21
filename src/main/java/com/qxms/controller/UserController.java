@@ -82,7 +82,7 @@ public class UserController extends Controller {
 
 	public void pwform() {
 
-		setAttr("user", getSession().getAttribute("user"));
+		setAttr("user", getSession().getAttribute("cache_user"));
 
 		render("pwform.jsp");
 	}
@@ -95,7 +95,9 @@ public class UserController extends Controller {
 		String truename = getPara("truename");
 		String email = getPara("email");
 		String remark = getPara("remark");
-		String[] role = getParaValues("role");
+		String rolex = getPara("role");
+		String[] role = {rolex};
+		//String[] role = getParaValues("role");
 
 		boolean update = false;
 		boolean lnflag = false;// 重名标记
@@ -145,19 +147,20 @@ public class UserController extends Controller {
 
 	public void resetpassword() {
 		// String uid = getPara("uid");
-		String loginname = getPara("loginname");
+		//String loginname = getPara("loginname");
+		User user = (User)getSession().getAttribute("cache_user");
 		String opassword = getPara("opassword");
 		String npassword = getPara("npassword");
 
 		// 先验证旧密码
 		// User user = userService.findByup(loginname, opassword);
-		User user = userService.findByloginname(loginname);
+		// User user = userService.findByloginname(loginname);
 		if (user == null || !SystemService.validatePassword(opassword, user.getPassword())) {
 			setAttr("errormsg", "密码不正确");
 			keepPara();
 			forwardAction("/user/pwform");
 		} else {
-			user.setPassword(npassword);
+			user.setPassword(SystemService.entryptPassword(npassword));
 			if (user.update()) {
 				setAttr("infomsg", "修改密码成功");
 				forwardAction("/index");
@@ -181,4 +184,38 @@ public class UserController extends Controller {
 
 	}
 
+	public void userinfo(){
+		User user = (User)getSession().getAttribute("cache_user");
+				
+		Department dept = departmentService.findByDid(user.getDid().toString());
+		List<Role> rlist= user.getRolelist();
+		setAttr("department", dept);
+		setAttr("rlist", rlist);
+		setAttr("user", user);
+		render("userinfoform.jsp");
+	}
+	
+	
+	/**
+	 * 保存个人信息
+	 */
+	public void saveuserinfo(){
+		User user = (User)getSession().getAttribute("cache_user");
+		
+		String email = getPara("email");
+		String remarks = getPara("remarks");
+		String truename = getPara("truename");
+		
+		user.setTurename(truename);
+		user.setRemarks(remarks);
+		user.setEmail(email);
+		
+		if(user.update()){
+			renderText("1");
+		}else{
+			renderText("2");
+		};
+		
+
+	}
 }

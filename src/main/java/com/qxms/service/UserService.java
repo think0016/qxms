@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.qxms.model.Role;
 import com.qxms.model.User;
 import com.qxms.model.UserRole;
 
@@ -95,5 +96,18 @@ public class UserService {
 		User user = this.findByUid(uid);
 		user.setStatus(new Integer(0));
 		return user.update();		
+	}
+	
+	public boolean isAdmin(User user){
+		List<Role> list=user.getRolelist();
+		boolean flag = false;
+		for (int i = 0; i < list.size(); i++) {
+			Role role = list.get(i);
+			if("global".equals(role.getRoleType())){
+				flag = true;
+				break;
+			};
+		}				
+		return flag;
 	}
 }

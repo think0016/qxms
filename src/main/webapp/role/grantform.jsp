@@ -76,7 +76,7 @@
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-								<span class="hidden-xs">${sessionScope.user.turename}</span>
+								<span class="hidden-xs">${sessionScope.cache_user.turename}</span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
@@ -84,7 +84,7 @@
 									<img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
 									<p>
-										${sessionScope.user.turename} - Web Developer
+										${sessionScope.cache_user.turename} - Web Developer
 										<small>Member since Nov. 2012</small>
 									</p>
 								</li>
@@ -106,7 +106,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">个人信息</a>
+										<a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
 									</div>
 									<div class="pull-right">
 										<a href="logout" class="btn btn-default btn-flat">登出</a>
@@ -178,64 +178,76 @@
 						</c:if>
 						<!-- 提示框 END -->
 						<div class="box">
-						  <div class="box-body">
-						  	<input type="hidden" name="roleid" value="${role.roleid}">
-						    <ul id="treeDemo" class="ztree"></ul>
-						  </div><!-- /.box-body -->
-						  <div class="box-footer">
-						    <button class="btn btn-default pull-right" onclick="saveform();">保存</button>
-						  </div><!-- box-footer -->
-						</div><!-- /.box -->
-
+							<div class="box-body">
+								<input type="hidden" name="roleid" value="${role.roleid}">
+								<ul id="treeDemo" class="ztree"></ul>
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer">
+								<div class="col-sm-9">
+									<a href="${ctxroot}/role" class="btn btn-default pull-right">返回</a>
+									<!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button>
+								-->
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
+							</div>
+							<div class="col-sm-2"></div>
+						</div>
 					</div>
-					<div class="col-md-1"></div>
+					<!-- /.box -->
+
 				</div>
+				<div class="col-md-1"></div>
+			</div>
 
-			</section>
-			<!-- /.content -->
-		</div>
-		<!-- /.content-wrapper -->
-
-		<footer class="main-footer">
-			<div class="pull-right hidden-xs">
-				<b>Version</b>
-				2.3.7
-			</div> <strong>Copyright &copy; 2014-2016
-				<a href="http://almsaeedstudio.com">Almsaeed Studio</a>
-				.</strong> 
-			All rights
-    reserved.
-		</footer>
-
-		<!-- Control Sidebar -->
-
-		<!-- /.control-sidebar -->
-		<!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-		<div class="control-sidebar-bg"></div>
+		</section>
+		<!-- /.content -->
 	</div>
-	<!-- ./wrapper -->
+	<!-- /.content-wrapper -->
 
-	<!-- jQuery 2.2.3 -->
-	<script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
-	<!-- SlimScroll -->
-	<script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
-	<!-- DataTables -->
-	<script src="${ctxStatic}/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<!-- ztree -->
-	<script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
-	<!-- Alert -->
-	<script type="text/javascript" src="${ctxStatic}/plugins/Alert/Alert.js"></script>
-	<!-- AdminLTE App -->
-	<script src="${ctxStatic}/dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="${ctxStatic}/dist/js/demo.js"></script>
-	<script type="text/javascript">
+	<footer class="main-footer">
+		<div class="pull-right hidden-xs">
+			<b>Version</b>
+			2.3.7
+		</div> <strong>Copyright &copy; 2014-2016
+			<a href="http://almsaeedstudio.com">Almsaeed Studio</a>
+			.</strong> 
+		All rights
+    reserved.
+	</footer>
+
+	<!-- Control Sidebar -->
+
+	<!-- /.control-sidebar -->
+	<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+	<div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
+<!-- DataTables -->
+<script src="${ctxStatic}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- ztree -->
+<script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<!-- Alert -->
+<script type="text/javascript" src="${ctxStatic}/plugins/Alert/Alert.js"></script>
+<!-- AdminLTE App -->
+<script src="${ctxStatic}/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="${ctxStatic}/dist/js/demo.js"></script>
+<script src="${ctxStatic}/qxms/js/menu.js"></script>
+<script type="text/javascript">
+ 	menu_active('2,4');
  	
  	$(document).ready(function(){
       //var did = ${did};

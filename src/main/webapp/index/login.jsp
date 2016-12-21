@@ -38,7 +38,7 @@
 
     <form action="${ctxroot}/login1" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="username" value="${username}" placeholder="用户名">
+        <input type="text" class="form-control" name="loginname" value="${loginname}" placeholder="用户名">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -63,9 +63,10 @@
 
     <!-- /.social-auth-links -->
 
+	<!-- 
     <a href="#">忘记密码</a><br>
-    <a href="/yjk.php/Login/register.html" class="text-center">现在注册</a>
-
+    <a href="#" class="text-center">现在注册</a>
+ 	-->
   </div>
   <!-- /.login-box-body -->
 </div>

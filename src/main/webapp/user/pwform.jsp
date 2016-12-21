@@ -74,7 +74,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">${sessionScope.user.turename}</span>
+                <span class="hidden-xs">${sessionScope.cache_user.turename}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -82,7 +82,7 @@
                   <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                   <p>
-                    ${sessionScope.user.turename} - Web Developer
+                    ${sessionScope.cache_user.turename} - Web Developer
                     <small>Member since Nov. 2012</small>
                   </p>
                 </li>
@@ -103,7 +103,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                    <a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
                   </div>
                   <div class="pull-right">
                     <a href="logout" class="btn btn-default btn-flat">登出</a>
@@ -124,8 +124,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%>
-      </section>
+        <%@ include file="../common/nav.jsp"%></section>
       <!-- /.sidebar --> </aside>
 
     <!-- =============================================== -->
@@ -137,8 +136,7 @@
         <h1>用户管理</h1>
         <ol class="breadcrumb">
           <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
+            <a href="#"> <i class="fa fa-dashboard"></i>
               Home
             </a>
           </li>
@@ -158,8 +156,7 @@
             <c:if test="${requestScope.errormsg != null}">
               <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>
-                  <i class="icon fa fa-ban"></i>
+                <h4> <i class="icon fa fa-ban"></i>
                   发生错误!
                 </h4>
                 ${requestScope.errormsg}
@@ -187,7 +184,7 @@
                     <label for="input1" class="col-sm-2 control-label">登录名：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="loginnamex" class="form-control" id="input1" value="${user.loginName}"></div>
+                      <input type="text" name="loginnamex" class="form-control" id="input1" value="${user.loginName}" disabled></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
@@ -214,10 +211,13 @@
 
                 </div>
                 <div class="box-footer">
-                  <div class="col-sm-10">
-                    <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
+                  <div class="col-sm-9">
+                    <a href="${ctxroot}/user" class="btn btn-default pull-right">返回</a>
                     <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button>
                   -->
+                </div>
+                <div class="col-sm-1">
+                  <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
                 </div>
                 <div class="col-sm-2"></div>
               </div>
@@ -272,8 +272,9 @@
 <script src="${ctxStatic}/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${ctxStatic}/dist/js/demo.js"></script>
+<script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
-   
+    menu_active('2,3,11');
 
     //表单提交
     function saveform(){

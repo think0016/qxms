@@ -52,7 +52,7 @@ public class MenuController extends Controller {
 	}
 
 	public void savemenu() {
-		User cuser = (User) getSession().getAttribute("user");
+		User cuser = (User) getSession().getAttribute("cache_user");
 
 		String menuid = getPara("menuid");
 		String pmenuid = getPara("pmenuid");

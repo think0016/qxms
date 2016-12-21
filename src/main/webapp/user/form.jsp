@@ -74,7 +74,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">${sessionScope.user.turename}</span>
+                <span class="hidden-xs">${sessionScope.cache_user.turename}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -82,7 +82,7 @@
                   <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                   <p>
-                    ${sessionScope.user.turename} - Web Developer
+                    ${sessionScope.cache_user.turename} - Web Developer
                     <small>Member since Nov. 2012</small>
                   </p>
                 </li>
@@ -103,7 +103,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                    <a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
                   </div>
                   <div class="pull-right">
                     <a href="logout" class="btn btn-default btn-flat">登出</a>
@@ -227,8 +227,8 @@
 
                     <div class="col-sm-8">
                       <c:forEach items="${roles}" var="role" varStatus="sn">
-                        <span class="pull-left">
-                        <input type="checkbox" name="role" value="${role.roleid}">&nbsp;${role.rolename}&nbsp;</span>
+                        <span class="pull-left">                        
+                        <input type="radio" name="role" value="${role.roleid}" <c:if test="${sn.index eq 0}">checked</c:if>>&nbsp;${role.rolename}&nbsp;</span>
                       </c:forEach>
                     </div>
                     <div class="col-sm-2"></div>
@@ -244,10 +244,11 @@
                 
               </div>
               <div class="box-footer">
-                <div class="col-sm-10">
-                  <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
+                <div class="col-sm-9">                  
+                  <a href="${ctxroot}/user" class="btn btn-default pull-right">返回</a>
                   <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button> -->
                 </div>
+                <div class="col-sm-1"><button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button></div>
                 <div class="col-sm-2"></div>
               </div>
             </div>
@@ -301,7 +302,9 @@
   <script src="${ctxStatic}/dist/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="${ctxStatic}/dist/js/demo.js"></script>
+  <script src="${ctxStatic}/qxms/js/menu.js"></script>
   <script type="text/javascript">
+    menu_active('2,3,10');
     var setting = {
       view: {
         selectedMulti:false

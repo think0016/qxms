@@ -16,6 +16,7 @@ import com.qxms.controller.MenuController;
 import com.qxms.controller.RoleController;
 import com.qxms.controller.TestController;
 import com.qxms.controller.UserController;
+import com.qxms.interceptor.AuthenticationValidator;
 import com.qxms.interceptor.VerifyLoginInterceptor;
 import com.qxms.model._MappingKit;
 
@@ -72,6 +73,7 @@ public class DemoConfig extends JFinalConfig {
 	public void configInterceptor(Interceptors me) {
 		//me.add(new TestInterceptor());
 		me.add(new VerifyLoginInterceptor());
+		me.add(new AuthenticationValidator());
 	}
 	
 	/**

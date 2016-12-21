@@ -1,5 +1,7 @@
 package com.qxms.model;
 
+import java.util.List;
+
 import com.qxms.model.base.BaseUser;
 
 /**
@@ -29,5 +31,11 @@ public class User extends BaseUser<User> {
 		this.role = role;
 	}
 	
-	
+	public List<Role> getRolelist(){
+		String sql = "SELECT `a`.* FROM `qx_role` `a` "
+				+ "LEFT JOIN `qx_user_role` `b` ON `a`.`roleid`=`b`.`role_id` "
+				+ "LEFT JOIN `qx_user` `c` ON `c`.`uid`=`b`.`user_id` "
+				+ "WHERE `c`.`uid`=?";		
+		return Role.dao.find(sql, getUid());
+	}
 }

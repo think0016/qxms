@@ -1,5 +1,7 @@
 package com.qxms.controller;
 
+import java.util.Date;
+
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
@@ -24,11 +26,10 @@ public class IndexController extends Controller {
 	@Clear
 	@Before(LoginValidator.class)
 	public void login1() {
-		String username = getPara("username");
+		String loginname = getPara("loginname");
 		String password = getPara("password");
 		
-		User user = userService.findByloginname(username);
-		//User user = userService.findByup(username, password);
+		User user = userService.findByloginname(loginname);
 		if(user == null || !SystemService.validatePassword(password, user.getPassword())){
 			setAttr("msg1", "用户名或密码不正确");
 			//setAttr("msg1", "用户名或密码不正确");
@@ -37,8 +38,10 @@ public class IndexController extends Controller {
 			render("login.jsp");
 		}else{
 			//renderText(user.getTurename()+"登陆成功");
-			getSession().setAttribute("user", user);
-			getSession().setAttribute("username", user.getTurename());
+			user.setLogindate(new Date());
+			user.update();
+			getSession().setAttribute("cache_user", user);
+			getSession().setAttribute("cache_cusername", user.getTurename());
 			//forwardAction("/");
 			redirect("/");
 		}
@@ -47,7 +50,8 @@ public class IndexController extends Controller {
 
 	@Clear
 	public void logout() {
-		getSession().removeAttribute("user");
+		getSession().removeAttribute("cache_user");
+		getSession().removeAttribute("cache_cusername");
 		redirect("/login");
 	}
 	

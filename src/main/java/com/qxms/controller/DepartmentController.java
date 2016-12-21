@@ -56,15 +56,21 @@ public class DepartmentController extends Controller {
 			//user = userService.findByUid(uid);
 		}	
 		
+		// 部门树信息
 		List<Department> dlist = departmentService.findAllDepartment();
+		List<TreeNode> nodes = departmentService.gettreedata(dlist);
+		Gson gson = new Gson();
+		String json = gson.toJson(nodes);
+		
 		
 		setAttr("dlist", dlist);
+		setAttr("treejson", json);
 		setAttr("department", department);
 		render("form.jsp");
 	}
 	
 	public void savedepartment(){
-		User cuser = (User)getSession().getAttribute("user");
+		User cuser = (User)getSession().getAttribute("cache_user");
 		
 		String did = getPara("did");
 		String pid = getPara("pid");
@@ -122,7 +128,6 @@ public class DepartmentController extends Controller {
 			renderText("1");
 		}else{
 			renderText("2");
-		}
-		
+		}		
 	}
 }

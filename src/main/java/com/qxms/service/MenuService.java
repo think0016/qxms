@@ -22,6 +22,30 @@ public class MenuService {
 		return this.findMenuList(param);
 	}
 	
+	/**
+	 * 获取用户菜单(超级管理员)
+	 * @return
+	 */
+	public List<Menu> findAllShowMenu() {
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("mtype", "0");
+		return this.findMenuList(param);
+	}
+	
+	/**
+	 * 获取用户菜单(其他用户)
+	 * @return
+	 */
+	public List<Menu> findShowMenu(String uid) {
+		String sql = "SELECT `e`.* FROM `qx_user` `a` "
+				+ "LEFT JOIN `qx_user_role` `b` ON `a`.`uid`=`b`.`user_id` "
+				+ "LEFT JOIN `qx_role` `c` ON `c`.`roleid`=`b`.`role_id`  "
+				+ "LEFT JOIN `qx_role_menu` `d` ON `d`.`role_id` = `c`.`roleid` "
+				+ "LEFT JOIN `qx_menu` `e` ON `e`.`menuid` = `d`.`menu_id` "
+				+ "WHERE `e`.`mtype` = '0' AND `a`.`uid` = ? GROUP BY `e`.`menuid` ORDER BY `e`.`sort` DESC";
+		return Menu.dao.find(sql,uid);
+	}
+	
 	public List<Menu> findMenuList(Map<String, String> param) {
 		String sql = "select * from `qx_menu` where `del_flag` = 0 ";
 		

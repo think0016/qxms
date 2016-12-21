@@ -126,7 +126,8 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%></section>
+        <%@ include file="../common/nav.jsp"%>
+      </section>
       <!-- /.sidebar --> </aside>
 
     <!-- =============================================== -->
@@ -135,10 +136,11 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>菜单管理</h1>
+        <h1>用户管理</h1>
         <ol class="breadcrumb">
           <li>
-            <a href="#"> <i class="fa fa-dashboard"></i>
+            <a href="#">
+              <i class="fa fa-dashboard"></i>
               Home
             </a>
           </li>
@@ -154,92 +156,85 @@
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-10">
-            <!-- 提示框 START -->
-            <c:if test="${requestScope.errormsg != null}">
-              <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4> <i class="icon fa fa-ban"></i>
-                  发生错误!
-                </h4>
-                ${requestScope.errormsg}
-              </div>
-            </c:if>
-            <c:if test="${requestScope.infomsg != null}">
-              <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>
-                  <i class="icon fa fa-check"></i>
-                  ${requestScope.infomsg}
-                </h4>
-              </div>
-            </c:if>
-            <!-- 提示框 END -->
-            <form action="${ctxroot}/menu/savemenu" class="form-horizontal"  method="post" id="form1">
-              <input type="hidden" name="pmenuid" value="">
-              <input type="hidden" name="menuid" value="${menu.menuid}">
-              <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">菜单添加</h3>
+              <!-- 提示框 START -->
+              <c:if test="${requestScope.errormsg != null}">
+                <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h4><i class="icon fa fa-ban"></i> 发生错误!</h4>${requestScope.errormsg}
                 </div>
-                <div class="box-body">
+              </c:if>
+              <c:if test="${requestScope.infomsg != null}">
+                <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h4><i class="icon fa fa-check"></i> ${requestScope.infomsg}</h4>
+                </div>
+              </c:if>
+              <!-- 提示框 END -->
+            <form action="${ctxroot}/user" class="form-horizontal"  method="post" id="form1">
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">个人资料</h3>
+              </div>
+              <div class="box-body">
+                  <input type="hidden" name="uid" value="${user.uid}">
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">上级菜单：</label>
+                    <label for="input1" class="col-sm-2 control-label">所属部门：</label>
 
-                    <div class="col-sm-7">
-                      <input type="text" id="citySel" name="" class="form-control" id="input1" value="" disabled></div>
-                    <div class="col-sm-3">
-                      <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
+                    <div class="col-sm-8">
+                      <input type="text" id="citySel" name="dname" class="form-control" id="input1" value="${department.dname}" disabled></div>
+                    <div class="col-sm-2">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">名称：</label>
+                    <label for="input1" class="col-sm-2 control-label">登录名：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="mname" class="form-control" id="input1" placeholder="菜单名称" value="${menu.mname}"></div>
+                      <input type="text" name="loginname" class="form-control" id="input1" placeholder="登录名" value="${user.loginName}" disabled></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">链接：</label>
+                    <label for="input1" class="col-sm-2 control-label">姓名：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="href" class="form-control" id="input1" placeholder="菜单名称" value="${menu.href}"></div>
+                      <input type="text" name="truename" class="form-control" id="input1" placeholder="姓名" value="${user.turename}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">排序：</label>
+                    <label for="input1" class="col-sm-2 control-label">邮箱：</label>
 
                     <div class="col-sm-8">
-                      <input type="number" name="sort" class="form-control" id="input1" placeholder="(0-255)" value="${menu.sort}"></div>
+                      <input type="text" name="email" class="form-control" id="input1" placeholder="邮箱" value="${user.email}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">类型：</label>
+                    <label for="input1" class="col-sm-2 control-label">角色：</label>
 
                     <div class="col-sm-8">
-                      <input type="radio" name="mtype" value="0" checked="">
-                      菜单&nbsp;&nbsp;&nbsp;
-                      <input type="radio" name="mtype" value="1">按钮</div>
-                    <div class="col-sm-2"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">备注：</label>
-
-                    <div class="col-sm-8">
-                      <textarea id="input9" name="remarks" class="form-control" rows="3" >${menu.remarks}</textarea>
+                      <c:forEach var="role" items="${rlist}">
+                        <label for="input1" class="control-label" style="font-weight: 100;"><span class="label label-default">${role.rolename}</span></label>
+                      </c:forEach>
                     </div>
                     <div class="col-sm-2"></div>
                   </div>
+                  <div class="form-group">
+                    <label for="input1" class="col-sm-2 control-label" >备注：</label>
 
-                </div>
+                    <div class="col-sm-8">
+                        <textarea id="input9" name="remarks" class="form-control" rows="3" >${user.remarks}</textarea>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                
+              </div>
               <div class="box-footer">
                 <div class="col-sm-9">                  
-                  <a href="${ctxroot}/menu" class="btn btn-default pull-right">返回</a>
+                  <a href="${ctxroot}" class="btn btn-default pull-right">返回</a>
                   <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button> -->
                 </div>
                 <div class="col-sm-1"><button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button></div>
                 <div class="col-sm-2"></div>
               </div>
-              </div>
+            </div>
             </form>
           </div>
           <div class="col-md-1"></div>
@@ -294,8 +289,8 @@
   <script src="${ctxStatic}/dist/js/demo.js"></script>
   <script src="${ctxStatic}/qxms/js/menu.js"></script>
   <script type="text/javascript">
-    menu_active('2,9');
-    var setting = {
+    menu_active('2,3,10');
+/*    var setting = {
       view: {
         selectedMulti:false
         //dblClickExpand: false
@@ -307,8 +302,8 @@
       },
       callback: {
         //beforeClick: beforeClick,
-        onClick: onClick,
-        onDblClick : hideMenu
+        onDblClick:hideMenu,
+        onClick: onClick
       }
     };
 
@@ -331,7 +326,7 @@
       // if (v.length > 0 ) v = v.substring(0, v.length-1);
       var cityObj = $("#citySel");
       cityObj.attr("value", treeNode.name);
-      $("input[name='pmenuid']").val(treeNode.id);
+      $("input[name='did']").val(treeNode.id);
     }
 
     function showMenu() {
@@ -359,21 +354,28 @@
         tree.expandNode(nodes[i], true, true, false);
       }
     });
+*/
 
     //表单提交
     function saveform(){
-      //验证表单
-      var pmenuid = $("input[name='pmenuid']").val();
-      var mname = $("input[name='mname']").val();
-
-
-      if(pmenuid == ''){
-        alert("上级菜单不能为空");
-      }else if(mname == ''){
-        alert("名称不能为空");
-      }else{
-        $('#form1')[0].submit();  
-      }
+      var truename = $("input[name='truename']").val();
+      var remarks = $("textarea[name='remarks']").val();
+      var email = $("input[name='email']").val();
+      //$('#form1')[0].submit();
+      var url = rooturl + "/user/saveuserinfo"
+      $.post(url, {
+        'truename':truename,
+        'remarks':remarks,
+        'email':email,
+      }, function(data){
+        if(data == '1'){
+          Alert('修改成功，重新登录后刷新',function(){
+            window.location.href = rooturl;
+          });
+        }else{
+          Alert('修改失败');
+        }
+      });
       
     };
 
