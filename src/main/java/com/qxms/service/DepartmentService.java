@@ -28,11 +28,6 @@ public class DepartmentService {
 		Iterator<Entry<String, String>> entries = param.entrySet().iterator();
 
 		while (entries.hasNext()) {
-			// if (i == 0) {
-			// sql += "where ";
-			// } else if (i > 0) {
-			// sql += "and ";
-			// }
 			sql += "and ";
 			Map.Entry<String, String> entry = entries.next();
 			sql += entry.getKey() + "=" + entry.getValue() + " ";
@@ -83,5 +78,31 @@ public class DepartmentService {
 		}
 		
 		return flag;
+	}
+	
+	/**
+	 * 树排序
+	 * @param list
+	 * @param sourcelist
+	 * @param parentId
+	 * @param cascade
+	 */
+	public static void sortList(List<Department> list, List<Department> sourcelist, int parentId, boolean cascade){
+		for (int i = 0; i < sourcelist.size(); i++) {
+			Department e = sourcelist.get(i);
+			if (e.getParentDid() != null && e.getParentDid().intValue() == parentId) {
+				list.add(e);
+				if (cascade) {
+					for (int j = 0; j < sourcelist.size(); j++) {
+						Department child = sourcelist.get(j);
+						if (child.getParentDid() != null && child.getParentDid().intValue() == e.getDid().intValue()) {
+							sortList(list, sourcelist, e.getDid(), true);
+							break;
+						}
+					}
+				}
+			}
+
+		}
 	}
 }

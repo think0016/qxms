@@ -22,25 +22,21 @@ public class RoleController extends Controller {
 		redirect("/role/list");
 	}
 	
-	
 	public void list() {
 		List<Role> rolelist = roleService.findAllRole();
-		
-		
 		setAttr("rolelist", rolelist);
 		render("list.jsp");
 	}
 
 	public void form(){
 		String roleid = getPara(0);
-		
-		
 		if(!StringUtils.isEmpty(roleid)){
 			Role role = roleService.findRoleById(roleid);
 			setAttr("role", role);
+			setAttr("subtitle", "角色修改");
+		}else{
+			setAttr("subtitle", "角色添加");
 		}
-		
-		
 		render("form.jsp");
 	}
 	
@@ -122,7 +118,6 @@ public class RoleController extends Controller {
 		
 		String roleid = getPara("roleid");
 		String menuid = getPara("menuid");
-		
 		
 		if(StringUtils.isEmpty(roleid) || StringUtils.isEmpty(menuid) ){
 			returnmsg = "错误请求";

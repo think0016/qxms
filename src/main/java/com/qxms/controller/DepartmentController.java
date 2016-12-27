@@ -1,5 +1,6 @@
 package com.qxms.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,24 +26,13 @@ public class DepartmentController extends Controller {
 	
 	public void list() {
 		
-		String did = getPara(0);
-		List<Department> dlist = departmentService.findAllDepartment();
-		List<Department> list = null;
-		if(StringUtils.isEmpty(did)==false){
-			list = departmentService.findDepartmentListBypids(did);
-		}else{
-			did = "1";
-			list = dlist;
-		}
+		//String did = getPara(0);
+		List<Department> list = new ArrayList<Department>();
+		DepartmentService.sortList(list, departmentService.findAllDepartment(), 0, true);
 		
-		List<TreeNode> nodes = departmentService.gettreedata(dlist);
-
-		Gson gson = new Gson();
-		String json = gson.toJson(nodes);
 		
 		setAttr("departmentlist", list);
-		setAttr("treejson", json);
-		setAttr("did", did);
+		// setAttr("did", did);
 		render("list.jsp");
 	}
 
@@ -54,18 +44,18 @@ public class DepartmentController extends Controller {
 		if (!StringUtils.isEmpty(did)) {
 			department = departmentService.findByDid(did);
 			//user = userService.findByUid(uid);
-		}	
+			setAttr("department", department);
+			setAttr("pdname", departmentService.findByDid(department.getParentDid().toString()).getDname());
+		}			
 		
 		// 部门树信息
 		List<Department> dlist = departmentService.findAllDepartment();
 		List<TreeNode> nodes = departmentService.gettreedata(dlist);
 		Gson gson = new Gson();
 		String json = gson.toJson(nodes);
-		
-		
+				
 		setAttr("dlist", dlist);
-		setAttr("treejson", json);
-		setAttr("department", department);
+		setAttr("treejson", json);		
 		render("form.jsp");
 	}
 	

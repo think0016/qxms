@@ -62,7 +62,7 @@ public class DemoConfig extends JFinalConfig {
 		// 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(C3p0Plugin);
 		me.add(arp);
-		
+		arp.setShowSql(true);
 		// 所有配置在 MappingKit 中搞定
 		_MappingKit.mapping(arp);
 	}

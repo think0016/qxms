@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ include file="../common/taglib.jsp"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +33,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <script type="text/javascript">
-    var rooturl = '${ctxroot}'; 
-  </script>
+  <script type="text/javascript">var rooturl = '${ctxroot}'; </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <!-- Site wrapper -->
@@ -112,8 +110,7 @@
                 </li>
               </ul>
             </li>
-            <!-- Control Sidebar Toggle Button --> 
-            </ul>
+            <!-- Control Sidebar Toggle Button --> </ul>
         </div>
       </nav>
     </header>
@@ -126,8 +123,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%>
-      </section>
+        <%@ include file="/common/nav.jsp"%></section>
       <!-- /.sidebar --> </aside>
 
     <!-- =============================================== -->
@@ -136,19 +132,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>用户管理</h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Examples</a>
-          </li>
-          <li class="active">Blank page</li>
-        </ol>
+        <h1>用户中心</h1>
       </section>
 
       <!-- Main content -->
@@ -164,26 +148,31 @@
           </div>
           <div class="col-md-10">
 
-              <!-- 提示框 START -->
-              <c:if test="${requestScope.errormsg != null}">
-                <div class="alert alert-danger alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-ban"></i> 发生错误!</h4>
-                  ${requestScope.errormsg}
-                </div>
-              </c:if>
-              <c:if test="${requestScope.infomsg != null}">
-                <div class="alert alert-success alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-check"></i> ${requestScope.infomsg}</h4>
-                </div>
-              </c:if>
-              <!-- 提示框 END -->
+            <!-- 提示框 START -->
+            <c:if test="${requestScope.errormsg != null}">
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4> <i class="icon fa fa-ban"></i>
+                  发生错误!
+                </h4>
+                ${requestScope.errormsg}
+              </div>
+            </c:if>
+            <c:if test="${requestScope.infomsg != null}">
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>
+                  <i class="icon fa fa-check"></i>
+                  ${requestScope.infomsg}
+                </h4>
+              </div>
+            </c:if>
+            <!-- 提示框 END -->
             <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title">用户列表</h3>
                 <div class="box-tools pull-right">
-                  <a href="${ctxroot}/user/form" class="btn btn-default btn-sm">添加用户</a>
+                  <button type="button" class="btn btn-default btn-sm" onclick="adduser();">添加用户</button>
                 </div>
               </div>
               <!-- /.box-header -->
@@ -199,12 +188,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach items="${userlist}" var="user" varStatus="sn">
+<!--                     <c:forEach items="${userlist}" var="user" varStatus="sn">
                       <tr>
                         <td>${sn.index+1}</td>
                         <td>${user.loginName}</td>
                         <td>${user.turename}</td>
-                        <td><fmt:formatDate value="${user.logindate}"  pattern="yyyy/MM/dd HH:mm:ss" /></td>
+                        <td>
+                          <fmt:formatDate value="${user.logindate}"  pattern="yyyy/MM/dd HH:mm:ss" />
+                        </td>
                         <td>
                           <div class="btn-group">
                             <a href="${ctxroot}/user/form/${user.uid}" class="btn btn-xs btn-default" onclick="">修改</a>
@@ -212,7 +203,7 @@
                           </div>
                         </td>
                       </tr>
-                    </c:forEach>
+                    </c:forEach> -->
                   </tbody>
                 </table>
               </div>
@@ -277,40 +268,59 @@
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
-	menu_active('2,3,10');
-	
-    $(document).ready(function(){
-      var did = ${did};
+  menu_active('10002,10003,10011');
 
-      var setting = {
-        view:{
-          selectedMulti:false
-        },
-        data: {
-          simpleData: {
-            enable: true
-          }
-        },
-        callback: {
-          onClick: selectdepartment
+  var did = ${did};
+  $(document).ready(function() {
+
+    var setting = {
+      view: {
+        selectedMulti: false
+      },
+      data: {
+        simpleData: {
+          enable: true
         }
-      };
-
-      var zNodes = ${treejson}; 
-      var tree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-      var nodes = tree.getNodesByParam("level", 0);
-      for(var i=0; i<nodes.length; i++) {
-        tree.expandNode(nodes[i], true, true, false);
+      },
+      callback: {
+        onClick: selectdepartment
       }
+    };
 
-      //默认选中
-      var node = tree.getNodeByParam("id", did, null);
-      tree.selectNode(node);
+    var zNodes = ${treejson};
+    var tree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    var nodes = tree.getNodesByParam("level", 0);
+    for (var i = 0; i < nodes.length; i++) {
+      tree.expandNode(nodes[i], true, true, false);
+    }
 
-    });
+    //默认选中
+    var node = tree.getNodeByParam("id", did, null);
+    tree.selectNode(node);
 
-      //datatable 数据表格
-    $('#userlist').DataTable({
+  });
+
+  var table = "";
+  createtable("0");
+  function createtable(did) {
+    var url = rooturl + "/user/getjsonlist";
+    //datatable 数据表格
+    //先Destroy后建立
+    if(table !=""){
+      $('#userlist').dataTable().fnDestroy();
+    }
+    table = $('#userlist').DataTable({
+      "ajax": {
+        "url": url,
+        "data":{
+          "did": did
+        }
+      },
+      "columnDefs": [ {
+            "targets": -1,
+            "data": null,
+            "defaultContent": "<div class=\"btn-group\"><button class='update btn btn-default btn-xs'>修改</button><button class='del btn btn-default btn-xs'>删除</button></div>"
+        } ],
       "paging": true,
       "pageLength": 20,
       "lengthChange": false,
@@ -332,27 +342,51 @@
         }
       }
     });
+    $('#userlist tbody').on( 'click', '.update', function () {
+        var data = table.row( $(this).parents('tr') ).data();
+            url = rooturl + "/user/form/"+data[0]+"-"+did;
+            window.location.href = url;
+    } );
+    $('#userlist tbody').on( 'click', '.del', function () {
+        var data = table.row( $(this).parents('tr') ).data();
+        del(data[0]);
+    } );
+  }
 
-    function selectdepartment(event, treeId, treeNode, clickFlag){
-      //console.log(treeNode.id);
-      did = treeNode.id
-      url = rooturl + "/user/list/"+did;
-      window.location.href = url;
-    };
 
-    function del(uid){
-      var purl = rooturl + "/user/delete";
-      $.post(purl, {"uid":uid}, function(data){
-            if(data == '1'){
-              Alert("删除成功",refresh);
-            }else{
-              Alert("删除失败",refresh);
-            }
-      });
-    };
-    var refresh = function(){
-      window.location.href = rooturl + "/user";
-    }
-  </script>
+  function selectdepartment(event, treeId, treeNode, clickFlag) {
+    // console.log(treeNode.id);
+
+    did = treeNode.id;
+    // url = rooturl + "/user/list/"+did;
+    // window.location.href = url;
+    createtable(did);
+
+  };
+
+  function del(uid) {
+    var purl = rooturl + "/user/delete";
+    $.post(purl, {
+      "uid": uid
+    }, function(data) {
+      if (data == '1') {
+        Alert("删除成功", createtable(did));
+      } else if(data == '2'){
+        Alert("超级管理员角色用户不可删除", createtable(did));
+      }else{
+        Alert("删除失败", createtable(did));
+      }
+    });
+  };
+
+  function adduser(){
+    url = rooturl + "/user/form/0-"+did;
+    window.location.href = url;
+  }
+
+  // var refresh = function() {
+  //   window.location.href = rooturl + "/user";
+  // }
+</script>
 </body>
 </html>

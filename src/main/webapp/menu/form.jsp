@@ -175,7 +175,7 @@
             </c:if>
             <!-- 提示框 END -->
             <form action="${ctxroot}/menu/savemenu" class="form-horizontal"  method="post" id="form1">
-              <input type="hidden" name="pmenuid" value="">
+              <input type="hidden" name="pmenuid" value="${pmenuid}">
               <input type="hidden" name="menuid" value="${menu.menuid}">
               <div class="box">
                 <div class="box-header with-border">
@@ -186,7 +186,7 @@
                     <label for="input1" class="col-sm-2 control-label">上级菜单：</label>
 
                     <div class="col-sm-7">
-                      <input type="text" id="citySel" name="" class="form-control" id="input1" value="" disabled></div>
+                      <input type="text" id="pmenuname" name="" class="form-control" id="input1" value="${pmenuname}" disabled></div>
                     <div class="col-sm-3">
                       <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
                     </div>
@@ -202,7 +202,7 @@
                     <label for="input1" class="col-sm-2 control-label">链接：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="href" class="form-control" id="input1" placeholder="菜单名称" value="${menu.href}"></div>
+                      <input type="text" name="href" class="form-control" id="input1" placeholder="链接" value="${menu.href}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
@@ -286,6 +286,20 @@
   <script src="${ctxStatic}/qxms/js/menu.js"></script>
   <script type="text/javascript">
     menu_active('2,9');
+
+    var mtype = '${menu.mtype}';
+    //添加默认值
+    var menuid = $("input[name='menuid']").val();
+    var pmenuid = $("input[name='pmenuid']").val();
+    if(menuid != null && menuid != ''){
+      //$("input[name='mtype']").val(mtype);
+      $("input[name='mtype']:eq("+mtype+")").attr("checked","checked");
+    }
+    if(pmenuid == null || pmenuid == ''){
+      $("input[name='pmenuid']").val(1);
+      $("#pmenuname").val('顶级菜单');
+    }
+
     var setting = {
       view: {
         selectedMulti:false

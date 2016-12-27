@@ -1,5 +1,6 @@
 package com.qxms.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 import com.qxms.model.Menu;
-import com.qxms.model.Role;
 import com.qxms.model.TreeNode;
 import com.qxms.model.User;
 import com.qxms.service.MenuService;
@@ -22,24 +22,36 @@ public class MenuController extends Controller {
 	}
 
 	public void list() {
-
 		
 		// 菜单树信息
-		List<Menu> mlist = menuService.findAllMenu();
-		List<TreeNode> nodes = menuService.gettreedata(mlist);
-		Gson gson = new Gson();
-		String json = gson.toJson(nodes);
-
-		setAttr("treejson", json);
+		List<Menu> list = new ArrayList<Menu>();
+		MenuService.sortList(list, menuService.findAllMenu(), 0, true);
+		
+//		List<TreeNode> nodes = menuService.gettreedata(mlist);
+//		Gson gson = new Gson();
+//		String json = gson.toJson(nodes);
+		
+//		setAttr("treejson", json);
+		setAttr("menulist", list);
 		render("list.jsp");
 	}
 
 	public void form() {
 		String menuid = getPara(0);
+		String type = getPara(1);//是否在下级添加
 		
 		if (!StringUtils.isEmpty(menuid)) {
 			Menu menu = menuService.findMenuById(menuid);
-			setAttr("menu", menu);
+			if("0".equals(type)){
+				setAttr("pmenuname", menuService.findMenuById(menu.getParentId().toString()).getMname());
+				setAttr("pmenuid", menuService.findMenuById(menu.getParentId().toString()).getMenuid());
+				setAttr("menu", menu);
+			}else{
+				setAttr("pmenuname", menu.getMname());
+				setAttr("pmenuid", menu.getMenuid());
+			}
+			
+			
 		}
 		// 菜单树信息
 		List<Menu> mlist = menuService.findAllMenu();
@@ -70,7 +82,6 @@ public class MenuController extends Controller {
 		if (!StringUtils.isEmpty(menuid)) {
 			menu = menuService.findMenuById(menuid);
 			update = true;
-
 		}
 
 		// 获取pidpath

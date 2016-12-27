@@ -134,17 +134,6 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>部门管理</h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#"> <i class="fa fa-dashboard"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Examples</a>
-          </li>
-          <li class="active">Blank page</li>
-        </ol>
       </section>
 
       <!-- Main content -->
@@ -196,7 +185,7 @@
                 <label for="input1" class="col-sm-2 control-label">上级部门：</label>
 
                 <div class="col-sm-7">
-                  <input type="text" id="citySel" name="" class="form-control" id="input1" value="" disabled></div>
+                  <input type="text" id="citySel" name="" class="form-control" id="input1" value="${pdname}" disabled></div>
                 <div class="col-sm-3">
                   <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
                 </div>
@@ -258,7 +247,7 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<%@ include file="../common/footer.jsp"%>
+<%@ include file="/common/footer.jsp"%>
 
 <!-- Control Sidebar -->
 

@@ -8,4 +8,11 @@ import com.qxms.model.base.BaseMenu;
 @SuppressWarnings("serial")
 public class Menu extends BaseMenu<Menu> {
 	public static final Menu dao = new Menu();
+
+	@Override
+	public String toString() {
+		return "PID:"+getParentId().toString()+"    ID:"+getMenuid().toString();
+	}
+	
+	
 }

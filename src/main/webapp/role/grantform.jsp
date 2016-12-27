@@ -139,17 +139,6 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>角色授权</h1>
-				<ol class="breadcrumb">
-					<li>
-						<a href="#"> <i class="fa fa-dashboard"></i>
-							Home
-						</a>
-					</li>
-					<li>
-						<a href="#">Examples</a>
-					</li>
-					<li class="active">Blank page</li>
-				</ol>
 			</section>
 
 			<!-- Main content -->
@@ -238,7 +227,7 @@
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
- 	menu_active('2,4');
+ 	menu_active('10002,10004');
  	
  	$(document).ready(function(){
       //var did = ${did};

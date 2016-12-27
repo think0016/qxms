@@ -1,5 +1,7 @@
 package com.qxms.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.qxms.model.base.BaseUser;
@@ -31,6 +33,10 @@ public class User extends BaseUser<User> {
 		this.role = role;
 	}
 	
+	/**
+	 * 获取角色列表
+	 * @return
+	 */
 	public List<Role> getRolelist(){
 		String sql = "SELECT `a`.* FROM `qx_role` `a` "
 				+ "LEFT JOIN `qx_user_role` `b` ON `a`.`roleid`=`b`.`role_id` "
@@ -38,4 +44,14 @@ public class User extends BaseUser<User> {
 				+ "WHERE `c`.`uid`=?";		
 		return Role.dao.find(sql, getUid());
 	}
+	
+	public String getFormaterLogindate(String pattern){
+		if("".equals(pattern)){
+			pattern = "yyyy-MM-dd HH:mm:ss";
+		}
+		SimpleDateFormat dateFormater = new SimpleDateFormat(pattern);
+		Date date=new Date();
+		return dateFormater.format(date);
+	}
+
 }

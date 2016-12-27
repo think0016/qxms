@@ -137,18 +137,6 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>角色管理</h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Examples</a>
-          </li>
-          <li class="active">Blank page</li>
-        </ol>
       </section>
 
       <!-- Main content -->
@@ -183,9 +171,8 @@
                 <table id="userlist" class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>序号</th>
-                      <th>角色名称</th>
-                      <th>角色编号</th>
+                      <th style="width: 100px;">角色编号</th>
+                      <th>角色名称</th>                      
                       <th>备注</th>
                       <th>操作</th>
                     </tr>
@@ -193,9 +180,9 @@
                   <tbody>
                     <c:forEach items="${rolelist}" var="role" varStatus="sn">
                       <tr>
-                        <td>${sn.index+1}</td>
-                        <td>${role.rolename}</td>
+                        <!-- <td>${sn.index+1}</td> -->
                         <td>${role.roleid}</td>
+                        <td>${role.rolename}</td>                        
                         <td>${role.remarks}</td>
                         <td>
                           <div class="btn-group">
@@ -270,7 +257,7 @@
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
-    menu_active('2,4');
+    menu_active('10002,10004');
 
     function del(did){
       url = rooturl + "/role/delete/"+did;

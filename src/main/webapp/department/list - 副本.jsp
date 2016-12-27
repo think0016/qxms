@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="${ctxStatic}/plugins/datatables/dataTables.bootstrap.css">
   <!-- ztree -->
   <link rel="stylesheet" href="${ctxStatic}/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <!-- Alert -->
+  <link rel="stylesheet" href="${ctxStatic}/plugins/Alert/Alert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="${ctxStatic}/dist/css/admincore.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -31,10 +33,9 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <style type="text/css">
-    ul.ztree {margin-top: 10px;border: 1px solid #617775;background: #f0f6e4;width:220px;height:360px;overflow-y:scroll;overflow-x:auto;}
-  </style>
-  <script type="text/javascript">var rooturl = '${ctxroot}'; </script>
+  <script type="text/javascript">
+    var rooturl = '${ctxroot}'; 
+  </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <!-- Site wrapper -->
@@ -106,12 +107,13 @@
                     <a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
                   </div>
                   <div class="pull-right">
-                    <a href="logout" class="btn btn-default btn-flat">登出</a>
+                    <a href="${ctxroot}/logout" class="btn btn-default btn-flat">登出</a>
                   </div>
                 </li>
               </ul>
             </li>
-            <!-- Control Sidebar Toggle Button --> </ul>
+            <!-- Control Sidebar Toggle Button --> 
+            </ul>
         </div>
       </nav>
     </header>
@@ -124,7 +126,8 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="/common/nav.jsp"%></section>
+        <%@ include file="/common/nav.jsp"%>
+      </section>
       <!-- /.sidebar --> </aside>
 
     <!-- =============================================== -->
@@ -133,94 +136,100 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>用户中心</h1>
+        <h1>组织机构</h1>
       </section>
 
       <!-- Main content -->
       <section class="content">
         <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-10">
-            <!-- 提示框 START -->
-            <c:if test="${requestScope.errormsg != null}">
-              <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4> <i class="icon fa fa-ban"></i>
-                  发生错误!
-                </h4>
-                ${requestScope.errormsg}
-              </div>
-            </c:if>
-            <c:if test="${requestScope.infomsg != null}">
-              <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>
-                  <i class="icon fa fa-check"></i>
-                  ${requestScope.infomsg}
-                </h4>
-              </div>
-            </c:if>
-            <!-- 提示框 END -->
-            <form action="${ctxroot}/user/resetpassword" class="form-horizontal"  method="post" id="form1">
-              <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">用户添加</h3>
-                </div>
-                <div class="box-body">
-                  <input type="hidden" name="uid" value="${user.uid}">
-                  <input type="hidden" name="loginname" value="${user.loginName}">
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">登录名：</label>
+          <div class="col-md-2">
 
-                    <div class="col-sm-8">
-                      <input type="text" name="loginnamex" class="form-control" id="input1" value="${user.loginName}" disabled></div>
-                    <div class="col-sm-2"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">旧密码：</label>
-
-                    <div class="col-sm-8">
-                      <input type="password" name="opassword" class="form-control" id="input1" placeholder="密码" value=""></div>
-                    <div class="col-sm-2"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">新密码：</label>
-
-                    <div class="col-sm-8">
-                      <input type="password" name="npassword" class="form-control" id="input1" placeholder="密码" value=""></div>
-                    <div class="col-sm-2"></div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">新密码确认：</label>
-
-                    <div class="col-sm-8">
-                      <input type="password" name="npassword2" class="form-control" id="input1" placeholder="密码确认" value=""></div>
-                    <div class="col-sm-2"></div>
-                  </div>
-
-                </div>
-                <div class="box-footer">
-                  <div class="col-sm-9">
-                    <a href="${ctxroot}/user" class="btn btn-default pull-right">返回</a>
-                    <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button>
-                  -->
-                </div>
-                <div class="col-sm-1">
-                  <button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button>
-                </div>
-                <div class="col-sm-2"></div>
+            <div class="box">
+              <div class="box-body">
+                <ul id="treeDemo" class="ztree"></ul>
               </div>
             </div>
-          </form>
-        </div>
-        <div class="col-md-1"></div>
+          </div>
+          <div class="col-md-10">
+
+              <!-- 提示框 START -->
+              <c:if test="${requestScope.errormsg != null}">
+                <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h4><i class="icon fa fa-ban"></i> 发生错误!</h4>
+                  ${requestScope.errormsg}
+                </div>
+              </c:if>
+              <c:if test="${requestScope.infomsg != null}">
+                <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h4><i class="icon fa fa-check"></i> ${requestScope.infomsg}</h4>
+                </div>
+              </c:if>
+              <!-- 提示框 END -->
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">部门列表</h3>
+                <div class="box-tools pull-right">
+                  <a href="${ctxroot}/department/form" class="btn btn-default btn-sm">添加部门</a>
+                </div>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <table id="userlist" class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>序号</th>
+                      <th>部门名</th>
+                      <th>编码</th>
+                      <th>备注</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <c:forEach items="${departmentlist}" var="department" varStatus="sn">
+                      <tr>
+                        <td>${sn.index+1}</td>
+                        <td>${department.dname}</td>
+                        <td>${department.did}</td>
+                        <td>${department.remarks}</td>
+                        <td>
+                          <div class="btn-group">
+                            <a href="${ctxroot}/department/form/${department.did}" class="btn btn-xs btn-default" onclick="">修改</a>
+                            <a href="#" class="btn btn-xs btn-default" onclick="del(${department.did});">删除</a>
+                          </div>
+                        </td>
+                      </tr>
+                    </c:forEach>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.box-body -->
+              <!--               <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <li>
+                  <a href="#">&laquo;</a>
+                </li>
+                <li>
+                  <a href="#">1</a>
+                </li>
+                <li>
+                  <a href="#">2</a>
+                </li>
+                <li>
+                  <a href="#">3</a>
+                </li>
+                <li>
+                  <a href="#">&raquo;</a>
+                </li>
+              </ul>
+            </div>
+            -->
+          </div>
+          <!-- /.box --> </div>
       </div>
 
-      <!-- 下拉菜单START -->
-      <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-        <ul id="treeDemo" class="ztree" style=""></ul>
-      </div>
-      <!-- 下拉菜单END --> </section>
+    </section>
     <!-- /.content --> </div>
   <!-- /.content-wrapper -->
 
@@ -248,32 +257,91 @@
 <script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- ztree -->
 <script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<!-- Alert -->
+<script type="text/javascript" src="${ctxStatic}/plugins/Alert/Alert.js"></script>
 <!-- AdminLTE App -->
 <script src="${ctxStatic}/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
-    menu_active('10002,10003,10012');
+    menu_active('10002,10008');
 
-    //表单提交
-    function saveform(){
-      //验证表单
-      var opassword = $("input[name='opassword']").val();
-      var npassword = $("input[name='npassword']").val();
-      var npassword2 = $("input[name='npassword2']").val();
+    $(document).ready(function(){
+      var did = ${did};
 
-      if(opassword == ''){
-        alert("旧密码不能为空");
-      }else if(npassword != npassword2){
-        alert("两次密码输入不相同");
-      }else{
-        $('#form1')[0].submit();  
+      var setting = {
+        view:{
+          selectedMulti:false
+        },
+        data: {
+          simpleData: {
+            enable: true
+          }
+        },
+        callback: {
+          onClick: selectdepartment
+        }
+      };
+
+      var zNodes = ${treejson}; 
+      var tree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      var nodes = tree.getNodesByParam("level", 0);
+      for(var i=0; i<nodes.length; i++) {
+        tree.expandNode(nodes[i], true, true, false);
       }
 
-      
+      //默认选中
+      var node = tree.getNodeByParam("id", did, null);
+      tree.selectNode(node);
+
+    });
+
+      //datatable 数据表格
+    $('#userlist').DataTable({
+      "paging": true,
+      "pageLength": 20,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": true,
+      "autoWidth": false,
+      "language": {
+        "lengthMenu": "每页 _MENU_ 条记录",
+        "zeroRecords": "没有找到记录",
+        "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+        "infoEmpty": "无记录",
+        "infoFiltered": "(从 _MAX_ 条记录过滤)",
+        "oPaginate": {
+          "sFirst": "首页",
+          "sPrevious": "上页",
+          "sNext": "下页",
+          "sLast": "末页"
+        }
+      }
+    });
+
+    function selectdepartment(event, treeId, treeNode, clickFlag){
+      //console.log(treeNode.id);
+      did = treeNode.id
+      url = rooturl + "/department/list/"+did;
+      window.location.href = url;
     };
 
+    function del(did){
+      url = rooturl + "/department/delete/"+did;
+      jQuery.post(url, {'did':did}, function(data){
+        console.log(data);
+        if(data == '1'){
+          Alert("删除成功",refresh);
+        }else{
+          Alert("删除失败",refresh);
+        }
+      });
+    }
+        var refresh = function(){
+  window.location.href = rooturl + "/menu";
+}
   </script>
 </body>
 </html>

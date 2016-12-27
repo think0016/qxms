@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ include file="../common/taglib.jsp"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,7 +124,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%>
+        <%@ include file="/common/nav.jsp"%>
       </section>
       <!-- /.sidebar --> </aside>
 
@@ -134,19 +134,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>用户管理</h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Examples</a>
-          </li>
-          <li class="active">Blank page</li>
-        </ol>
+        <h1>用户中心</h1>
       </section>
 
       <!-- Main content -->
@@ -171,16 +159,16 @@
             <form action="${ctxroot}/user/saveuser" class="form-horizontal"  method="post" id="form1">
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">用户添加</h3>
+                <h3 class="box-title">${subtitle}</h3>
               </div>
               <div class="box-body">
                   <input type="hidden" name="uid" value="${user.uid}">
-                  <input type="hidden" name="did" value="">
+                  <input type="hidden" name="did" value="${department.did}">
                   <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">所属部门：</label>
 
                     <div class="col-sm-7">
-                      <input type="text" id="citySel" name="dname" class="form-control" id="input1" value="" disabled></div>
+                      <input type="text" id="citySel" name="dname" class="form-control" id="input1" value="${department.dname}" disabled></div>
                     <div class="col-sm-3">
                       <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
                     </div>
@@ -295,7 +283,7 @@
   <script src="${ctxStatic}/dist/js/demo.js"></script>
   <script src="${ctxStatic}/qxms/js/menu.js"></script>
   <script type="text/javascript">
-    menu_active('2,3,10');
+    menu_active('10002,10003,10011');
     var setting = {
       view: {
         selectedMulti:false

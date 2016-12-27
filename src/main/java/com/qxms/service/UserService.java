@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.qxms.model.Department;
 import com.qxms.model.Role;
 import com.qxms.model.User;
 import com.qxms.model.UserRole;
@@ -49,10 +50,26 @@ public class UserService {
 			Map.Entry<String, String> entry = entries.next();
 			sql += "`" + entry.getKey() + "`='" + entry.getValue() + "' ";
 		}
-		System.out.println(sql);
+
 		return User.dao.find(sql);
 	}
+	
+	/**
+	 * 查找当前部门及其下属部门下的所有用户
+	 */
+	public List<User> findUserList_did(String did) {	
+		
+		List<Department> dlist= Department.dao.find("select * from `qx_department` where `del_flag` = 0 AND `parent_dids` like '%"+did+"%'");
+		
+		String sql = "select * from `qx_user` where `status` = 1 AND ( `did`=?";
 
+		for (int i = 0; i < dlist.size(); i++) {
+			sql += " OR `did`="+dlist.get(i).getDid().toString()+" "; 
+		}
+		sql += ")"; 
+		return User.dao.find(sql,did);
+	}
+	
 	public int save(User user, boolean update) {
 		int flag = 0;
 		if (update) {
@@ -60,7 +77,7 @@ public class UserService {
 			if (flag1) {
 				// 先删除所有角色关联
 				String sql = "select * from `qx_user_role` `q` where `q`.`user_id` = ?";
-				List<UserRole> list= UserRole.dao.find(sql);
+				List<UserRole> list= UserRole.dao.find(sql,user.getUid().toString());
 				for (int i = 0; i < list.size(); i++) {
 					list.get(i).delete();
 				}
@@ -92,10 +109,18 @@ public class UserService {
 		return flag;
 	}
 	
-	public boolean delete(String uid){
+	public int delete(String uid){
+		int flag = 0;
 		User user = this.findByUid(uid);
-		user.setStatus(new Integer(0));
-		return user.update();		
+		if(!this.isAdmin(user)){
+			user.setStatus(new Integer(0));
+			if(user.update()){
+				flag = 1;
+			};
+		}else{
+			flag = 2;//超管权限不可删除
+		}
+		return flag;		
 	}
 	
 	public boolean isAdmin(User user){

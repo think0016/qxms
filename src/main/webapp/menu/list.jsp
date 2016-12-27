@@ -36,9 +36,7 @@
   <style type="text/css">
     /*ul.ztree {margin-top: 10px;border: 1px solid #617775;background: #f0f6e4;width:600px;height:360px;overflow-y:scroll;overflow-x:auto;}*/
   </style>
-  <script type="text/javascript">
-    var rooturl = '${ctxroot}'; 
-  </script>
+  <script type="text/javascript">var rooturl = '${ctxroot}'; </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <!-- Site wrapper -->
@@ -115,8 +113,7 @@
                 </li>
               </ul>
             </li>
-            <!-- Control Sidebar Toggle Button --> 
-            </ul>
+            <!-- Control Sidebar Toggle Button --> </ul>
         </div>
       </nav>
     </header>
@@ -129,8 +126,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%>
-      </section>
+        <%@ include file="../common/nav.jsp"%></section>
       <!-- /.sidebar --> </aside>
 
     <!-- =============================================== -->
@@ -142,8 +138,7 @@
         <h1>菜单管理</h1>
         <ol class="breadcrumb">
           <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
+            <a href="#"> <i class="fa fa-dashboard"></i>
               Home
             </a>
           </li>
@@ -157,34 +152,74 @@
       <!-- Main content -->
       <section class="content">
         <div class="row">
-           <div class="col-md-12">
+          <div class="col-md-12">
 
-              <!-- 提示框 START -->
-              <c:if test="${requestScope.errormsg != null}">
-                <div class="alert alert-danger alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-ban"></i> 发生错误!</h4>
-                  ${requestScope.errormsg}
-                </div>
-              </c:if>
-              <c:if test="${requestScope.infomsg != null}">
-                <div class="alert alert-success alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-check"></i> ${requestScope.infomsg}</h4>
-                </div>
-              </c:if>
-              <!-- 提示框 END -->
+            <!-- 提示框 START -->
+            <c:if test="${requestScope.errormsg != null}">
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4> <i class="icon fa fa-ban"></i>
+                  发生错误!
+                </h4>
+                ${requestScope.errormsg}
+              </div>
+            </c:if>
+            <c:if test="${requestScope.infomsg != null}">
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>
+                  <i class="icon fa fa-check"></i>
+                  ${requestScope.infomsg}
+                </h4>
+              </div>
+            </c:if>
+            <!-- 提示框 END -->
             <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title">菜单列表</h3>
                 <div class="box-tools pull-right">
-                  <a href="${ctxroot}/menu/form" class="btn btn-default btn-sm">添加菜单</a>
+                  <!-- <a href="${ctxroot}/menu/form" class="btn btn-default btn-sm">添加菜单</a> -->
                 </div>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
-                <ul id="treeDemo" class="ztree"></ul>
-              </div>
+                <table id="treeTable1" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>名称</th>
+                      <th>链接</th>
+                      <th style="width: 80px;">排序</th>
+                      <th style="width: 60px;">类型</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <c:forEach items="${menulist}" var="menu" varStatus="sn">
+                      <tr id="${menu.menuid}" <c:if test="${menu.parentId ne 0}" >pId="${menu.parentId}"</c:if>
+                      >
+                      <td>${menu.mname}</td>
+                      <td>${menu.href}</td>
+                      <td>${menu.sort}</td>
+                      <td>
+                        <c:if test="${menu.mtype eq 0}"><span class="label" style="background-color:#87CEFA;color: #444">菜单</span></c:if>
+                        <c:if test="${menu.mtype eq 1}"><span class="label" style="background-color:#DCDCDC;color: #444">按钮</span></c:if>
+                        <c:if test="${menu.mtype eq 2}"><span class="label" style="background-color:#444;color: #DCDCDC">顶级</span></c:if>
+                      </td>
+                      <td>
+                        <div class="btn-group">
+                          <c:if test="${menu.mtype ne 2}">
+                            <a href="${ctxroot}/menu/form/${menu.menuid}-0" class="btn btn-default btn-xs">修改</a>
+                            <button type="button" class="btn btn-default btn-xs" onclick="del(${menu.menuid})">删除</button>
+                          </c:if>
+                            <a href="${ctxroot}/menu/form/${menu.menuid}-1" class="btn btn-default btn-xs">添加下级功能</a>
+                        </div>
+                      </td>
+                    </tr>
+                  </c:forEach>
+                </tbody>
+
+              </table>
+            </div>
           </div>
           <!-- /.box --> </div>
       </div>
@@ -219,86 +254,37 @@
 <script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
 <!-- Alert -->
 <script type="text/javascript" src="${ctxStatic}/plugins/Alert/Alert.js"></script>
+<!-- treetable -->
+<script src="${ctxStatic}/plugins/treetable/script/treeTable/jquery.treeTable.js"></script>
 <!-- AdminLTE App -->
 <script src="${ctxStatic}/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
-    menu_active('2,9');
+    menu_active('10002,10009');
 
-    $(document).ready(function(){
+  $(function(){
+    var option = {
+        theme:'vsStyle',
+        expandLevel : 4
+        // beforeExpand : function($treeTable, id) {
+        //     //判断id是否已经有了孩子节点，如果有了就不再加载，这样就可以起到缓存的作用
+        //     if ($('.' + id, $treeTable).length) { return; }
+        //     //这里的html可以是ajax请求
+        //     var html = '<tr id="8" pId="6"><td>5.1</td><td>可以是ajax请求来的内容</td></tr>'
+        //              + '<tr id="9" pId="6"><td>5.2</td><td>动态的内容</td></tr>';
 
-      var setting = {
-        view:{
-          selectedMulti:false,
-          addDiyDom: addDiyDom
-        },
-        data: {
-          simpleData: {
-            enable: true
-          }
-        },
-        callback: {
-          //onClick: selectdepartment
-        }
-      };
+        //     $treeTable.addChilds(html);
+        // },
+        // onSelect : function($treeTable, id) {
+        //     window.console && console.log('onSelect:' + id);
+        // }
 
-      var zNodes = ${treejson}; 
-      var tree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-      var nodes = tree.getNodesByParam("level", 0);
-      for(var i=0; i<nodes.length; i++) {
-        tree.expandNode(nodes[i], true, true, false);
-      }
-
-      //默认选中
-      //var node = tree.getNodeByParam("id", did, null);
-      //tree.selectNode(node);
-
-    });
-
-    function addDiyDom(treeId, treeNode){
-      if (treeNode.id == 1) return;
-      var aObj = $("#" + treeNode.tId + '_a');
-      //var editStr = "<span class='demoIcon' id='diyBtn_" +treeNode.id+ "' title='"+treeNode.name+"' onfocus=''>&nbsp;&nbsp;&nbsp;&nbsp;修改</span>";
-      var editStr = '&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"${ctxroot}/menu/form/'+treeNode.id+'\" class=\"btn btn-default btn-sm\">修改</a>';
-      editStr += '&nbsp;<button class=\"btn btn-default btn-sm\" onClick=\"del('+treeNode.id+');\">删除</button>';
-      aObj.append(editStr);
-      //var btn = $("#diyBtn_"+treeNode.id);
-      //if (btn) btn.bind("click", function(){alert("diy Button for " + treeNode.name);});
-    }
-/*
-      //datatable 数据表格
-    $('#userlist').DataTable({
-      "paging": true,
-      "pageLength": 20,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": false,
-      "info": true,
-      "autoWidth": false,
-      "language": {
-        "lengthMenu": "每页 _MENU_ 条记录",
-        "zeroRecords": "没有找到记录",
-        "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-        "infoEmpty": "无记录",
-        "infoFiltered": "(从 _MAX_ 条记录过滤)",
-        "oPaginate": {
-          "sFirst": "首页",
-          "sPrevious": "上页",
-          "sNext": "下页",
-          "sLast": "末页"
-        }
-      }
-    });
-
-    function selectdepartment(event, treeId, treeNode, clickFlag){
-      //console.log(treeNode.id);
-      did = treeNode.id
-      url = rooturl + "/user/list/"+did;
-      window.location.href = url;
     };
-*/
+    $('#treeTable1').treeTable(option);
+});
+
 function del(menuid){
   var purl = rooturl + "/menu/delete";
   $.post(purl, {"menuid":menuid}, function(data){
@@ -311,7 +297,7 @@ function del(menuid){
 };
 var refresh = function(){
   window.location.href = rooturl + "/menu";
-}
+};
   </script>
 </body>
 </html>

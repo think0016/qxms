@@ -1,5 +1,6 @@
 package com.qxms.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,15 +33,15 @@ public class UserController extends Controller {
 
 		String did = getPara(0);
 
-		List<User> list = null;
-		if (did != null) {
-			Map<String, String> param = new HashMap<String, String>();
-			param.put("did", did);
-			list = userService.findUserList(param);
-		} else {
-			did = "1";
-			list = userService.findAllUser();
-		}
+		// List<User> list = null;
+		// if (did != null) {
+		// Map<String, String> param = new HashMap<String, String>();
+		// param.put("did", did);
+		// list = userService.findUserList(param);
+		// } else {
+		did = "0";
+		// list = userService.findAllUser();
+		// }
 
 		// 部门树信息
 		List<Department> dlist = departmentService.findAllDepartment();
@@ -49,10 +50,36 @@ public class UserController extends Controller {
 		Gson gson = new Gson();
 		String json = gson.toJson(nodes);
 
-		setAttr("userlist", list);
+		// setAttr("userlist", list);
 		setAttr("treejson", json);
 		setAttr("did", did);
 		render("list.jsp");
+	}
+
+	public void getjsonlist() {
+		String did = getPara("did");
+		List<User> list = null;
+		if (!"0".equals(did)) {
+			// Map<String, String> param = new HashMap<String, String>();
+			// param.put("did", did);
+			// list = userService.findUserList(param);
+			list = userService.findUserList_did(did);
+		} else {
+			// did = "1";
+			list = userService.findAllUser();
+		}
+
+		List<String[]> result = new ArrayList<String[]>();
+		for (int i = 0; i < list.size(); i++) {
+			User e = list.get(i);
+			String[] temp = { e.getUid().toString(), e.getLoginName(), e.getTurename(), e.getFormaterLogindate(""),
+					"" };
+			result.add(temp);
+		}
+		Gson gson = new Gson();
+		String json = "{\"data\":" + gson.toJson(result) + "}";
+
+		renderText(json);
 	}
 
 	public void form() {
@@ -60,8 +87,19 @@ public class UserController extends Controller {
 		// 先判断是修改还是新增
 		User user = new User();
 		String uid = getPara(0);
-		if (!StringUtils.isEmpty(uid)) {
+		String did = getPara(1);// 部门筛选
+		if (!StringUtils.isEmpty(uid) && !"0".equals(uid)) {
 			user = userService.findByUid(uid);
+			setAttr("user", user);
+			setAttr("department", departmentService.findByDid(user.getDid().toString()));
+			setAttr("subtitle", "用户修改");
+		} else {
+			if (!StringUtils.isEmpty(did) && !"0".equals(did)) {
+				setAttr("department", departmentService.findByDid(did));
+			} else {
+				setAttr("department", departmentService.findByDid("10001"));
+			}
+			setAttr("subtitle", "用户添加");
 		}
 
 		// 部门树信息
@@ -75,7 +113,6 @@ public class UserController extends Controller {
 
 		setAttr("roles", rlist);
 		setAttr("treejson", json);
-		setAttr("user", user);
 
 		render("form.jsp");
 	}
@@ -96,8 +133,8 @@ public class UserController extends Controller {
 		String email = getPara("email");
 		String remark = getPara("remark");
 		String rolex = getPara("role");
-		String[] role = {rolex};
-		//String[] role = getParaValues("role");
+		String[] role = { rolex };
+		// String[] role = getParaValues("role");
 
 		boolean update = false;
 		boolean lnflag = false;// 重名标记
@@ -105,6 +142,10 @@ public class UserController extends Controller {
 		if (!StringUtils.isEmpty(uid)) {
 			update = true;
 			user = userService.findByUid(uid);
+			user.setTurename(truename);
+			user.setEmail(email);
+			user.setRemarks(remark);
+			user.setRole(role);
 		} else {
 			Map<String, String> param = new HashMap<String, String>();
 			param.put("login_name", loginname);
@@ -112,16 +153,15 @@ public class UserController extends Controller {
 			if (rs.size() > 0) {
 				lnflag = true;
 			}
+			user.setDid(new Integer(did));
+			user.setLoginName(loginname);
+			user.setTurename(truename);
+			user.setEmail(email);
+			user.setPassword(SystemService.entryptPassword(password));
+			user.setRemarks(remark);
+			user.setRegisterdate(new Date());
+			user.setRole(role);
 		}
-
-		user.setDid(new Integer(did));
-		user.setLoginName(loginname);
-		user.setTurename(truename);
-		user.setEmail(email);
-		user.setPassword(SystemService.entryptPassword(password));
-		user.setRemarks(remark);
-		user.setRegisterdate(new Date());
-		user.setRole(role);
 
 		if (!lnflag) {
 			int flag = userService.save(user, update);
@@ -147,8 +187,8 @@ public class UserController extends Controller {
 
 	public void resetpassword() {
 		// String uid = getPara("uid");
-		//String loginname = getPara("loginname");
-		User user = (User)getSession().getAttribute("cache_user");
+		// String loginname = getPara("loginname");
+		User user = (User) getSession().getAttribute("cache_user");
 		String opassword = getPara("opassword");
 		String npassword = getPara("npassword");
 
@@ -175,47 +215,40 @@ public class UserController extends Controller {
 
 	public void delete() {
 		String uid = getPara("uid");
-		boolean flag = userService.delete(uid);
-		if (flag) {
-			renderText("1");
-		} else {
-			renderText("2");
-		}
-
+		int flag = userService.delete(uid);
+		renderText(flag+"");
 	}
 
-	public void userinfo(){
-		User user = (User)getSession().getAttribute("cache_user");
-				
+	public void userinfo() {
+		User user = (User) getSession().getAttribute("cache_user");
+
 		Department dept = departmentService.findByDid(user.getDid().toString());
-		List<Role> rlist= user.getRolelist();
+		List<Role> rlist = user.getRolelist();
 		setAttr("department", dept);
 		setAttr("rlist", rlist);
 		setAttr("user", user);
 		render("userinfoform.jsp");
 	}
-	
-	
+
 	/**
 	 * 保存个人信息
 	 */
-	public void saveuserinfo(){
-		User user = (User)getSession().getAttribute("cache_user");
-		
+	public void saveuserinfo() {
+		User user = (User) getSession().getAttribute("cache_user");
+
 		String email = getPara("email");
 		String remarks = getPara("remarks");
 		String truename = getPara("truename");
-		
+
 		user.setTurename(truename);
 		user.setRemarks(remarks);
 		user.setEmail(email);
-		
-		if(user.update()){
+
+		if (user.update()) {
 			renderText("1");
-		}else{
+		} else {
 			renderText("2");
-		};
-		
+		}
 
 	}
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ include file="../common/taglib.jsp"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,7 +126,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%>
+        <%@ include file="/common/nav.jsp"%>
       </section>
       <!-- /.sidebar --> </aside>
 
@@ -137,32 +137,12 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>组织机构</h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Examples</a>
-          </li>
-          <li class="active">Blank page</li>
-        </ol>
       </section>
 
       <!-- Main content -->
       <section class="content">
         <div class="row">
-          <div class="col-md-2">
-
-            <div class="box">
-              <div class="box-body">
-                <ul id="treeDemo" class="ztree"></ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-10">
+          <div class="col-md-12">
 
               <!-- 提示框 START -->
               <c:if test="${requestScope.errormsg != null}">
@@ -188,22 +168,22 @@
               </div>
               <!-- /.box-header -->
               <div class="box-body">
-                <table id="userlist" class="table table-bordered">
+                <table id="treeTable1" class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>序号</th>
                       <th>部门名</th>
-                      <th>编码</th>
+                      <th>负责人</th>
+                      <th>排序</th>
                       <th>备注</th>
                       <th>操作</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:forEach items="${departmentlist}" var="department" varStatus="sn">
-                      <tr>
-                        <td>${sn.index+1}</td>
+                      <tr id="${department.did}" <c:if test="${department.parentDid ne 0}" >pId="${department.parentDid}"</c:if>>
                         <td>${department.dname}</td>
-                        <td>${department.did}</td>
+                        <td>${department.manager}</td>
+                        <td>${department.sort}</td>
                         <td>${department.remarks}</td>
                         <td>
                           <div class="btn-group">
@@ -217,26 +197,7 @@
                 </table>
               </div>
               <!-- /.box-body -->
-              <!--               <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li>
-                  <a href="#">&laquo;</a>
-                </li>
-                <li>
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">&raquo;</a>
-                </li>
-              </ul>
-            </div>
-            -->
+
           </div>
           <!-- /.box --> </div>
       </div>
@@ -269,6 +230,8 @@
 <script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- ztree -->
 <script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<!-- treetable -->
+<script src="${ctxStatic}/plugins/treetable/script/treeTable/jquery.treeTable.js"></script>
 <!-- Alert -->
 <script type="text/javascript" src="${ctxStatic}/plugins/Alert/Alert.js"></script>
 <!-- AdminLTE App -->
@@ -277,68 +240,15 @@
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script src="${ctxStatic}/qxms/js/menu.js"></script>
 <script type="text/javascript">
-    menu_active('2,8');
+    menu_active('10002,10008');
 
-    $(document).ready(function(){
-      var did = ${did};
-
-      var setting = {
-        view:{
-          selectedMulti:false
-        },
-        data: {
-          simpleData: {
-            enable: true
-          }
-        },
-        callback: {
-          onClick: selectdepartment
-        }
-      };
-
-      var zNodes = ${treejson}; 
-      var tree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-      var nodes = tree.getNodesByParam("level", 0);
-      for(var i=0; i<nodes.length; i++) {
-        tree.expandNode(nodes[i], true, true, false);
-      }
-
-      //默认选中
-      var node = tree.getNodeByParam("id", did, null);
-      tree.selectNode(node);
-
+    $(function() {
+        var option = {
+            theme: 'vsStyle',
+            expandLevel: 4
+         };
+        $('#treeTable1').treeTable(option);
     });
-
-      //datatable 数据表格
-    $('#userlist').DataTable({
-      "paging": true,
-      "pageLength": 20,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": false,
-      "info": true,
-      "autoWidth": false,
-      "language": {
-        "lengthMenu": "每页 _MENU_ 条记录",
-        "zeroRecords": "没有找到记录",
-        "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-        "infoEmpty": "无记录",
-        "infoFiltered": "(从 _MAX_ 条记录过滤)",
-        "oPaginate": {
-          "sFirst": "首页",
-          "sPrevious": "上页",
-          "sNext": "下页",
-          "sLast": "末页"
-        }
-      }
-    });
-
-    function selectdepartment(event, treeId, treeNode, clickFlag){
-      //console.log(treeNode.id);
-      did = treeNode.id
-      url = rooturl + "/department/list/"+did;
-      window.location.href = url;
-    };
 
     function del(did){
       url = rooturl + "/department/delete/"+did;
@@ -351,9 +261,9 @@
         }
       });
     }
-        var refresh = function(){
-  window.location.href = rooturl + "/menu";
-}
+    var refresh = function(){
+      window.location.href = rooturl + "/menu";
+    }
   </script>
 </body>
 </html>

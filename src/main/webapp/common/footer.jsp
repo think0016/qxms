@@ -4,9 +4,9 @@
 <footer class="main-footer">
 <div class="pull-right hidden-xs">
   <b>Version</b>
-  2.3.7
-</div> <strong>Copyright &copy; 2014-2016
-  <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
+  1.0.0
+</div> <strong>Copyright &copy; 2016-2017
+  <a href="http://hnsi.cn">河南软信科技有限公司</a>
   .</strong> 
 All rights
     reserved.

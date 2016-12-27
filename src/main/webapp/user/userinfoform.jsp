@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ include file="../common/taglib.jsp"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,7 +126,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="../common/nav.jsp"%>
+        <%@ include file="/common/nav.jsp"%>
       </section>
       <!-- /.sidebar --> </aside>
 
@@ -136,19 +136,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>用户管理</h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Examples</a>
-          </li>
-          <li class="active">Blank page</li>
-        </ol>
+        <h1>用户中心</h1>
       </section>
 
       <!-- Main content -->
@@ -280,7 +268,7 @@
   <script src="${ctxStatic}/dist/js/demo.js"></script>
   <script src="${ctxStatic}/qxms/js/menu.js"></script>
   <script type="text/javascript">
-    menu_active('2,3,10');
+    menu_active('10002,10003,10011');
 /*    var setting = {
       view: {
         selectedMulti:false

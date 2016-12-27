@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <ul class="sidebar-menu">
-	<li class="header">MAIN NAVIGATION</li>
+	<li class="header"></li>
 	<c:set var="cacheuid" value="${cache_user.uid}" />
 	<c:set var="m1" value="0" />
 	<c:set var="m2" value="0" />
@@ -11,7 +11,7 @@
 	<!-- MENU START -->
 	
 	<c:forEach items="${menuList}" var="menu" varStatus="idxStatus1">
-		<c:if test="${menu.parentId eq '1'}">
+		<c:if test="${menu.parentId eq '10001'}">
 		<li id="menu-${menu.menuid}" class="treeview">
 
 		  <a href="#"> <i class="fa fa-cog"></i>

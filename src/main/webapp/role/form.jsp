@@ -136,17 +136,6 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>角色管理</h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#"> <i class="fa fa-dashboard"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Examples</a>
-          </li>
-          <li class="active">Blank page</li>
-        </ol>
       </section>
 
       <!-- Main content -->
@@ -178,7 +167,7 @@
               <input type="hidden" name="roleid" value="${role.roleid}">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">角色添加</h3>
+                  <h3 class="box-title">${subtitle}</h3>
                 </div>
                 <div class="box-body">
 
@@ -253,7 +242,7 @@
   <script src="${ctxStatic}/dist/js/demo.js"></script>
   <script src="${ctxStatic}/qxms/js/menu.js"></script>
   <script type="text/javascript">
-  menu_active('2,4');
+  menu_active('10002,10004');
   /*
     var setting = {
       view: {
