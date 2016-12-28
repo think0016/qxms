@@ -70,46 +70,7 @@
             <!-- Tasks: style can be found in dropdown.less -->
 
             <!-- User Account: style can be found in dropdown.less -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">${sessionScope.cache_user.turename}</span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="${ctxStatic}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                  <p>
-                    ${sessionScope.cache_user.turename} - Web Developer
-                    <small>Member since Nov. 2012</small>
-                  </p>
-                </li>
-                <!-- Menu Body -->
-                <li class="user-body">
-                  <div class="row">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </div>
-                  <!-- /.row --> </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
-                  </div>
-                  <div class="pull-right">
-                    <a href="${ctxroot}/logout" class="btn btn-default btn-flat">登出</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
+            <%@ include file="/common/userAccount.jsp"%>
             <!-- Control Sidebar Toggle Button --> </ul>
         </div>
       </nav>

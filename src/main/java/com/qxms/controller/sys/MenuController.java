@@ -1,4 +1,4 @@
-package com.qxms.controller;
+package com.qxms.controller.sys;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,11 +7,13 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Menu;
 import com.qxms.model.TreeNode;
 import com.qxms.model.User;
-import com.qxms.service.MenuService;
+import com.qxms.service.sys.MenuService;
 
 public class MenuController extends Controller {
 
@@ -21,6 +23,7 @@ public class MenuController extends Controller {
 		redirect("/menu/list");
 	}
 
+	@Before({AuthenticationValidator.class})
 	public void list() {
 		
 		// 菜单树信息
@@ -35,22 +38,23 @@ public class MenuController extends Controller {
 		setAttr("menulist", list);
 		render("list.jsp");
 	}
-
+	
+	@Before({AuthenticationValidator.class})
 	public void form() {
 		String menuid = getPara(0);
 		String type = getPara(1);//是否在下级添加
-		
+		String subtitle ="菜单添加";
 		if (!StringUtils.isEmpty(menuid)) {
 			Menu menu = menuService.findMenuById(menuid);
 			if("0".equals(type)){
 				setAttr("pmenuname", menuService.findMenuById(menu.getParentId().toString()).getMname());
 				setAttr("pmenuid", menuService.findMenuById(menu.getParentId().toString()).getMenuid());
 				setAttr("menu", menu);
+				subtitle = "菜单修改";
 			}else{
 				setAttr("pmenuname", menu.getMname());
 				setAttr("pmenuid", menu.getMenuid());
 			}
-			
 			
 		}
 		// 菜单树信息
@@ -60,6 +64,7 @@ public class MenuController extends Controller {
 		String json = gson.toJson(nodes);
 
 		setAttr("treejson", json);
+		setAttr("subtitle", subtitle);
 		render("form.jsp");
 	}
 

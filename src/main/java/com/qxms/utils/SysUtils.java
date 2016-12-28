@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.qxms.model.Menu;
 import com.qxms.model.User;
-import com.qxms.service.MenuService;
-import com.qxms.service.UserService;
+import com.qxms.service.sys.MenuService;
+import com.qxms.service.sys.UserService;
 
 public class SysUtils {
 	public static final UserService userService = new UserService();

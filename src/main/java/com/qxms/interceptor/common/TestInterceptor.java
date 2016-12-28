@@ -1,4 +1,4 @@
-package com.qxms.interceptor;
+package com.qxms.interceptor.common;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;

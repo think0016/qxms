@@ -1,4 +1,4 @@
-package com.qxms.controller;
+package com.qxms.controller.sys;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,15 +9,17 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Department;
 import com.qxms.model.Role;
 import com.qxms.model.TreeNode;
 import com.qxms.model.User;
-import com.qxms.service.DepartmentService;
-import com.qxms.service.RoleService;
-import com.qxms.service.SystemService;
-import com.qxms.service.UserService;
+import com.qxms.service.sys.DepartmentService;
+import com.qxms.service.sys.RoleService;
+import com.qxms.service.sys.SystemService;
+import com.qxms.service.sys.UserService;
 
 public class UserController extends Controller {
 	public static final UserService userService = new UserService();
@@ -29,6 +31,7 @@ public class UserController extends Controller {
 		redirect("/user/list");
 	}
 
+	@Before({AuthenticationValidator.class})
 	public void list() {
 
 		String did = getPara(0);
@@ -82,6 +85,7 @@ public class UserController extends Controller {
 		renderText(json);
 	}
 
+	@Before({AuthenticationValidator.class})
 	public void form() {
 
 		// 先判断是修改还是新增
@@ -117,6 +121,7 @@ public class UserController extends Controller {
 		render("form.jsp");
 	}
 
+	@Before({AuthenticationValidator.class})
 	public void pwform() {
 
 		setAttr("user", getSession().getAttribute("cache_user"));

@@ -1,14 +1,14 @@
-package com.qxms.controller;
+package com.qxms.controller.sys;
 
 import java.util.Date;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
-import com.qxms.interceptor.LoginValidator;
+import com.qxms.interceptor.common.LoginValidator;
 import com.qxms.model.User;
-import com.qxms.service.SystemService;
-import com.qxms.service.UserService;
+import com.qxms.service.sys.SystemService;
+import com.qxms.service.sys.UserService;
 
 public class IndexController extends Controller {
 	public static final UserService userService = new UserService();
@@ -42,6 +42,7 @@ public class IndexController extends Controller {
 			user.update();
 			getSession().setAttribute("cache_user", user);
 			getSession().setAttribute("cache_cusername", user.getTurename());
+			getSession().setAttribute("isAdmin", userService.isAdmin(user));
 			//forwardAction("/");
 			redirect("/");
 		}
@@ -55,4 +56,10 @@ public class IndexController extends Controller {
 		redirect("/login");
 	}
 	
+	/**
+	 * 权限不足页面
+	 */
+	public void forbidpage(){
+		render("forbidpage.jsp");
+	}
 }

@@ -1,4 +1,4 @@
-package com.qxms.service;
+package com.qxms.service.sys;
 
 import com.qxms.common.security.Digests;
 import com.qxms.common.utils.Encodes;

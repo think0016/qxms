@@ -1,4 +1,4 @@
-package com.qxms.controller;
+package com.qxms.controller.sys;
 
 import java.util.Date;
 import java.util.List;
@@ -6,12 +6,14 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Role;
 import com.qxms.model.TreeNode;
 import com.qxms.model.User;
-import com.qxms.service.MenuService;
-import com.qxms.service.RoleService;
+import com.qxms.service.sys.MenuService;
+import com.qxms.service.sys.RoleService;
 
 public class RoleController extends Controller {
 
@@ -22,12 +24,14 @@ public class RoleController extends Controller {
 		redirect("/role/list");
 	}
 	
+	@Before({AuthenticationValidator.class})
 	public void list() {
 		List<Role> rolelist = roleService.findAllRole();
 		setAttr("rolelist", rolelist);
 		render("list.jsp");
 	}
 
+	@Before({AuthenticationValidator.class})
 	public void form(){
 		String roleid = getPara(0);
 		if(!StringUtils.isEmpty(roleid)){

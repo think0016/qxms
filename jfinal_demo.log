@@ -1426,3 +1426,60 @@ Caused by: java.lang.NumberFormatException: For input string: "did"
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
 	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:432)
 	... 28 more
+
+2016-12-28 10:49:16
+[ERROR]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: /user/list
+java.lang.NullPointerException
+	at com.qxms.service.sys.MenuService.VerifyAuthenticationByHref(MenuService.java:56)
+	at com.qxms.interceptor.common.AuthenticationValidator.intercept(AuthenticationValidator.java:20)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.qxms.interceptor.common.VerifyLoginInterceptor.intercept(VerifyLoginInterceptor.java:21)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2016-12-28 10:49:53
+[ERROR]-[Thread: http-bio-8080-exec-7]-[com.jfinal.core.ActionHandler.handle()]: /user/list
+java.lang.NullPointerException
+	at com.qxms.service.sys.MenuService.VerifyAuthenticationByHref(MenuService.java:56)
+	at com.qxms.interceptor.common.AuthenticationValidator.intercept(AuthenticationValidator.java:20)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.qxms.interceptor.common.VerifyLoginInterceptor.intercept(VerifyLoginInterceptor.java:21)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2016-12-28 15:31:01
+[WARN]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /index/

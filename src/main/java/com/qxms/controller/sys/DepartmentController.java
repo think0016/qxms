@@ -1,4 +1,4 @@
-package com.qxms.controller;
+package com.qxms.controller.sys;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,12 +7,14 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Department;
 import com.qxms.model.TreeNode;
 import com.qxms.model.User;
-import com.qxms.service.DepartmentService;
-import com.qxms.service.UserService;
+import com.qxms.service.sys.DepartmentService;
+import com.qxms.service.sys.UserService;
 
 public class DepartmentController extends Controller {
 
@@ -23,7 +25,7 @@ public class DepartmentController extends Controller {
 		redirect("/department/list");
 	}
 	
-	
+	@Before({AuthenticationValidator.class})
 	public void list() {
 		
 		//String did = getPara(0);
@@ -35,7 +37,8 @@ public class DepartmentController extends Controller {
 		// setAttr("did", did);
 		render("list.jsp");
 	}
-
+	
+	@Before({AuthenticationValidator.class})
 	public void form(){
 		
 		String did = getPara(0);

@@ -1,4 +1,4 @@
-package com.qxms.service;
+package com.qxms.service.sys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.qxms.model.Department;
 import com.qxms.model.Menu;
 import com.qxms.model.TreeNode;
@@ -45,6 +46,17 @@ public class MenuService {
 				+ "LEFT JOIN `qx_menu` `e` ON `e`.`menuid` = `d`.`menu_id` "
 				+ "WHERE `e`.`mtype` = '0' AND `a`.`uid` = ? GROUP BY `e`.`menuid` ORDER BY `e`.`sort` DESC";
 		return Menu.dao.find(sql, uid);
+	}
+
+	public boolean VerifyAuthenticationByHref(String uid, String href) {
+		String sql = "SELECT COUNT(*) AS 'x' FROM `qx_user` `a` "
+				+ "LEFT JOIN `qx_user_role` `b` ON `a`.`uid`=`b`.`user_id` "
+				+ "LEFT JOIN `qx_role` `c` ON `c`.`roleid`=`b`.`role_id`  "
+				+ "LEFT JOIN `qx_role_menu` `d` ON `d`.`role_id` = `c`.`roleid` "
+				+ "LEFT JOIN `qx_menu` `e` ON `e`.`menuid` = `d`.`menu_id` "
+				+ "WHERE `e`.`href` = ? AND `a`.`uid` = ? GROUP BY `e`.`menuid` ORDER BY `e`.`sort` DESC";
+		List<Menu> rs = Menu.dao.find(sql, href, uid);
+		return rs.size() > 0;
 	}
 
 	public List<Menu> findMenuList(Map<String, String> param) {

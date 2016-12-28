@@ -87,35 +87,37 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>主面板</h1>
+        <h1>主页</h1>
+        <ol class="breadcrumb">
+          <li>
+            <a href="#">
+              <i class="fa fa-dashboard"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#">Examples</a>
+          </li>
+          <li class="active">Blank page</li>
+        </ol>
       </section>
 
       <!-- Main content -->
       <section class="content">
-        <div class="row">
-          <div class="col-md-12">
-            <!-- 提示框 START -->
-            <c:if test="${requestScope.errormsg != null}">
-              <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>
-                  <i class="icon fa fa-ban"></i>
-                  发生错误!
-                </h4>
-                ${requestScope.errormsg}
-              </div>
-            </c:if>
-            <c:if test="${requestScope.infomsg != null}">
-              <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4>
-                  <i class="icon fa fa-check"></i>
-                  ${requestScope.infomsg}
-                </h4>
-              </div>
-            </c:if>
-            <!-- 提示框 END --> </div>
+      <div class="error-page">
+        <!-- <h2 class="headline text-red">出错啦</h2> -->
+
+        <div class="error-content">
+          <h3><i class="fa fa-warning text-red"></i> 您所在的角色组没有执行此操作的权限.</h3>
+
+          <p>
+             您可以<a href="${ctxroot}">返回主页</a>。
+          </p>
+
+
         </div>
+      </div>
+      <!-- /.error-page -->
 
       </section>
       <!-- /.content --> </div>

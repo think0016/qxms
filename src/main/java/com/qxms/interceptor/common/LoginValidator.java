@@ -1,4 +1,4 @@
-package com.qxms.interceptor;
+package com.qxms.interceptor.common;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;

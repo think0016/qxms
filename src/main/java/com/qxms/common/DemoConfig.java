@@ -10,14 +10,14 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
-import com.qxms.controller.DepartmentController;
-import com.qxms.controller.IndexController;
-import com.qxms.controller.MenuController;
-import com.qxms.controller.RoleController;
 import com.qxms.controller.TestController;
-import com.qxms.controller.UserController;
-import com.qxms.interceptor.AuthenticationValidator;
-import com.qxms.interceptor.VerifyLoginInterceptor;
+import com.qxms.controller.sys.DepartmentController;
+import com.qxms.controller.sys.IndexController;
+import com.qxms.controller.sys.MenuController;
+import com.qxms.controller.sys.RoleController;
+import com.qxms.controller.sys.UserController;
+import com.qxms.interceptor.common.AuthenticationValidator;
+import com.qxms.interceptor.common.VerifyLoginInterceptor;
 import com.qxms.model._MappingKit;
 
 /**
@@ -32,7 +32,7 @@ public class DemoConfig extends JFinalConfig {
 		// 加载少量必要配置，随后可用PropKit.get(...)获取值
 		PropKit.use("qxmscfg.txt");
 		me.setDevMode(PropKit.getBoolean("devMode", false));
-		me.setViewType(ViewType.JSP);
+		me.setViewType(ViewType.JSP);		
 	}
 	
 	/**
@@ -62,7 +62,8 @@ public class DemoConfig extends JFinalConfig {
 		// 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(C3p0Plugin);
 		me.add(arp);
-		arp.setShowSql(true);
+		//输出SQL语句(测试)
+		//arp.setShowSql(true);
 		// 所有配置在 MappingKit 中搞定
 		_MappingKit.mapping(arp);
 	}
@@ -73,7 +74,7 @@ public class DemoConfig extends JFinalConfig {
 	public void configInterceptor(Interceptors me) {
 		//me.add(new TestInterceptor());
 		me.add(new VerifyLoginInterceptor());
-		me.add(new AuthenticationValidator());
+		//me.add(new AuthenticationValidator());
 	}
 	
 	/**

@@ -8,7 +8,7 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 import com.qxms.model.Menu;
-import com.qxms.service.MenuService;
+import com.qxms.service.sys.MenuService;
 
 public class TestController extends Controller {
 
