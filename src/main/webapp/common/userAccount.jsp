@@ -13,7 +13,7 @@
 			alt="User Image">
 
 			<p>
-				${sessionScope.cache_user.turename}
+				${sessionScope.cache_user.turename} - ${sessionScope.cache_user.department.dname}
 			</p></li>
 		<!-- Menu Body -->
 		<!-- Menu Footer-->
