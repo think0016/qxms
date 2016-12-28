@@ -16,7 +16,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="${ctxStatic}/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${ctxStatic}/dist/css/admincore.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="${ctxStatic}/plugins/iCheck/square/blue.css">
 
@@ -26,11 +26,14 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style type="text/css">
+
+  </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href=""><b>Admin</b>LTE</a>
+    <a href="">权限管理系统</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

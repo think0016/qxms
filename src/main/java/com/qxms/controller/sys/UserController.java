@@ -31,7 +31,7 @@ public class UserController extends Controller {
 		redirect("/user/list");
 	}
 
-	@Before({AuthenticationValidator.class})
+	@Before({ AuthenticationValidator.class })
 	public void list() {
 
 		String did = getPara(0);
@@ -75,8 +75,9 @@ public class UserController extends Controller {
 		List<String[]> result = new ArrayList<String[]>();
 		for (int i = 0; i < list.size(); i++) {
 			User e = list.get(i);
-			String[] temp = { e.getUid().toString(), e.getLoginName(), e.getTurename(), e.getFormaterLogindate(""),
-					"" };
+			Department department = e.getDepartment();
+			String[] temp = { e.getUid().toString(), e.getLoginName(), e.getTurename(), department.getDname(),
+					e.getFormaterLogindate(""), "" };
 			result.add(temp);
 		}
 		Gson gson = new Gson();
@@ -85,7 +86,7 @@ public class UserController extends Controller {
 		renderText(json);
 	}
 
-	@Before({AuthenticationValidator.class})
+	@Before({ AuthenticationValidator.class })
 	public void form() {
 
 		// 先判断是修改还是新增
@@ -121,7 +122,7 @@ public class UserController extends Controller {
 		render("form.jsp");
 	}
 
-	@Before({AuthenticationValidator.class})
+	@Before({ AuthenticationValidator.class })
 	public void pwform() {
 
 		setAttr("user", getSession().getAttribute("cache_user"));
@@ -221,7 +222,7 @@ public class UserController extends Controller {
 	public void delete() {
 		String uid = getPara("uid");
 		int flag = userService.delete(uid);
-		renderText(flag+"");
+		renderText(flag + "");
 	}
 
 	public void userinfo() {

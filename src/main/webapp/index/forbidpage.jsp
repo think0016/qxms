@@ -34,16 +34,7 @@
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"> <b>A</b>
-          LT
-        </span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"> <b>Admin</b>
-          LTE
-        </span>
-      </a>
+      <%@ include file="/common/logo.jsp"%>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
@@ -87,19 +78,8 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>主页</h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#">
-              <i class="fa fa-dashboard"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Examples</a>
-          </li>
-          <li class="active">Blank page</li>
-        </ol>
+        <!-- <h1>出错啦</h1> -->
+
       </section>
 
       <!-- Main content -->

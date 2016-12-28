@@ -22,7 +22,7 @@
 				<a href="${ctxroot}/user/userinfo" class="btn btn-default btn-flat">个人信息</a>
 			</div>
 			<div class="pull-right">
-				<a href="logout" class="btn btn-default btn-flat">登出</a>
+				<a href="${ctxroot}/logout" class="btn btn-default btn-flat">退出登录</a>
 			</div>
 		</li>
 	</ul></li>

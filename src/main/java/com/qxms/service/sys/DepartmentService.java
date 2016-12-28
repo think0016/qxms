@@ -51,6 +51,11 @@ public class DepartmentService {
 		return rs;
 	}
 
+	/**
+	 * 查询当前部门及其子部门全部列表
+	 * @param did
+	 * @return
+	 */
 	public List<Department> findDepartmentListBypids(String did) {
 		String sql = "select * from `qx_department` where `del_flag` = 0 and (`parent_dids` like '%" + did
 				+ "%' OR `did` = ?)";

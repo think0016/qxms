@@ -41,16 +41,7 @@
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"> <b>A</b>
-          LT
-        </span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"> <b>Admin</b>
-          LTE
-        </span>
-      </a>
+      <%@ include file="/common/logo.jsp"%>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
@@ -133,7 +124,7 @@
               <div class="box-header with-border">
                 <h3 class="box-title">用户列表</h3>
                 <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-default btn-sm" onclick="adduser();">添加用户</button>
+                  <button type="button" class="btn btn-default btn-sm" onclick="adduser();">添加新用户</button>
                 </div>
               </div>
               <!-- /.box-header -->
@@ -141,9 +132,10 @@
                 <table id="userlist" class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>序号</th>
+                      <th>编号</th>
                       <th>登录名</th>
                       <th>姓名</th>
+                      <th>所属部门</th>
                       <th>最近登录时间</th>
                       <th>操作</th>
                     </tr>
