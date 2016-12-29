@@ -156,6 +156,13 @@
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
+                    <label for="input1" class="col-sm-2 control-label">性别：</label>
+                    <div class="col-sm-8">
+                      <input type="radio" name="gender" value="男" <c:if test="${user.gender ne '女'}">checked</c:if>>&nbsp;男&nbsp;<input type="radio" name="gender" value="女" <c:if test="${user.gender eq '女'}">checked</c:if>>&nbsp;女&nbsp;
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                  <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">邮箱：</label>
 
                     <div class="col-sm-8">
@@ -167,8 +174,13 @@
 
                     <div class="col-sm-8">
                       <c:forEach items="${roles}" var="role" varStatus="sn">
-                        <span class="pull-left">                        
+                        <span class="pull-left">  
+                        <c:if test="${empty user}">
                         <input type="radio" name="role" value="${role.roleid}" <c:if test="${sn.index eq 0}">checked</c:if>>&nbsp;${role.rolename}&nbsp;</span>
+                        </c:if>
+                        <c:if test="${!empty user}">
+                        <input type="radio" name="role" value="${role.roleid}" <c:if test="${userroleid eq role.roleid}">checked</c:if>>&nbsp;${role.rolename}&nbsp;</span>
+                        </c:if>
                       </c:forEach>
                     </div>
                     <div class="col-sm-2"></div>

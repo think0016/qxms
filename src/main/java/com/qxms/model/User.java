@@ -53,5 +53,4 @@ public class User extends BaseUser<User> {
 		Date date=new Date();
 		return dateFormater.format(date);
 	}
-
 }

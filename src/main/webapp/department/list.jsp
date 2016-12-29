@@ -115,7 +115,7 @@
               <div class="box-header with-border">
                 <h3 class="box-title">部门列表</h3>
                 <div class="box-tools pull-right">
-                  <a href="${ctxroot}/department/form" class="btn btn-default btn-sm">添加部门</a>
+                  <a href="${ctxroot}/department/form" class="btn btn-default btn-sm">添加新部门</a>
                 </div>
               </div>
               <!-- /.box-header -->

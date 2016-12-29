@@ -98,6 +98,7 @@ public class UserController extends Controller {
 			setAttr("user", user);
 			setAttr("department", departmentService.findByDid(user.getDid().toString()));
 			setAttr("subtitle", "用户修改");
+			setAttr("userroleid", user.getRolelist().get(0).getRoleid().toString());
 		} else {
 			if (!StringUtils.isEmpty(did) && !"0".equals(did)) {
 				setAttr("department", departmentService.findByDid(did));
@@ -136,6 +137,7 @@ public class UserController extends Controller {
 		String loginname = getPara("loginname");
 		String password = getPara("password");
 		String truename = getPara("truename");
+		String gender = getPara("gender");
 		String email = getPara("email");
 		String remark = getPara("remark");
 		String rolex = getPara("role");
@@ -150,6 +152,7 @@ public class UserController extends Controller {
 			user = userService.findByUid(uid);
 			user.setTurename(truename);
 			user.setEmail(email);
+			user.setGender(gender);
 			user.setRemarks(remark);
 			user.setRole(role);
 		} else {
@@ -163,6 +166,7 @@ public class UserController extends Controller {
 			user.setLoginName(loginname);
 			user.setTurename(truename);
 			user.setEmail(email);
+			user.setGender(gender);
 			user.setPassword(SystemService.entryptPassword(password));
 			user.setRemarks(remark);
 			user.setRegisterdate(new Date());

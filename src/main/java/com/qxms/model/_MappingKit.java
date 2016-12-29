@@ -23,6 +23,5 @@ public class _MappingKit {
 		arp.addMapping("qx_user", "uid", User.class);
 		arp.addMapping("qx_user_role", "urid", UserRole.class);
 	}
-	
 }
 

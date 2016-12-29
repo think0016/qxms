@@ -36,7 +36,7 @@ public class Init {
 		// 设置数据库方言
 		gernerator.setDialect(new MysqlDialect());
 		// 添加不需要生成的表名
-		gernerator.addExcludedTable("user");
+		//gernerator.addExcludedTable("qx_department");
 		// 设置是否在 Model 中生成 dao 对象
 		gernerator.setGenerateDaoInModel(true);
 		// 设置是否生成字典文件

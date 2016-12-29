@@ -49,12 +49,28 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return get("did");
 	}
 
+	public void setGender(java.lang.String gender) {
+		set("gender", gender);
+	}
+
+	public java.lang.String getGender() {
+		return get("gender");
+	}
+
 	public void setEmail(java.lang.String email) {
 		set("email", email);
 	}
 
 	public java.lang.String getEmail() {
 		return get("email");
+	}
+
+	public void setPhone(java.lang.String phone) {
+		set("phone", phone);
+	}
+
+	public java.lang.String getPhone() {
+		return get("phone");
 	}
 
 	public void setRegisterdate(java.util.Date registerdate) {
