@@ -130,7 +130,22 @@ public class UserController extends Controller {
 
 		render("pwform.jsp");
 	}
-
+	
+	/**
+	 * 验证重名action
+	 */
+	public void yzloginname(){
+		String loginname = getPara("loginname");
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("login_name", loginname);
+		List<User> rs = userService.findUserList(param);
+		if(rs.size()>0){
+			renderText("0");
+		}else{
+			renderText("1");
+		}
+	}
+	
 	public void saveuser() {
 		String uid = getPara("uid");
 		String did = getPara("did");

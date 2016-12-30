@@ -125,22 +125,24 @@
                       <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div id="iloginname" class="form-group" >
                     <label for="input1" class="col-sm-2 control-label">登录名：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="loginname" class="form-control" id="input1" placeholder="登录名" value="${user.loginName}" <c:if test="${user.uid != null}">disabled</c:if>></div>
+                      <input type="text" name="loginname" class="form-control" id="input1" placeholder="登录名" value="${user.loginName}" <c:if test="${user.uid != null}">disabled</c:if>>
+                      <span class="help-block emsg1" style="display:none;"></span>
+                    </div>
                     <div class="col-sm-2"></div>
                   </div>
                   <c:if test="${user.uid == null}">   
-                    <div class="form-group">
+                    <div class="form-group ipassword">
                       <label for="input1" class="col-sm-2 control-label">密码：</label>
 
                       <div class="col-sm-8">
                         <input type="password" name="password" class="form-control" id="input1" placeholder="密码" value=""></div>
                       <div class="col-sm-2"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group ipassword">
                       <label for="input1" class="col-sm-2 control-label">密码确认：</label>
 
                       <div class="col-sm-8">
@@ -173,15 +175,21 @@
                     <label for="input1" class="col-sm-2 control-label">角色：</label>
 
                     <div class="col-sm-8">
-                      <c:forEach items="${roles}" var="role" varStatus="sn">
-                        <span class="pull-left">  
-                        <c:if test="${empty user}">
-                        <input type="radio" name="role" value="${role.roleid}" <c:if test="${sn.index eq 0}">checked</c:if>>&nbsp;${role.rolename}&nbsp;</span>
-                        </c:if>
-                        <c:if test="${!empty user}">
-                        <input type="radio" name="role" value="${role.roleid}" <c:if test="${userroleid eq role.roleid}">checked</c:if>>&nbsp;${role.rolename}&nbsp;</span>
-                        </c:if>
-                      </c:forEach>
+                      <select class="form-control" name="role">
+                        <c:forEach items="${roles}" var="role" varStatus="sn">
+                          <c:if test="${empty user}">
+                            <option value="${role.roleid}">${role.rolename}</option>
+                          </c:if>
+                          <c:if test="${!empty user}">
+                            <c:if test="${userroleid eq role.roleid}">
+                              <option value="${role.roleid}" selected>${role.rolename}</option>
+                            </c:if>
+                            <c:if test="${userroleid ne role.roleid}">
+                              <option value="${role.roleid}">${role.rolename}</option>
+                            </c:if>
+                          </c:if>
+                        </c:forEach>                        
+                      </select>
                     </div>
                     <div class="col-sm-2"></div>
                   </div>
@@ -248,6 +256,10 @@
   <script src="${ctxStatic}/qxms/js/menu.js"></script>
   <script type="text/javascript">
     menu_active('10002,10003,10011');
+
+    //全局参数
+    var yzloginname = false;
+    // ztree部分
     var setting = {
       view: {
         selectedMulti:false
@@ -274,14 +286,6 @@
     }
     
     function onClick(e, treeId, treeNode) {
-      // var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-      // nodes = zTree.getSelectedNodes(),
-      // v = "";
-      // nodes.sort(function compare(a,b){return a.id-b.id;});
-      // for (var i=0, l=nodes.length; i<l; i++) {
-      //   v += nodes[i].name + ",";
-      // }
-      // if (v.length > 0 ) v = v.substring(0, v.length-1);
       var cityObj = $("#citySel");
       cityObj.attr("value", treeNode.name);
       $("input[name='did']").val(treeNode.id);
@@ -310,26 +314,52 @@
       var nodes = tree.getNodesByParam("level", 0);
       for(var i=0; i<nodes.length; i++) {
         tree.expandNode(nodes[i], true, true, false);
-      }
+      };
+
+      $("input[name='loginname']").blur(function(){
+        var loginname = $(this).val();
+        var url = rooturl + '/user/yzloginname';
+        if(loginname == ''){
+
+        }else{
+          $.post(url, {"loginname":loginname}, function(data){
+              if(data =='1'){
+                $('#iloginname').removeClass("has-error");
+                $('#iloginname').addClass('has-success');
+                $('.emsg1').css("display","block");
+                $('.emsg1').text("登录名尚未使用");  
+                yzloginname = true;                       
+              }else{
+                $('#iloginname').removeClass("has-success");
+                $('#iloginname').addClass('has-error');
+                $('.emsg1').css("display","block");
+                $('.emsg1').text("登录名已被占用");
+                yzloginname = false;    
+              }
+          });
+        }
+
+      });
     });
 
 
     //表单提交
     function saveform(){
       //验证表单
+      if(!yzloginname) return;
       var did = $("input[name='did']").val();
       var loginname = $("input[name='loginname']").val();
       var password = $("input[name='password']").val();
       var password2 = $("input[name='password2']").val();
-      var rolenum = $("input[name='role']:checked").length;
+      var role = $("select[name='role']").val();
 
       if(did == ''){
         alert("所属部门不能为空");
       }else if(loginname == ''){
         alert("登录名不能为空");
-      }else if(password == ''){
-        alert("密码不能为空");
-      }else if(rolenum == 0){
+      }else if(password == ''){        
+        alert("密码不能为空");        
+      }else if(role == ''){
         alert("角色不能为空");
       }else if(password != password2){
         alert("两次密码输入不相同");
@@ -340,5 +370,9 @@
       
     };
 
+    //清空表单提示
+    function cleartip(){
+
+    }
   </script></body>
 </html>

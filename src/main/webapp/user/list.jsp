@@ -325,9 +325,9 @@
       if (data == '1') {
         Alert("删除成功", createtable(did));
       } else if(data == '2'){
-        Alert("超级管理员角色用户不可删除", createtable(did));
+        Alert("超级管理员角色用户不可删除");
       }else{
-        Alert("删除失败", createtable(did));
+        Alert("删除失败");
       }
     });
   };
