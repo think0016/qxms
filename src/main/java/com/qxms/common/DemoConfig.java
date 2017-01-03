@@ -9,6 +9,7 @@ import com.jfinal.config.Routes;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.qxms.controller.TestController;
 import com.qxms.controller.sys.DepartmentController;
@@ -16,7 +17,6 @@ import com.qxms.controller.sys.IndexController;
 import com.qxms.controller.sys.MenuController;
 import com.qxms.controller.sys.RoleController;
 import com.qxms.controller.sys.UserController;
-import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.interceptor.common.VerifyLoginInterceptor;
 import com.qxms.model._MappingKit;
 
@@ -55,6 +55,9 @@ public class DemoConfig extends JFinalConfig {
 	 * 配置插件
 	 */
 	public void configPlugin(Plugins me) {
+		// ehcache缓存插件
+        me.add(new EhCachePlugin());
+		
 		// 配置C3p0数据库连接池插件
 		C3p0Plugin C3p0Plugin = createC3p0Plugin();
 		me.add(C3p0Plugin);
@@ -63,9 +66,11 @@ public class DemoConfig extends JFinalConfig {
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(C3p0Plugin);
 		me.add(arp);
 		//输出SQL语句(测试)
-		//arp.setShowSql(true);
+		arp.setShowSql(true);
 		// 所有配置在 MappingKit 中搞定
 		_MappingKit.mapping(arp);
+		
+
 	}
 	
 	/**

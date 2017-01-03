@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.qxms.model.Department;
 import com.qxms.model.Role;
 import com.qxms.model.User;
@@ -134,5 +135,18 @@ public class UserService {
 			};
 		}				
 		return flag;
+	}
+	
+	/**
+	 * 获取缓存中用户信息，没有就查数据库
+	 * @param uid
+	 * @return
+	 */
+	public User getCacheUser(String uid){
+		User user= CacheKit.get("userlist", uid);
+		if(user == null){
+			user = this.findByUid(uid);
+		}
+		return user;
 	}
 }

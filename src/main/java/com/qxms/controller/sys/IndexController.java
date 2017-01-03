@@ -5,6 +5,7 @@ import java.util.Date;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.qxms.interceptor.common.LoginValidator;
 import com.qxms.model.User;
 import com.qxms.service.sys.SystemService;
@@ -43,6 +44,7 @@ public class IndexController extends Controller {
 			getSession().setAttribute("cache_user", user);
 			getSession().setAttribute("cache_cusername", user.getTurename());
 			getSession().setAttribute("isAdmin", userService.isAdmin(user));
+			CacheKit.put("userlist", user.getUid().toString(), user);
 			// forwardAction("/");
 			redirect("/");
 		}

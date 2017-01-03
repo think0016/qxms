@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Department;
 import com.qxms.model.Role;
@@ -205,6 +206,11 @@ public class UserController extends Controller {
 			forwardAction("/user/form");
 		}
 
+		if(update){
+			//清除缓存
+			CacheKit.remove("menulist", uid);
+			CacheKit.remove("userlist", uid);
+		}
 		// boolean flag = user.save();
 
 		// redirect("/user/list");
@@ -241,6 +247,8 @@ public class UserController extends Controller {
 	public void delete() {
 		String uid = getPara("uid");
 		int flag = userService.delete(uid);
+		CacheKit.remove("menulist", uid);
+		CacheKit.remove("userlist", uid);
 		renderText(flag + "");
 	}
 

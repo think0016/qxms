@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Role;
 import com.qxms.model.TreeNode;
@@ -67,7 +68,8 @@ public class RoleController extends Controller {
 		}
 		
 		boolean flag = roleService.save(role, update);
-		
+		//清除缓存
+		CacheKit.removeAll("menulist");
 		if (flag) {
 			setAttr("infomsg", "添加成功");
 			forwardAction("/role/list");
@@ -81,6 +83,8 @@ public class RoleController extends Controller {
 	public void delete(){
 		String roleid = getPara(0);
 		boolean flag = roleService.delete(roleid);
+		//清除缓存
+		CacheKit.removeAll("menulist");
 		if(flag){
 			renderText("1");
 		}else{
@@ -131,6 +135,9 @@ public class RoleController extends Controller {
 				returnmsg = "1";
 			}
 		}
+		
+		//清除缓存
+		CacheKit.removeAll("menulist");
 		
 		renderText(returnmsg);
 	}
