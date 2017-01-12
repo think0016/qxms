@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +16,6 @@
   <link rel="stylesheet" href="${ctxroot}/static/plugins/datatables/dataTables.bootstrap.css">
   <!-- ztree -->
   <link rel="stylesheet" href="${ctxroot}/static/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-  <!-- Alert -->
-  <link rel="stylesheet" href="${ctxroot}/static/plugins/Alert/Alert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="${ctxroot}/static/dist/css/admincore.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -38,13 +33,13 @@
   </style>
   <script type="text/javascript">var rooturl = '${ctxroot}'; </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green-light sidebar-mini">
   <!-- Site wrapper -->
   <div class="wrapper">
 
     <header class="main-header">
       <!-- Logo -->
-      <%@ include file="/common/logo.jsp"%>
+      <#include "/common/logo.html">
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
@@ -64,7 +59,7 @@
             <!-- Tasks: style can be found in dropdown.less -->
 
             <!-- User Account: style can be found in dropdown.less -->
-            <%@ include file="/common/userAccount.jsp"%>
+            <#include "/common/userAccount.html">
             <!-- Control Sidebar Toggle Button --> </ul>
         </div>
       </nav>
@@ -78,7 +73,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="/common/nav.jsp"%>
+        ${menuhtml}
       </section>
       <!-- /.sidebar --> </aside>
 
@@ -96,71 +91,128 @@
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-10">
-              <!-- 提示框 START -->
-              <c:if test="${requestScope.errormsg != null}">
-                <div class="alert alert-danger alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-ban"></i> 发生错误!</h4>${requestScope.errormsg}
-                </div>
-              </c:if>
-              <c:if test="${requestScope.infomsg != null}">
-                <div class="alert alert-success alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h4><i class="icon fa fa-check"></i> ${requestScope.infomsg}</h4>
-                </div>
-              </c:if>
-              <!-- 提示框 END -->
-            <form action="${ctxroot}/user" class="form-horizontal"  method="post" id="form1">
+            <!-- 提示框 START -->
+            <#if errormsg??>
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>
+                  <i class="icon fa fa-ban"></i>
+                  发生错误!
+                </h4>
+                ${errormsg}
+              </div>
+            </#if>
+            <#if infomsg??>
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4>
+                  <i class="icon fa fa-check"></i>
+                  ${infomsg}
+                </h4>
+              </div>
+            </#if>
+            <!-- 提示框 END -->
+            <form action="${ctxroot}/user/saveuser" class="form-horizontal"  method="post" id="form1">
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">个人资料</h3>
+                <h3 class="box-title">${subtitle!}</h3>
               </div>
               <div class="box-body">
-                  <input type="hidden" name="uid" value="${user.uid}">
+                  <input type="hidden" name="uid" value="${user.uid!}">
+                  <input type="hidden" name="did" value="${department.did!}">
                   <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">所属部门：</label>
 
-                    <div class="col-sm-8">
-                      <input type="text" id="citySel" name="dname" class="form-control" id="input1" value="${department.dname}" disabled></div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-7">
+                      <input type="text" id="citySel" name="dname" class="form-control" id="input1" value="${department.dname!}" disabled></div>
+                    <div class="col-sm-3">
+                      <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div id="iloginname" class="form-group" >
                     <label for="input1" class="col-sm-2 control-label">登录名：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="loginname" class="form-control" id="input1" placeholder="登录名" value="${user.loginName}" disabled></div>
+
+                    <#if user.uid??>
+                        <input type="text" name="loginname" class="form-control" id="input1" placeholder="登录名" value="${user.loginName!}" disabled>
+                    <#else>
+                        <input type="text" name="loginname" class="form-control" id="input1" placeholder="登录名" value="" >
+                    </#if>                      
+                      <span class="help-block emsg1" style="display:none;"></span>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                  <#if !user.uid??>
+                    <div class="form-group ipassword">
+                      <label for="input1" class="col-sm-2 control-label">密码：</label>
+
+                      <div class="col-sm-8">
+                        <input type="password" name="password" class="form-control" id="input1" placeholder="密码" value=""></div>
+                      <div class="col-sm-2"></div>
+                    </div>
+                    <div class="form-group ipassword">
+                      <label for="input1" class="col-sm-2 control-label">密码确认：</label>
+
+                      <div class="col-sm-8">
+                        <input type="password" name="password2" class="form-control" id="input1" placeholder="密码确认" value=""></div>
+                      <div class="col-sm-2"></div>
+                    </div>
+                  </#if>  
+                  <div class="form-group">
+                    <label for="input1" class="col-sm-2 control-label">昵称：</label>
+
+                    <div class="col-sm-8">
+                      <input type="text" name="truename" class="form-control" id="input1" placeholder="姓名" value="${user.nickname!}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label">姓名：</label>
-
+                    <label for="input1" class="col-sm-2 control-label">性别：</label>
                     <div class="col-sm-8">
-                      <input type="text" name="truename" class="form-control" id="input1" placeholder="姓名" value="${user.turename}"></div>
+                      <#if user.uid??>
+                        <#if user.gender == "女">
+                          <input type="radio" name="gender" value="男" >&nbsp;男&nbsp;<input type="radio" name="gender" value="女" checked>&nbsp;女&nbsp;
+                        <#else>
+                          <input type="radio" name="gender" value="男" checked>&nbsp;男&nbsp;<input type="radio" name="gender" value="女" >&nbsp;女&nbsp;
+                        </#if>
+                        <#else>
+                          <input type="radio" name="gender" value="男" checked>&nbsp;男&nbsp;<input type="radio" name="gender" value="女" >&nbsp;女&nbsp;
+                      </#if>                      
+                    </div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">邮箱：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="email" class="form-control" id="input1" placeholder="邮箱" value="${user.email}"></div>
+                      <input type="text" name="email" class="form-control" id="input1" placeholder="邮箱" value="${user.email!}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">角色：</label>
 
                     <div class="col-sm-8">
-                      <c:forEach var="role" items="${rlist}">
-                        <label for="input1" class="control-label" style="font-weight: 100;"><span class="label label-default">${role.rolename}</span></label>
-                      </c:forEach>
+                      <select class="form-control" name="role">
+                        <#list roles as role>
+                          <#if user.uid??>
+                            <#if userroleid?number == role.roleid>
+                            <option value="${role.roleid}" selected>${role.rolename!}</option>
+                            <#else>
+                            <option value="${role.roleid}">${role.rolename!}</option>
+                            </#if>
+                          <#else>
+                          <option value="${role.roleid}">${role.rolename!}</option>
+                          </#if>
+                        </#list>
+                      </select>
                     </div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
-                    <label for="input1" class="col-sm-2 control-label" >备注：</label>
+                    <label for="input1" class="col-sm-2 control-label">备注：</label>
 
                     <div class="col-sm-8">
-                        <textarea id="input9" name="remarks" class="form-control" rows="3" >${user.remarks}</textarea>
+                        <textarea id="input9" name="remark" class="form-control" rows="3" >${user.remarks!}</textarea>
                     </div>
                     <div class="col-sm-2"></div>
                   </div>
@@ -168,7 +220,7 @@
               </div>
               <div class="box-footer">
                 <div class="col-sm-9">                  
-                  <a href="${ctxroot}" class="btn btn-default pull-right">返回</a>
+                  <a href="${ctxroot}/user" class="btn btn-default pull-right">返回</a>
                   <!-- <button type="submit" class="btn btn-info pull-right" onclick="">保存</button> -->
                 </div>
                 <div class="col-sm-1"><button type="button" class="btn btn-info pull-right" onclick="saveform();">保存</button></div>
@@ -188,7 +240,7 @@
       <!-- /.content --> </div>
     <!-- /.content-wrapper -->
 
-  <%@ include file="/common/footer.jsp"%>
+    <#include "/common/footer.html">
 
     <!-- Control Sidebar -->
 
@@ -212,8 +264,6 @@
   <script src="${ctxroot}/static/plugins/datatables/dataTables.bootstrap.min.js"></script>
   <!-- ztree -->
   <script type="text/javascript" src="${ctxroot}/static/plugins/ztree/js/jquery.ztree.all.min.js"></script>
-  <!-- Alert -->
-  <script type="text/javascript" src="${ctxroot}/static/plugins/Alert/Alert.js"></script>
   <!-- AdminLTE App -->
   <script src="${ctxroot}/static/dist/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
@@ -221,7 +271,11 @@
   <script src="${ctxroot}/static/qxms/js/menu.js"></script>
   <script type="text/javascript">
     menu_active('10002,10003,10011');
-/*    var setting = {
+
+    //全局参数
+    var yzloginname = false;
+    // ztree部分
+    var setting = {
       view: {
         selectedMulti:false
         //dblClickExpand: false
@@ -238,7 +292,7 @@
       }
     };
 
-    var zNodes =${treejson};
+    var zNodes =${treejson!};
 
     function beforeClick(treeId, treeNode) {
       var check = (treeNode && !treeNode.isParent);
@@ -247,14 +301,6 @@
     }
     
     function onClick(e, treeId, treeNode) {
-      // var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-      // nodes = zTree.getSelectedNodes(),
-      // v = "";
-      // nodes.sort(function compare(a,b){return a.id-b.id;});
-      // for (var i=0, l=nodes.length; i<l; i++) {
-      //   v += nodes[i].name + ",";
-      // }
-      // if (v.length > 0 ) v = v.substring(0, v.length-1);
       var cityObj = $("#citySel");
       cityObj.attr("value", treeNode.name);
       $("input[name='did']").val(treeNode.id);
@@ -283,32 +329,65 @@
       var nodes = tree.getNodesByParam("level", 0);
       for(var i=0; i<nodes.length; i++) {
         tree.expandNode(nodes[i], true, true, false);
-      }
+      };
+
+      $("input[name='loginname']").blur(function(){
+        var loginname = $(this).val();
+        var url = rooturl + '/user/yzloginname';
+        if(loginname == ''){
+
+        }else{
+          $.post(url, {"loginname":loginname}, function(data){
+              if(data =='1'){
+                $('#iloginname').removeClass("has-error");
+                $('#iloginname').addClass('has-success');
+                $('.emsg1').css("display","block");
+                $('.emsg1').text("登录名尚未使用");  
+                yzloginname = true;                       
+              }else{
+                $('#iloginname').removeClass("has-success");
+                $('#iloginname').addClass('has-error');
+                $('.emsg1').css("display","block");
+                $('.emsg1').text("登录名已被占用");
+                yzloginname = false;    
+              }
+          });
+        }
+
+      });
     });
-*/
+
 
     //表单提交
     function saveform(){
-      var truename = $("input[name='truename']").val();
-      var remarks = $("textarea[name='remarks']").val();
-      var email = $("input[name='email']").val();
-      //$('#form1')[0].submit();
-      var url = rooturl + "/user/saveuserinfo"
-      $.post(url, {
-        'truename':truename,
-        'remarks':remarks,
-        'email':email,
-      }, function(data){
-        if(data == '1'){
-          Alert('修改成功，重新登录后刷新',function(){
-            window.location.href = rooturl;
-          });
-        }else{
-          Alert('修改失败');
-        }
-      });
+      //验证表单
+      if(!yzloginname) return;
+      var did = $("input[name='did']").val();
+      var loginname = $("input[name='loginname']").val();
+      var password = $("input[name='password']").val();
+      var password2 = $("input[name='password2']").val();
+      var role = $("select[name='role']").val();
+
+      if(did == ''){
+        alert("所属部门不能为空");
+      }else if(loginname == ''){
+        alert("登录名不能为空");
+      }else if(password == ''){        
+        alert("密码不能为空");        
+      }else if(role == ''){
+        alert("角色不能为空");
+      }else if(password != password2){
+        alert("两次密码输入不相同");
+      }else{
+        $('#form1')[0].submit();  
+      }
+
       
     };
 
+    //清空表单提示
+    function cleartip(){
+
+    }
   </script></body>
 </html>

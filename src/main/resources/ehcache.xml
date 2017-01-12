@@ -44,7 +44,7 @@
            diskPersistent="true"
     />
     
-    <!-- 存放一个用户菜单信息，过期时间 2个小时 -->
+    <!-- 存放一个用户菜单HTML信息，过期时间 2个小时 -->
     <cache name="menulist"
            maxElementsInMemory="10000"
            maxElementsOnDisk="100000"

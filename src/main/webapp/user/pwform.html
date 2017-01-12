@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,20 +7,20 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="${ctxStatic}/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${ctxroot}/static/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="${ctxStatic}/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${ctxroot}/static/plugins/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="${ctxStatic}/plugins/other/ionicons.min.css">
+  <link rel="stylesheet" href="${ctxroot}/static/plugins/other/ionicons.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="${ctxStatic}/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="${ctxroot}/static/plugins/datatables/dataTables.bootstrap.css">
   <!-- ztree -->
-  <link rel="stylesheet" href="${ctxStatic}/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <link rel="stylesheet" href="${ctxroot}/static/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="${ctxStatic}/dist/css/admincore.css">
+  <link rel="stylesheet" href="${ctxroot}/static/dist/css/admincore.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="${ctxStatic}/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="${ctxroot}/static/dist/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,7 +39,7 @@
 
     <header class="main-header">
       <!-- Logo -->
-      <%@ include file="/common/logo.jsp"%>
+      <#include "/common/logo.html">
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
@@ -62,7 +59,7 @@
             <!-- Tasks: style can be found in dropdown.less -->
 
             <!-- User Account: style can be found in dropdown.less -->
-            <%@ include file="/common/userAccount.jsp"%>
+            <#include "/common/userAccount.html">
             <!-- Control Sidebar Toggle Button --> </ul>
         </div>
       </nav>
@@ -76,7 +73,7 @@
       <section class="sidebar">
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <%@ include file="/common/nav.jsp"%></section>
+        ${menuhtml}</section>
       <!-- /.sidebar --> </aside>
 
     <!-- =============================================== -->
@@ -94,24 +91,25 @@
           <div class="col-md-1"></div>
           <div class="col-md-10">
             <!-- 提示框 START -->
-            <c:if test="${requestScope.errormsg != null}">
+            <#if errormsg??>
               <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4> <i class="icon fa fa-ban"></i>
+                <h4>
+                  <i class="icon fa fa-ban"></i>
                   发生错误!
                 </h4>
-                ${requestScope.errormsg}
+                ${errormsg}
               </div>
-            </c:if>
-            <c:if test="${requestScope.infomsg != null}">
+            </#if>
+            <#if infomsg??>
               <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h4>
                   <i class="icon fa fa-check"></i>
-                  ${requestScope.infomsg}
+                  ${infomsg}
                 </h4>
               </div>
-            </c:if>
+            </#if>
             <!-- 提示框 END -->
             <form action="${ctxroot}/user/resetpassword" class="form-horizontal"  method="post" id="form1">
               <div class="box">
@@ -119,13 +117,13 @@
                   <h3 class="box-title">用户添加</h3>
                 </div>
                 <div class="box-body">
-                  <input type="hidden" name="uid" value="${user.uid}">
-                  <input type="hidden" name="loginname" value="${user.loginName}">
+                  <input type="hidden" name="uid" value="${user.uid!}">
+                  <input type="hidden" name="loginname" value="${user.loginName!}">
                   <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">登录名：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="loginnamex" class="form-control" id="input1" value="${user.loginName}" disabled></div>
+                      <input type="text" name="loginnamex" class="form-control" id="input1" value="${user.loginName!}" disabled></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
@@ -188,23 +186,23 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-<script src="${ctxStatic}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="${ctxroot}/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="${ctxStatic}/bootstrap/js/bootstrap.min.js"></script>
+<script src="${ctxroot}/static/bootstrap/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="${ctxStatic}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="${ctxroot}/static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="${ctxStatic}/plugins/fastclick/fastclick.js"></script>
+<script src="${ctxroot}/static/plugins/fastclick/fastclick.js"></script>
 <!-- DataTables -->
-<script src="${ctxStatic}/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="${ctxStatic}/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="${ctxroot}/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${ctxroot}/static/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- ztree -->
-<script type="text/javascript" src="${ctxStatic}/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="${ctxroot}/static/plugins/ztree/js/jquery.ztree.all.min.js"></script>
 <!-- AdminLTE App -->
-<script src="${ctxStatic}/dist/js/app.min.js"></script>
+<script src="${ctxroot}/static/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="${ctxStatic}/dist/js/demo.js"></script>
-<script src="${ctxStatic}/qxms/js/menu.js"></script>
+<script src="${ctxroot}/static/dist/js/demo.js"></script>
+<script src="${ctxroot}/static/qxms/js/menu.js"></script>
 <script type="text/javascript">
     menu_active('10002,10003,10012');
 

@@ -37,7 +37,7 @@ public class MenuController extends Controller {
 		
 //		setAttr("treejson", json);
 		setAttr("menulist", list);
-		render("list.jsp");
+		render("list.html");
 	}
 	
 	@Before({AuthenticationValidator.class})
@@ -45,12 +45,13 @@ public class MenuController extends Controller {
 		String menuid = getPara(0);
 		String type = getPara(1);//是否在下级添加
 		String subtitle ="菜单添加";
+		
+		Menu menu = new Menu();
 		if (!StringUtils.isEmpty(menuid)) {
-			Menu menu = menuService.findMenuById(menuid);
+			menu = menuService.findMenuById(menuid);
 			if("0".equals(type)){
 				setAttr("pmenuname", menuService.findMenuById(menu.getParentId().toString()).getMname());
-				setAttr("pmenuid", menuService.findMenuById(menu.getParentId().toString()).getMenuid());
-				setAttr("menu", menu);
+				setAttr("pmenuid", menuService.findMenuById(menu.getParentId().toString()).getMenuid());				
 				subtitle = "菜单修改";
 			}else{
 				setAttr("pmenuname", menu.getMname());
@@ -64,9 +65,10 @@ public class MenuController extends Controller {
 		Gson gson = new Gson();
 		String json = gson.toJson(nodes);
 
+		setAttr("menu", menu);
 		setAttr("treejson", json);
 		setAttr("subtitle", subtitle);
-		render("form.jsp");
+		render("form.html");
 	}
 
 	public void savemenu() {
@@ -109,8 +111,7 @@ public class MenuController extends Controller {
 		boolean flag = menuService.save(menu, update);
 		
 		//清除缓存
-		CacheKit.removeAll("menulist");
-		
+		CacheKit.removeAll("menulist");		
 		
 		if (flag) {
 			setAttr("infomsg", "添加成功");

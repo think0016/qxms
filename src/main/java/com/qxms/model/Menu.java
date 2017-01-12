@@ -1,5 +1,6 @@
 package com.qxms.model;
 
+import com.jfinal.kit.PropKit;
 import com.qxms.model.base.BaseMenu;
 
 /**
@@ -14,5 +15,8 @@ public class Menu extends BaseMenu<Menu> {
 		return "PID:"+getParentId().toString()+"    ID:"+getMenuid().toString();
 	}
 	
-	
+	public String getTrueHref(){
+		String rooturl = PropKit.get("rooturl") ;
+		return rooturl + getHref();
+	}
 }

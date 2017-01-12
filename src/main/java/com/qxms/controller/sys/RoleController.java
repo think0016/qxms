@@ -29,20 +29,22 @@ public class RoleController extends Controller {
 	public void list() {
 		List<Role> rolelist = roleService.findAllRole();
 		setAttr("rolelist", rolelist);
-		render("list.jsp");
+		render("list.html");
 	}
 
 	@Before({AuthenticationValidator.class})
 	public void form(){
 		String roleid = getPara(0);
+		
+		Role role = new Role();
 		if(!StringUtils.isEmpty(roleid)){
-			Role role = roleService.findRoleById(roleid);
-			setAttr("role", role);
+			role = roleService.findRoleById(roleid);			
 			setAttr("subtitle", "角色修改");
 		}else{
 			setAttr("subtitle", "角色添加");
 		}
-		render("form.jsp");
+		setAttr("role", role);
+		render("form.html");
 	}
 	
 	public void saverole(){
@@ -115,7 +117,7 @@ public class RoleController extends Controller {
 
 				setAttr("treejson", json);
 				setAttr("role", role);
-				render("grantform.jsp");
+				render("grantform.html");
 			}
 			
 		}

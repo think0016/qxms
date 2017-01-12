@@ -35,7 +35,7 @@ public class DepartmentController extends Controller {
 		
 		setAttr("departmentlist", list);
 		// setAttr("did", did);
-		render("list.jsp");
+		render("list.html");
 	}
 	
 	@Before({AuthenticationValidator.class})
@@ -46,8 +46,7 @@ public class DepartmentController extends Controller {
 		Department department = new Department();
 		if (!StringUtils.isEmpty(did)) {
 			department = departmentService.findByDid(did);
-			//user = userService.findByUid(uid);
-			setAttr("department", department);
+			//user = userService.findByUid(uid);			
 			setAttr("pdname", departmentService.findByDid(department.getParentDid().toString()).getDname());
 		}			
 		
@@ -56,10 +55,11 @@ public class DepartmentController extends Controller {
 		List<TreeNode> nodes = departmentService.gettreedata(dlist);
 		Gson gson = new Gson();
 		String json = gson.toJson(nodes);
-				
+		
+		setAttr("department", department);
 		setAttr("dlist", dlist);
 		setAttr("treejson", json);		
-		render("form.jsp");
+		render("form.html");
 	}
 	
 	public void savedepartment(){

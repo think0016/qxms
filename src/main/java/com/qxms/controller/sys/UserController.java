@@ -57,7 +57,7 @@ public class UserController extends Controller {
 		// setAttr("userlist", list);
 		setAttr("treejson", json);
 		setAttr("did", did);
-		render("list.jsp");
+		render("list.html");
 	}
 
 	public void getjsonlist() {
@@ -96,7 +96,7 @@ public class UserController extends Controller {
 		String did = getPara(1);// 部门筛选
 		if (!StringUtils.isEmpty(uid) && !"0".equals(uid)) {
 			user = userService.findByUid(uid);
-			setAttr("user", user);
+
 			setAttr("department", departmentService.findByDid(user.getDid().toString()));
 			setAttr("subtitle", "用户修改");
 			setAttr("userroleid", user.getRolelist().get(0).getRoleid().toString());
@@ -118,10 +118,11 @@ public class UserController extends Controller {
 		// 角色信息
 		List<Role> rlist = roleservice.findAllRole();
 
+		setAttr("user", user);
 		setAttr("roles", rlist);
 		setAttr("treejson", json);
 
-		render("form.jsp");
+		render("form.html");
 	}
 
 	@Before({ AuthenticationValidator.class })
@@ -129,7 +130,7 @@ public class UserController extends Controller {
 
 		setAttr("user", getSession().getAttribute("cache_user"));
 
-		render("pwform.jsp");
+		render("pwform.html");
 	}
 	
 	/**
@@ -152,7 +153,8 @@ public class UserController extends Controller {
 		String did = getPara("did");
 		String loginname = getPara("loginname");
 		String password = getPara("password");
-		String truename = getPara("truename");
+		//String truename = getPara("truename");
+		String nickname = getPara("nickname");
 		String gender = getPara("gender");
 		String email = getPara("email");
 		String remark = getPara("remark");
@@ -166,7 +168,7 @@ public class UserController extends Controller {
 		if (!StringUtils.isEmpty(uid)) {
 			update = true;
 			user = userService.findByUid(uid);
-			user.setTurename(truename);
+			user.setNickname(nickname);;
 			user.setEmail(email);
 			user.setGender(gender);
 			user.setRemarks(remark);
@@ -180,7 +182,7 @@ public class UserController extends Controller {
 			}
 			user.setDid(new Integer(did));
 			user.setLoginName(loginname);
-			user.setTurename(truename);
+			user.setNickname(nickname);
 			user.setEmail(email);
 			user.setGender(gender);
 			user.setPassword(SystemService.entryptPassword(password));
@@ -260,7 +262,7 @@ public class UserController extends Controller {
 		setAttr("department", dept);
 		setAttr("rlist", rlist);
 		setAttr("user", user);
-		render("userinfoform.jsp");
+		render("userinfoform.html");
 	}
 
 	/**
@@ -271,9 +273,10 @@ public class UserController extends Controller {
 
 		String email = getPara("email");
 		String remarks = getPara("remarks");
-		String truename = getPara("truename");
-
-		user.setTurename(truename);
+		//String truename = getPara("truename");
+		String nickname = getPara("nickname");
+		
+		user.setNickname(nickname);
 		user.setRemarks(remarks);
 		user.setEmail(email);
 

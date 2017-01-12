@@ -21,6 +21,14 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		set("login_name", loginName);
 	}
 
+	public java.lang.String getNickname() {
+		return get("nickname");
+	}
+
+	public void setNickname(java.lang.String nickname) {
+		set("nickname", nickname);
+	}
+
 	public java.lang.String getLoginName() {
 		return get("login_name");
 	}
