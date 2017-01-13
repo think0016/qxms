@@ -15,7 +15,6 @@ public class IndexController extends Controller {
 	public static final UserService userService = new UserService();
 
 	public void index() {
-
 		render("index.html");
 	}
 
@@ -36,7 +35,7 @@ public class IndexController extends Controller {
 			// setAttr("msg1", "用户名或密码不正确");
 			keepPara();
 			// forwardAction("/login");
-			render("login.jsp");
+			render("login.html");
 		} else {
 			// renderText(user.getTurename()+"登陆成功");
 			user.setLogindate(new Date());
@@ -58,13 +57,13 @@ public class IndexController extends Controller {
 		getSession().removeAttribute("isAdmin");
 		// redirect("/login");
 		setAttr("msg1", "您已经安全退出系统");
-		render("login.jsp");
+		render("login.html");
 	}
 
 	/**
 	 * 权限不足页面
 	 */
 	public void forbidpage() {
-		render("forbidpage.jsp");
+		render("forbidpage.html");
 	}
 }

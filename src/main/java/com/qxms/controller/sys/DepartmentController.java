@@ -48,6 +48,10 @@ public class DepartmentController extends Controller {
 			department = departmentService.findByDid(did);
 			//user = userService.findByUid(uid);			
 			setAttr("pdname", departmentService.findByDid(department.getParentDid().toString()).getDname());
+		}else{
+			Department topdepartment = departmentService.findTopDepartment();
+			setAttr("pdname",topdepartment.getDname());
+			setAttr("pid",topdepartment.getDid());
 		}			
 		
 		// 部门树信息

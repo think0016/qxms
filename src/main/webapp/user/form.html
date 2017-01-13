@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>权限管理系统</title>
+  <title>${sitetitle!"MOE"}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -163,7 +163,7 @@
                     <label for="input1" class="col-sm-2 control-label">昵称：</label>
 
                     <div class="col-sm-8">
-                      <input type="text" name="truename" class="form-control" id="input1" placeholder="姓名" value="${user.nickname!}"></div>
+                      <input type="text" name="nickname" class="form-control" id="input1" placeholder="姓名" value="${user.nickname!}"></div>
                     <div class="col-sm-2"></div>
                   </div>
                   <div class="form-group">
@@ -193,8 +193,11 @@
 
                     <div class="col-sm-8">
                       <select class="form-control" name="role">
+                        <#if !userroleid??>
+                        <option value="">(无角色)</option>
+                        </#if>
                         <#list roles as role>
-                          <#if user.uid??>
+                          <#if user.uid?? && userroleid??>
                             <#if userroleid?number == role.roleid>
                             <option value="${role.roleid}" selected>${role.rolename!}</option>
                             <#else>
@@ -342,7 +345,7 @@
                 $('#iloginname').removeClass("has-error");
                 $('#iloginname').addClass('has-success');
                 $('.emsg1').css("display","block");
-                $('.emsg1').text("登录名尚未使用");  
+                $('.emsg1').text("登录名尚未使用，可以新增");  
                 yzloginname = true;                       
               }else{
                 $('#iloginname').removeClass("has-success");
@@ -360,8 +363,12 @@
 
     //表单提交
     function saveform(){
+
       //验证表单
-      if(!yzloginname) return;
+      var uid = $("input[name='uid']").val();
+
+      if(uid == '' && !yzloginname) return;
+
       var did = $("input[name='did']").val();
       var loginname = $("input[name='loginname']").val();
       var password = $("input[name='password']").val();

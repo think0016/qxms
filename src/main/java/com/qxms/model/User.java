@@ -41,7 +41,7 @@ public class User extends BaseUser<User> {
 		String sql = "SELECT `a`.* FROM `qx_role` `a` "
 				+ "LEFT JOIN `qx_user_role` `b` ON `a`.`roleid`=`b`.`role_id` "
 				+ "LEFT JOIN `qx_user` `c` ON `c`.`uid`=`b`.`user_id` "
-				+ "WHERE `c`.`uid`=?";		
+				+ "WHERE `c`.`uid`=? AND `a`.`del_flag`=0";		
 		return Role.dao.find(sql, getUid());
 	}
 	

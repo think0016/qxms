@@ -16,7 +16,16 @@ public class DepartmentService {
 		String sql = "select * from `qx_department` where `del_flag` = 0 and `did` = ?";
 		return Department.dao.findFirst(sql, did);
 	}
-
+	
+	/**
+	 * 获取一条顶级部门信息
+	 * @return
+	 */
+	public Department findTopDepartment(){
+		String sql = "select * from `qx_department` where `del_flag` = 0 and `parent_did` = 0";
+		return Department.dao.findFirst(sql);
+	}
+	
 	public List<Department> findAllDepartment() {
 		Map<String, String> param = new HashMap<String, String>();
 		return this.findDepartmentList(param);

@@ -77,7 +77,7 @@ public class UserController extends Controller {
 		for (int i = 0; i < list.size(); i++) {
 			User e = list.get(i);
 			Department department = e.getDepartment();
-			String[] temp = { e.getUid().toString(), e.getLoginName(), e.getTurename(), department.getDname(),
+			String[] temp = { e.getUid().toString(), e.getLoginName(), e.getNickname(), department.getDname(),
 					e.getFormaterLogindate(""), "" };
 			result.add(temp);
 		}
@@ -99,7 +99,12 @@ public class UserController extends Controller {
 
 			setAttr("department", departmentService.findByDid(user.getDid().toString()));
 			setAttr("subtitle", "用户修改");
-			setAttr("userroleid", user.getRolelist().get(0).getRoleid().toString());
+			List<Role> rolelist = user.getRolelist();
+			if(rolelist.size()>0){
+				setAttr("userroleid", rolelist.get(0).getRoleid().toString());
+			}
+			
+			
 		} else {
 			if (!StringUtils.isEmpty(did) && !"0".equals(did)) {
 				setAttr("department", departmentService.findByDid(did));

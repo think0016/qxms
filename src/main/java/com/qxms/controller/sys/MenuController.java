@@ -56,6 +56,7 @@ public class MenuController extends Controller {
 			}else{
 				setAttr("pmenuname", menu.getMname());
 				setAttr("pmenuid", menu.getMenuid());
+				menu = new Menu();
 			}
 			
 		}

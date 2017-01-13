@@ -17,6 +17,7 @@ import com.qxms.controller.sys.IndexController;
 import com.qxms.controller.sys.MenuController;
 import com.qxms.controller.sys.RoleController;
 import com.qxms.controller.sys.UserController;
+import com.qxms.interceptor.common.CommonHandler;
 import com.qxms.interceptor.common.MenuHandler;
 import com.qxms.interceptor.common.VerifyLoginInterceptor;
 import com.qxms.model._MappingKit;
@@ -31,7 +32,7 @@ public class DemoConfig extends JFinalConfig {
 	 */
 	public void configConstant(Constants me) {
 		// 加载少量必要配置，随后可用PropKit.get(...)获取值
-		PropKit.use("qxmscfg.txt");
+		PropKit.use("commoncfg.properties");
 		me.setDevMode(PropKit.getBoolean("devMode", false));
 		//me.setViewType(ViewType.JSP);		
 	}
@@ -89,5 +90,6 @@ public class DemoConfig extends JFinalConfig {
 	public void configHandler(Handlers me) {
 		me.add(new ContextPathHandler("ctxroot"));
 		//me.add(new MenuHandler());
+		me.add(new CommonHandler());
 	}
 }

@@ -59,10 +59,21 @@ public class RoleService {
 	}
 	
 	public boolean delete(String roleid){
-		boolean flag = true;
+		boolean flag = false;
+		
 		Role role = this.findRoleById(roleid);
-		role.setDelFlag(new Integer("1"));
-		role.update();
+		
+		if(role != null){
+			//先清空role_menu授权
+			String sql = "DELETE FROM `qx_role_menu` WHERE `role_id`=?";
+			//List<RoleMenu> rolemenu = RoleMenu.dao.;
+			Db.update(sql,roleid);			
+
+			role.setDelFlag(new Integer("1"));
+			role.update();
+			
+			flag = true;
+		}
 		return flag;
 	}
 	

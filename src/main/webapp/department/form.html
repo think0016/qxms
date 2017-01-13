@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>权限管理系统</title>
+  <title>${sitetitle!"MOE"}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -118,7 +118,12 @@
                 </div>
                 <div class="box-body">
                   <input type="hidden" name="did" value="${department.did!}">
+                  <#if department.parentDid??>
                   <input type="hidden" name="pid" value="${department.parentDid!}">
+                  <#else>
+                  <input type="hidden" name="pid" value="${pid}">
+                  </#if>
+                  
               <div class="form-group">
                 <label for="input1" class="col-sm-2 control-label">上级部门：</label>
 
