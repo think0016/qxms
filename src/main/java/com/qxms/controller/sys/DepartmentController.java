@@ -46,8 +46,13 @@ public class DepartmentController extends Controller {
 		Department department = new Department();
 		if (!StringUtils.isEmpty(did)) {
 			department = departmentService.findByDid(did);
-			//user = userService.findByUid(uid);			
-			setAttr("pdname", departmentService.findByDid(department.getParentDid().toString()).getDname());
+			//user = userService.findByUid(uid);		
+			if(department.getParentDid()!=0){
+				setAttr("pdname", departmentService.findByDid(department.getParentDid().toString()).getDname());
+			}else{
+				setAttr("istop", 1);
+			}
+			
 		}else{
 			Department topdepartment = departmentService.findTopDepartment();
 			setAttr("pdname",topdepartment.getDname());

@@ -123,16 +123,17 @@
                   <#else>
                   <input type="hidden" name="pid" value="${pid}">
                   </#if>
-                  
-              <div class="form-group">
-                <label for="input1" class="col-sm-2 control-label">上级部门：</label>
+              <#if !istop??>
+                <div class="form-group">
+                  <label for="input1" class="col-sm-2 control-label">上级部门：</label>
 
-                <div class="col-sm-7">
-                  <input type="text" id="citySel" name="" class="form-control" id="input1" value="${pdname!}" disabled></div>
-                <div class="col-sm-3">
-                  <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
+                  <div class="col-sm-7">
+                    <input type="text" id="citySel" name="" class="form-control" id="input1" value="${pdname!}" disabled></div>
+                  <div class="col-sm-3">
+                    <button type="button" class="btn btn-info pull-left" onclick="showMenu(); return false;">选择</button>
+                  </div>
                 </div>
-              </div>
+              </#if>
               <div class="form-group">
                 <label for="input1" class="col-sm-2 control-label">部门名称：</label>
 

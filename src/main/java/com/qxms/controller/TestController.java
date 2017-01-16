@@ -48,19 +48,4 @@ public class TestController extends Controller {
 
 	}
 
-	public static void main(String[] args) {
-		Gson gson = new Gson();
-		String jsonData = "{'name':'John', 'age':20,'grade':{'course':'English','score':100,'level':'A'}}";
-
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("aa", "da");
-		map.put("aaa", "daa");
-		map.put("aaaa", "daaa");
-		
-		HashMap<String, Object> map1 = gson.fromJson(jsonData, HashMap.class);
-		
-		
-		//System.out.println(gson.toJson(map));
-		System.out.println(map1);
-	}
 }
