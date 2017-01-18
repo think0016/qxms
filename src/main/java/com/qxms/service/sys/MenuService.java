@@ -104,11 +104,16 @@ public class MenuService {
 	public boolean delete(String menuid) {
 		boolean flag = true;
 		List<Menu> list = this.findMenuListByPids(menuid);
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {			
 			Menu menu = list.get(i);
 			menu.setDelFlag(new Integer(1));
 			if(!menu.update()){
 				flag = false;
+			}else{
+				//清空role_menu授权
+				String sql = "DELETE FROM `qx_role_menu` WHERE `menu_id`=?";
+				//List<RoleMenu> rolemenu = RoleMenu.dao.;
+				Db.update(sql,menu.getMenuid().toString());			
 			};
 		}
 		return flag;

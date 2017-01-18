@@ -1,5 +1,7 @@
 package com.qxms.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jfinal.kit.PropKit;
 import com.qxms.model.base.BaseMenu;
 
@@ -12,11 +14,18 @@ public class Menu extends BaseMenu<Menu> {
 
 	@Override
 	public String toString() {
-		return "PID:"+getParentId().toString()+"    ID:"+getMenuid().toString();
+		return "PID:" + getParentId().toString() + "    ID:" + getMenuid().toString();
 	}
-	
-	public String getTrueHref(){
-		String rooturl = PropKit.get("rooturl") ;
-		return rooturl + getHref();
+
+	public String getTrueHref() {
+		// StringUtils.
+		String url = getHref();
+
+		if (StringUtils.indexOf(url, "http://") != -1 || StringUtils.indexOf(url, "https://") != -1) {
+
+		}else{
+			url = PropKit.get("rooturl") + url;
+		}
+		return url;
 	}
 }

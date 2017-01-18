@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 import com.qxms.model.Menu;
@@ -16,7 +18,7 @@ public class TestController extends Controller {
 
 	public void index() {
 
-		render("index.jsp");
+		renderText("index");
 	}
 
 	public void test() {
@@ -48,4 +50,12 @@ public class TestController extends Controller {
 
 	}
 
+	public static void main(String[] args) {
+		String  s= "    http://blog.sina.com.cn/s/blog_4550f3ca0100qrsd.html";
+		
+		System.out.println(StringUtils.indexOf( s,"http://"));
+		
+		
+		
+	}
 }

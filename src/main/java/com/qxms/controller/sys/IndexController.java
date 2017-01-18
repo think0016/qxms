@@ -42,14 +42,23 @@ public class IndexController extends Controller {
 			render("login.html");
 		} else {
 			// renderText(user.getTurename()+"登陆成功");
-			user.setLogindate(new Date());
-			user.update();
-			getSession().setAttribute("cache_user", user);
-			getSession().setAttribute("cache_cusername", user.getTurename());
-			getSession().setAttribute("isAdmin", userService.isAdmin(user));
-			CacheKit.put("userlist", user.getUid().toString(), user);
-			// forwardAction("/");
-			redirect("/");
+			if(user.getStatus().intValue() == 1){
+				user.setLogindate(new Date());
+				user.update();
+				getSession().setAttribute("cache_user", user);
+				getSession().setAttribute("cache_cusername", user.getTurename());
+				getSession().setAttribute("isAdmin", userService.isAdmin(user));
+				CacheKit.put("userlist", user.getUid().toString(), user);
+				// forwardAction("/");
+				redirect("/");
+			}else{
+				//已冻结或者不存在
+				setAttr("msg1", "该账号已冻结！");
+				keepPara();
+				// forwardAction("/login");
+				render("login.html");
+			}
+
 		}
 
 	}
