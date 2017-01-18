@@ -16,16 +16,17 @@ public class DepartmentService {
 		String sql = "select * from `qx_department` where `del_flag` = 0 and `did` = ?";
 		return Department.dao.findFirst(sql, did);
 	}
-	
+
 	/**
 	 * 获取一条顶级部门信息
+	 * 
 	 * @return
 	 */
-	public Department findTopDepartment(){
+	public Department findTopDepartment() {
 		String sql = "select * from `qx_department` where `del_flag` = 0 and `parent_did` = 0";
 		return Department.dao.findFirst(sql);
 	}
-	
+
 	public List<Department> findAllDepartment() {
 		Map<String, String> param = new HashMap<String, String>();
 		return this.findDepartmentList(param);
@@ -55,13 +56,13 @@ public class DepartmentService {
 			TreeNode node = new TreeNode(dep.getDid(), dep.getParentDid(), dep.getDname());
 			rs.add(node);
 		}
-		
-		
+
 		return rs;
 	}
 
 	/**
 	 * 查询当前部门及其子部门全部列表
+	 * 
 	 * @param did
 	 * @return
 	 */
@@ -81,27 +82,31 @@ public class DepartmentService {
 		}
 		return flag;
 	}
-	
-	public boolean delete(String did){
+
+	public boolean delete(String did) {
 		boolean flag = true;
 		List<Department> list = this.findDepartmentListBypids(did);
 		for (int i = 0; i < list.size(); i++) {
 			Department dept = list.get(i);
 			dept.setDelFlag(new Integer("1"));
-			dept.update();
+			if (!dept.update()) {
+				flag = false;
+			}
+			;
 		}
-		
+
 		return flag;
 	}
-	
+
 	/**
 	 * 树排序
+	 * 
 	 * @param list
 	 * @param sourcelist
 	 * @param parentId
 	 * @param cascade
 	 */
-	public static void sortList(List<Department> list, List<Department> sourcelist, int parentId, boolean cascade){
+	public static void sortList(List<Department> list, List<Department> sourcelist, int parentId, boolean cascade) {
 		for (int i = 0; i < sourcelist.size(); i++) {
 			Department e = sourcelist.get(i);
 			if (e.getParentDid() != null && e.getParentDid().intValue() == parentId) {

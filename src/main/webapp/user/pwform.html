@@ -13,9 +13,11 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="${ctxroot}/static/plugins/other/ionicons.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="${ctxroot}/static/plugins/datatables/dataTables.bootstrap.css">
+  <!-- <link rel="stylesheet" href="${ctxroot}/static/plugins/datatables/dataTables.bootstrap.css"> -->
   <!-- ztree -->
-  <link rel="stylesheet" href="${ctxroot}/static/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <!-- <link rel="stylesheet" href="${ctxroot}/static/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css"> -->
+  <!-- Alert -->
+  <link rel="stylesheet" href="${ctxroot}/static/plugins/Alert/Alert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="${ctxroot}/static/dist/css/admincore.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -111,7 +113,7 @@
               </div>
             </#if>
             <!-- 提示框 END -->
-            <form action="${ctxroot}/user/resetpassword" class="form-horizontal"  method="post" id="form1">
+            <form action="" class="form-horizontal"  method="post" id="form1">
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">用户添加</h3>
@@ -194,10 +196,12 @@
 <!-- FastClick -->
 <script src="${ctxroot}/static/plugins/fastclick/fastclick.js"></script>
 <!-- DataTables -->
-<script src="${ctxroot}/static/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="${ctxroot}/static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- <script src="${ctxroot}/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${ctxroot}/static/plugins/datatables/dataTables.bootstrap.min.js"></script> -->
 <!-- ztree -->
-<script type="text/javascript" src="${ctxroot}/static/plugins/ztree/js/jquery.ztree.all.min.js"></script>
+<!-- <script type="text/javascript" src="${ctxroot}/static/plugins/ztree/js/jquery.ztree.all.min.js"></script> -->
+<!-- Alert -->
+<script type="text/javascript" src="${ctxroot}/static/plugins/Alert/Alert.js"></script>
 <!-- AdminLTE App -->
 <script src="${ctxroot}/static/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -214,16 +218,31 @@
       var npassword2 = $("input[name='npassword2']").val();
 
       if(opassword == ''){
-        alert("旧密码不能为空");
+        Alert("旧密码不能为空");
       }else if(npassword != npassword2){
-        alert("两次密码输入不相同");
+        Alert("两次密码输入不相同");
       }else{
-        $('#form1')[0].submit();  
+        //$('#form1')[0].submit();
+        var url = rooturl + '/user/resetpassword';
+        $.post(url, {"opassword":opassword,"npassword":npassword}, function(data){
+        	if(data == "1"){
+        		Alert("修改成功！",function(){
+        			window.location.href = rooturl + "";
+        		});
+        	}else if(data == "0"){
+        		Alert("密码输入错误");
+        	}else{
+        		Alert("系统错误");
+        	}
+        });  
       }
 
       
     };
 
+  // var refresh = function() {
+  //   window.location.href = rooturl + "/user";
+  // }
   </script>
 </body>
 </html>

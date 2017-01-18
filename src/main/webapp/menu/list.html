@@ -155,7 +155,7 @@
                         <div class="btn-group">
                           <#if menu.parentId != 0>
                             <a href="${ctxroot}/menu/form/${menu.menuid}-0" class="btn btn-default btn-xs">修改</a>
-                            <button type="button" class="btn btn-default btn-xs" onclick="del(${menu.menuid})">删除</button>
+                            <button type="button" class="btn btn-default btn-xs" onclick="delfm(${menu.menuid});">删除</button>
                           </#if>
                             <a href="${ctxroot}/menu/form/${menu.menuid}-1" class="btn btn-default btn-xs">添加下级功能</a>
                         </div>
@@ -170,6 +170,32 @@
           <!-- /.box --> </div>
       </div>
 
+      <!-- 信息确认框 -->
+      <div class="modal fade" id="delcfmModel">
+        <input type="hidden" name="del_id" value="">
+        <div class="modal-dialog">
+          <div class="modal-content message_align">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">提示信息</h4>
+            </div>
+            <div class="modal-body">
+              <p>您确认要删除吗？</p>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" id="url"/>
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <a onclick="del();" class="btn btn-success" data-dismiss="modal">确定</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <!-- 信息确认框END -->
     </section>
     <!-- /.content --> </div>
   <!-- /.content-wrapper -->
@@ -231,16 +257,27 @@
     $('#treeTable1').treeTable(option);
 });
 
-function del(menuid){
-  var purl = rooturl + "/menu/delete";
-  $.post(purl, {"menuid":menuid}, function(data){
-        if(data == '1'){
-          Alert("删除成功",refresh);
-        }else{
-          Alert("删除失败",refresh);
-        }
-  });
-};
+    function del(){
+      var menuid = $("input[name='del_id']").val();
+      if(menuid == ''){
+        Alert("删除失败");
+      }else{
+        var purl = rooturl + "/menu/delete";
+        $.post(purl, {"menuid":menuid}, function(data){
+              if(data == '1'){
+                Alert("删除成功",refresh);
+              }else{
+                Alert("删除失败",refresh);
+              }
+        });
+      }
+
+    };
+
+    function delfm(menuid){
+      $("input[name='del_id']").val(menuid);
+      $('#delcfmModel').modal('show');
+    }
 var refresh = function(){
   window.location.href = rooturl + "/menu";
 };

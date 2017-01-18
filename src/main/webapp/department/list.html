@@ -147,7 +147,7 @@
                         <td>
                           <div class="btn-group">
                             <a href="${ctxroot}/department/form/${department.did}" class="btn btn-xs btn-default" onclick="">修改</a>
-                            <a href="#" class="btn btn-xs btn-default" onclick="del(${department.did});">删除</a>
+                            <a href="#" class="btn btn-xs btn-default" onclick="delfm(${department.did});">删除</a>
                           </div>
                         </td>
                       </tr>
@@ -160,7 +160,32 @@
           </div>
           <!-- /.box --> </div>
       </div>
-
+      <!-- 信息确认框 -->
+      <div class="modal fade" id="delcfmModel">
+        <input type="hidden" name="del_id" value="">
+        <div class="modal-dialog">
+          <div class="modal-content message_align">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">提示信息</h4>
+            </div>
+            <div class="modal-body">
+              <p>您确认要删除吗？</p>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" id="url"/>
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <a onclick="del();" class="btn btn-success" data-dismiss="modal">确定</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <!-- 信息确认框END -->
     </section>
     <!-- /.content --> </div>
   <!-- /.content-wrapper -->
@@ -209,16 +234,26 @@
         $('#treeTable1').treeTable(option);
     });
 
-    function del(did){
-      url = rooturl + "/department/delete/"+did;
-      jQuery.post(url, {'did':did}, function(data){
-        console.log(data);
-        if(data == '1'){
-          Alert("删除成功",refresh);
-        }else{
-          Alert("删除失败",refresh);
-        }
-      });
+    function del(){
+      var did = $("input[name='del_id']").val();
+      if(did == ''){
+        Alert("删除失败");
+      }else{
+        url = rooturl + "/department/delete/"+did;
+        jQuery.post(url, {'did':did}, function(data){
+          console.log(data);
+          if(data == '1'){
+            Alert("删除成功",refresh);
+          }else{
+            Alert("删除失败",refresh);
+          }
+        });
+      }
+    }
+
+    function delfm(did){
+      $("input[name='del_id']").val(did);
+      $('#delcfmModel').modal('show');
     }
     var refresh = function(){
       window.location.href = rooturl + "/department";

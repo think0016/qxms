@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.qxms.common.utils.UrlEncoderUtils;
 import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Menu;
 import com.qxms.model.TreeNode;
@@ -24,41 +25,52 @@ public class MenuController extends Controller {
 		redirect("/menu/list");
 	}
 
-	@Before({AuthenticationValidator.class})
+	@Before({ AuthenticationValidator.class })
 	public void list() {
-		
+
+		String msgtype = getPara(0);
+
+		if (!StringUtils.isEmpty(msgtype)) {
+			String msg = UrlEncoderUtils.decode(getPara(1), "utf-8");
+			if ("1".equals(msgtype)) {// 正常信息
+				setAttr("infomsg", msg);
+			} else {
+				setAttr("errormsg", msg);
+			}
+		}
+
 		// 菜单树信息
 		List<Menu> list = new ArrayList<Menu>();
 		MenuService.sortList(list, menuService.findAllMenu(), 0, true);
-		
-//		List<TreeNode> nodes = menuService.gettreedata(mlist);
-//		Gson gson = new Gson();
-//		String json = gson.toJson(nodes);
-		
-//		setAttr("treejson", json);
+
+		// List<TreeNode> nodes = menuService.gettreedata(mlist);
+		// Gson gson = new Gson();
+		// String json = gson.toJson(nodes);
+
+		// setAttr("treejson", json);
 		setAttr("menulist", list);
 		render("list.html");
 	}
-	
-	@Before({AuthenticationValidator.class})
+
+	@Before({ AuthenticationValidator.class })
 	public void form() {
 		String menuid = getPara(0);
-		String type = getPara(1);//是否在下级添加
-		String subtitle ="菜单添加";
-		
+		String type = getPara(1);// 是否在下级添加
+		String subtitle = "菜单添加";
+
 		Menu menu = new Menu();
 		if (!StringUtils.isEmpty(menuid)) {
 			menu = menuService.findMenuById(menuid);
-			if("0".equals(type)){
+			if ("0".equals(type)) {
 				setAttr("pmenuname", menuService.findMenuById(menu.getParentId().toString()).getMname());
-				setAttr("pmenuid", menuService.findMenuById(menu.getParentId().toString()).getMenuid());				
+				setAttr("pmenuid", menuService.findMenuById(menu.getParentId().toString()).getMenuid());
 				subtitle = "菜单修改";
-			}else{
+			} else {
 				setAttr("pmenuname", menu.getMname());
 				setAttr("pmenuid", menu.getMenuid());
 				menu = new Menu();
 			}
-			
+
 		}
 		// 菜单树信息
 		List<Menu> mlist = menuService.findAllMenu();
@@ -110,29 +122,46 @@ public class MenuController extends Controller {
 		}
 
 		boolean flag = menuService.save(menu, update);
-		
-		//清除缓存
-		CacheKit.removeAll("menulist");		
-		
+
+		// 清除缓存
+		CacheKit.removeAll("menulist");
+
 		if (flag) {
-			setAttr("infomsg", "添加成功");
-			forwardAction("/menu/list");
+			// setAttr("infomsg", "添加成功");
+			// forwardAction("/menu/list");
+			String url = "/menu/list/1-";
+			if (update) {
+				url = url + UrlEncoderUtils.encode("修改成功", "utf-8");
+			} else {
+				url = url + UrlEncoderUtils.encode("添加成功", "utf-8");
+			}
+			redirect(url);
 		} else {
 			keepPara();
-			setAttr("errormsg", "添加部门失败");
+			if (update) {
+				setAttr("errormsg", "修改失败");
+			} else {
+				setAttr("errormsg", "添加失败");
+			}
+
 			forwardAction("/menu/form");
 		}
 	}
 
 	public void delete() {
 		String menuid = getPara("menuid");
-		boolean flag = menuService.delete(menuid);		
-		//清除缓存
-		CacheKit.removeAll("menulist");
-		if (flag) {
-			renderText("1");
-		} else {
+		if(StringUtils.isEmpty(menuid)){
 			renderText("2");
+		}else{
+			boolean flag = menuService.delete(menuid);
+			// 清除缓存
+			CacheKit.removeAll("menulist");
+			if (flag) {
+				renderText("1");
+			} else {
+				renderText("2");
+			}
 		}
+
 	}
 }

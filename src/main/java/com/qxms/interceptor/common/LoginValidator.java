@@ -16,7 +16,7 @@ public class LoginValidator extends Validator {
 	protected void handleError(Controller c) {
 		// TODO Auto-generated method stub
 		c.keepPara("loginname");
-		c.render("login.jsp");
+		c.render("login.html");
 	}
 
 }

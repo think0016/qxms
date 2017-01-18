@@ -107,7 +107,9 @@ public class MenuService {
 		for (int i = 0; i < list.size(); i++) {
 			Menu menu = list.get(i);
 			menu.setDelFlag(new Integer(1));
-			menu.update();
+			if(!menu.update()){
+				flag = false;
+			};
 		}
 		return flag;
 	}

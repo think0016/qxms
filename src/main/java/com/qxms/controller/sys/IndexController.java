@@ -2,10 +2,13 @@ package com.qxms.controller.sys;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.qxms.common.utils.UrlEncoderUtils;
 import com.qxms.interceptor.common.LoginValidator;
 import com.qxms.model.User;
 import com.qxms.service.sys.SystemService;
@@ -15,6 +18,7 @@ public class IndexController extends Controller {
 	public static final UserService userService = new UserService();
 
 	public void index() {
+		
 		render("index.html");
 	}
 

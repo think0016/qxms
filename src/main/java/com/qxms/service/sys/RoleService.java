@@ -70,10 +70,9 @@ public class RoleService {
 			Db.update(sql,roleid);			
 
 			role.setDelFlag(new Integer("1"));
-			role.update();
-			
-			flag = true;
+			flag = role.update();
 		}
+
 		return flag;
 	}
 	

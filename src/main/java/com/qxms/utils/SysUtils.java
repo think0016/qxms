@@ -68,7 +68,6 @@ public class SysUtils {
 			int n1 = 0;
 			// 先开始第一层
 			for (int i = 0; i < list.size();) {
-
 				// 是否有下一层
 				if ((i + 1) < list.size()
 						&& list.get(i).getMenuid().intValue() == list.get((i + 1)).getParentId().intValue()) {
@@ -159,7 +158,7 @@ public class SysUtils {
 					html.append("<li id=\"menu-"+list.get(i).getMenuid()+"\" class=\"treeview\">");
 					html.append("<a href=\"" + list.get(i).getTrueHref() + "\"><i class=\"fa fa-circle-o\"></i> <span>"
 							+ list.get(i).getMname() + "</span></a>");
-					// n1++;
+					n1++;
 				}
 
 				html.append("</li>");
@@ -167,10 +166,13 @@ public class SysUtils {
 				i = n1 + 1;
 			}
 			html.append("</ul>");
-			// for (int i = 0; i < list.size();i++) {
-			// System.out.println(list.get(i).getMname()+"("+list.get(i).getMenuid()+"):::::"+list.get(i).getParentId());
-			// }
-
+			
+			
+//			 for (int i = 0; i < list.size();i++) {
+//			 System.out.println("["+i+"]"+list.get(i).getMname()+"("+list.get(i).getMenuid()+"):::::"+list.get(i).getParentId());
+//			 }
+//			String html = "";
+			
 			MenuHTML = html.toString();
 			CacheKit.put("menulist", uid, MenuHTML);
 		}

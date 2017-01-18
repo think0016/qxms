@@ -18,7 +18,7 @@ public class UserService {
 		String sql = "select * from `qx_user` where login_name=?";
 		return User.dao.findFirst(sql, loginname);
 	}
-	
+
 	public User findByUid(String uid) {
 		String sql = "select * from `qx_user` where uid=?";
 		return User.dao.findFirst(sql, uid);
@@ -54,23 +54,51 @@ public class UserService {
 
 		return User.dao.find(sql);
 	}
-	
+
+	/**
+	 * 包含已删除的用户
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public List<User> findOUserList(Map<String, String> param) {
+
+		String sql = "select * from `qx_user`";
+
+		Iterator<Entry<String, String>> entries = param.entrySet().iterator();
+
+		int i = 0;
+		while (entries.hasNext()) {
+			if (i == 0) {
+				sql += "where ";
+			} else if (i > 0) {
+				sql += "and ";
+			}
+			Map.Entry<String, String> entry = entries.next();
+			sql += "`" + entry.getKey() + "`='" + entry.getValue() + "' ";
+			i++;
+		}
+
+		return User.dao.find(sql);
+	}
+
 	/**
 	 * 查找当前部门及其下属部门下的所有用户
 	 */
-	public List<User> findUserList_did(String did) {	
-		
-		List<Department> dlist= Department.dao.find("select * from `qx_department` where `del_flag` = 0 AND `parent_dids` like '%"+did+"%'");
-		
+	public List<User> findUserList_did(String did) {
+
+		List<Department> dlist = Department.dao
+				.find("select * from `qx_department` where `del_flag` = 0 AND `parent_dids` like '%" + did + "%'");
+
 		String sql = "select * from `qx_user` where `status` = 1 AND ( `did`=?";
 
 		for (int i = 0; i < dlist.size(); i++) {
-			sql += " OR `did`="+dlist.get(i).getDid().toString()+" "; 
+			sql += " OR `did`=" + dlist.get(i).getDid().toString() + " ";
 		}
-		sql += ")"; 
-		return User.dao.find(sql,did);
+		sql += ")";
+		return User.dao.find(sql, did);
 	}
-	
+
 	public int save(User user, boolean update) {
 		int flag = 0;
 		if (update) {
@@ -78,11 +106,11 @@ public class UserService {
 			if (flag1) {
 				// 先删除所有角色关联
 				String sql = "select * from `qx_user_role` `q` where `q`.`user_id` = ?";
-				List<UserRole> list= UserRole.dao.find(sql,user.getUid().toString());
+				List<UserRole> list = UserRole.dao.find(sql, user.getUid().toString());
 				for (int i = 0; i < list.size(); i++) {
 					list.get(i).delete();
 				}
-				
+
 				// 添加角色关联
 				String[] roles = user.getRole();
 				for (int i = 0; i < roles.length; i++) {
@@ -109,42 +137,45 @@ public class UserService {
 		}
 		return flag;
 	}
-	
-	public int delete(String uid){
+
+	public int delete(String uid) {
 		int flag = 0;
 		User user = this.findByUid(uid);
-		if(!this.isAdmin(user)){
+		if (!this.isAdmin(user)) {
 			user.setStatus(new Integer(0));
-			if(user.update()){
+			if (user.update()) {
 				flag = 1;
-			};
-		}else{
-			flag = 2;//超管权限不可删除
+			}
+			;
+		} else {
+			flag = 2;// 超管权限不可删除
 		}
-		return flag;		
+		return flag;
 	}
-	
-	public boolean isAdmin(User user){
-		List<Role> list=user.getRolelist();
+
+	public boolean isAdmin(User user) {
+		List<Role> list = user.getRolelist();
 		boolean flag = false;
 		for (int i = 0; i < list.size(); i++) {
 			Role role = list.get(i);
-			if("global".equals(role.getRoleType())){
+			if ("global".equals(role.getRoleType())) {
 				flag = true;
 				break;
-			};
-		}				
+			}
+			;
+		}
 		return flag;
 	}
-	
+
 	/**
 	 * 获取缓存中用户信息，没有就查数据库
+	 * 
 	 * @param uid
 	 * @return
 	 */
-	public User getCacheUser(String uid){
-		User user= CacheKit.get("userlist", uid);
-		if(user == null){
+	public User getCacheUser(String uid) {
+		User user = CacheKit.get("userlist", uid);
+		if (user == null) {
 			user = this.findByUid(uid);
 		}
 		return user;

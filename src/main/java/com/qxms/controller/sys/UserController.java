@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.qxms.common.utils.UrlEncoderUtils;
 import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Department;
 import com.qxms.model.Role;
@@ -36,6 +37,16 @@ public class UserController extends Controller {
 	public void list() {
 
 		String did = getPara(0);
+		String msgtype = getPara(1);
+
+		if (!StringUtils.isEmpty(msgtype)) {
+			String msg = UrlEncoderUtils.decode(getPara(2), "utf-8");
+			if ("1".equals(msgtype)) {// 正常信息
+				setAttr("infomsg", msg);
+			} else {
+				setAttr("errormsg", msg);
+			}
+		}
 
 		// List<User> list = null;
 		// if (did != null) {
@@ -100,11 +111,10 @@ public class UserController extends Controller {
 			setAttr("department", departmentService.findByDid(user.getDid().toString()));
 			setAttr("subtitle", "用户修改");
 			List<Role> rolelist = user.getRolelist();
-			if(rolelist.size()>0){
+			if (rolelist.size() > 0) {
 				setAttr("userroleid", rolelist.get(0).getRoleid().toString());
 			}
-			
-			
+
 		} else {
 			if (!StringUtils.isEmpty(did) && !"0".equals(did)) {
 				setAttr("department", departmentService.findByDid(did));
@@ -134,31 +144,30 @@ public class UserController extends Controller {
 	public void pwform() {
 
 		setAttr("user", getSession().getAttribute("cache_user"));
-
 		render("pwform.html");
 	}
-	
+
 	/**
 	 * 验证重名action
 	 */
-	public void yzloginname(){
+	public void yzloginname() {
 		String loginname = getPara("loginname");
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("login_name", loginname);
-		List<User> rs = userService.findUserList(param);
-		if(rs.size()>0){
+		List<User> rs = userService.findOUserList(param);
+		if (rs.size() > 0) {
 			renderText("0");
-		}else{
+		} else {
 			renderText("1");
 		}
 	}
-	
+
 	public void saveuser() {
 		String uid = getPara("uid");
 		String did = getPara("did");
 		String loginname = getPara("loginname");
 		String password = getPara("password");
-		//String truename = getPara("truename");
+		// String truename = getPara("truename");
 		String nickname = getPara("nickname");
 		String gender = getPara("gender");
 		String email = getPara("email");
@@ -173,7 +182,8 @@ public class UserController extends Controller {
 		if (!StringUtils.isEmpty(uid)) {
 			update = true;
 			user = userService.findByUid(uid);
-			user.setNickname(nickname);;
+			user.setNickname(nickname);
+			;
 			user.setEmail(email);
 			user.setGender(gender);
 			user.setRemarks(remark);
@@ -200,10 +210,22 @@ public class UserController extends Controller {
 			int flag = userService.save(user, update);
 
 			if (flag == 1) {
-				setAttr("infomsg", "添加成功");
-				forwardAction("/user/list");
+				// setAttr("infomsg", "添加成功");
+				// forwardAction("/user/list");
+				String url = "/user/list/0-1-";
+				if(update){
+					url = url + UrlEncoderUtils.encode("修改成功", "utf-8");
+				}else{
+					url = url + UrlEncoderUtils.encode("添加成功", "utf-8");
+				}				
+				redirect(url);
 			} else {
-				setAttr("errormsg", "添加失败");
+				if(update){
+					setAttr("errormsg", "修改失败");
+				}else{
+					setAttr("errormsg", "添加失败");
+				}
+				
 				keepPara();
 				forwardAction("/user/form");
 			}
@@ -213,8 +235,8 @@ public class UserController extends Controller {
 			forwardAction("/user/form");
 		}
 
-		if(update){
-			//清除缓存
+		if (update) {
+			// 清除缓存
 			CacheKit.remove("menulist", uid);
 			CacheKit.remove("userlist", uid);
 		}
@@ -230,33 +252,44 @@ public class UserController extends Controller {
 		String opassword = getPara("opassword");
 		String npassword = getPara("npassword");
 
+		String result = "";
 		// 先验证旧密码
 		// User user = userService.findByup(loginname, opassword);
 		// User user = userService.findByloginname(loginname);
 		if (user == null || !SystemService.validatePassword(opassword, user.getPassword())) {
-			setAttr("errormsg", "密码不正确");
-			keepPara();
-			forwardAction("/user/pwform");
+			// setAttr("errormsg", "密码不正确");
+			// keepPara();
+			// forwardAction("/user/pwform");
+			result = "0";//
 		} else {
 			user.setPassword(SystemService.entryptPassword(npassword));
 			if (user.update()) {
-				setAttr("infomsg", "修改密码成功");
-				forwardAction("/index");
+				// setAttr("infomsg", "修改密码成功");
+				// forwardAction("/index");
+//				String url = "/index/1-";
+//				url = url + UrlEncoderUtils.encode("修改密码成功", "utf-8");
+//				redirect(url);
+				result = "1";
 			} else {
-				setAttr("errormsg", "密码不正确");
-				keepPara();
-				forwardAction("/user/pwform");
+//				setAttr("errormsg", "密码不正确");
+//				keepPara();
+//				forwardAction("/user/pwform");
+				result = "10";
 			}
 		}
-
+		renderText(result);
 	}
 
-	public void delete() {
+	public void delete() {		
 		String uid = getPara("uid");
-		int flag = userService.delete(uid);
-		CacheKit.remove("menulist", uid);
-		CacheKit.remove("userlist", uid);
-		renderText(flag + "");
+		if(StringUtils.isEmpty(uid)){
+			renderText("0");
+		}else{
+			int flag = userService.delete(uid);
+			CacheKit.remove("menulist", uid);
+			CacheKit.remove("userlist", uid);
+			renderText(flag + "");
+		}
 	}
 
 	public void userinfo() {
@@ -278,9 +311,9 @@ public class UserController extends Controller {
 
 		String email = getPara("email");
 		String remarks = getPara("remarks");
-		//String truename = getPara("truename");
+		// String truename = getPara("truename");
 		String nickname = getPara("nickname");
-		
+
 		user.setNickname(nickname);
 		user.setRemarks(remarks);
 		user.setEmail(email);
