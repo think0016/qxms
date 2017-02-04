@@ -22,6 +22,7 @@ public class VerifyLoginInterceptor implements Interceptor {
 			String html = SysUtils.getMenuList_HTML(user.getUid().toString());
 			//request.setAttribute("menuhtml", html);
 			inv.getController().setAttr("menuhtml", html);
+			inv.getController().setAttr("cache_user", user);
 			inv.getController().setAttr("cache_cnickname", user.getNickname());
 			inv.getController().setAttr("cache_dname", user.getDepartment().getDname());
 			inv.invoke();

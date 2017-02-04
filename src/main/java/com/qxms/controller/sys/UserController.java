@@ -1,17 +1,23 @@
 package com.qxms.controller.sys;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.core.JFinal;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.jfinal.upload.UploadFile;
+import com.qxms.common.utils.MoeFileUtils;
 import com.qxms.common.utils.UrlEncoderUtils;
 import com.qxms.interceptor.common.AuthenticationValidator;
 import com.qxms.model.Department;
@@ -213,19 +219,19 @@ public class UserController extends Controller {
 				// setAttr("infomsg", "添加成功");
 				// forwardAction("/user/list");
 				String url = "/user/list/0-1-";
-				if(update){
+				if (update) {
 					url = url + UrlEncoderUtils.encode("修改成功", "utf-8");
-				}else{
+				} else {
 					url = url + UrlEncoderUtils.encode("添加成功", "utf-8");
-				}				
+				}
 				redirect(url);
 			} else {
-				if(update){
+				if (update) {
 					setAttr("errormsg", "修改失败");
-				}else{
+				} else {
 					setAttr("errormsg", "添加失败");
 				}
-				
+
 				keepPara();
 				forwardAction("/user/form");
 			}
@@ -266,25 +272,25 @@ public class UserController extends Controller {
 			if (user.update()) {
 				// setAttr("infomsg", "修改密码成功");
 				// forwardAction("/index");
-//				String url = "/index/1-";
-//				url = url + UrlEncoderUtils.encode("修改密码成功", "utf-8");
-//				redirect(url);
+				// String url = "/index/1-";
+				// url = url + UrlEncoderUtils.encode("修改密码成功", "utf-8");
+				// redirect(url);
 				result = "1";
 			} else {
-//				setAttr("errormsg", "密码不正确");
-//				keepPara();
-//				forwardAction("/user/pwform");
+				// setAttr("errormsg", "密码不正确");
+				// keepPara();
+				// forwardAction("/user/pwform");
 				result = "10";
 			}
 		}
 		renderText(result);
 	}
 
-	public void delete() {		
+	public void delete() {
 		String uid = getPara("uid");
-		if(StringUtils.isEmpty(uid)){
+		if (StringUtils.isEmpty(uid)) {
 			renderText("0");
-		}else{
+		} else {
 			int flag = userService.delete(uid);
 			CacheKit.remove("menulist", uid);
 			CacheKit.remove("userlist", uid);
@@ -311,9 +317,10 @@ public class UserController extends Controller {
 
 		String email = getPara("email");
 		String remarks = getPara("remarks");
-		// String truename = getPara("truename");
 		String nickname = getPara("nickname");
-
+		String headphoto = getPara("headphotourl");
+		
+		user.setHeadphoto(headphoto);
 		user.setNickname(nickname);
 		user.setRemarks(remarks);
 		user.setEmail(email);
@@ -323,6 +330,47 @@ public class UserController extends Controller {
 		} else {
 			renderText("2");
 		}
+	}
 
+	/**
+	 * 上传头像
+	 */
+	public void uploadheadphoto() {
+		
+		Map<String,String> result = new HashMap<String,String>();
+		result.put("status", "0");
+		result.put("msg", "");
+		
+		UploadFile uf = getFile("headphoto");
+
+		// System.out.println(uf.getContentType());
+		// System.out.println(uf.getOriginalFileName());
+		// System.out.println(uf.getParameterName());
+		// System.out.println(uf.getFile().getPath());
+		// System.out.println(JFinal.me().getServletContext().getRealPath("upload/headphoto/"));
+
+		if (MoeFileUtils.isImg(uf.getContentType())) {
+			String path = JFinal.me().getServletContext().getRealPath("upload/headphoto") + "\\";
+			String filename = ((User) getSession().getAttribute("cache_user")).getUid().toString() + "_"
+					+ (new Date().getTime()) + "." + MoeFileUtils.getExtname(uf.getOriginalFileName());
+
+			File srcFile = uf.getFile();
+			File destFile = new File(path + filename);
+
+			try {
+				FileUtils.moveFile(srcFile, destFile);
+				result.put("status", "1");
+				result.put("msg", filename);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println(uf.getContentType() + "ERROR!!!");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(result);
+		renderText(json);
 	}
 }

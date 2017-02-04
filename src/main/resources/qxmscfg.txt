@@ -1,5 +1,0 @@
-jdbcUrl = jdbc:mysql://192.168.12.106/qx?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
-user = root
-password = root
-devMode = false
-rooturl = /qxms

@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.qxms.model.base.BaseUser;
 
 /**
@@ -52,5 +54,15 @@ public class User extends BaseUser<User> {
 		SimpleDateFormat dateFormater = new SimpleDateFormat(pattern);
 		Date date=new Date();
 		return dateFormater.format(date);
+	}
+	
+	public String getRealHeadphoto(){
+		String headphoto =  this.getHeadphoto();
+		if(StringUtils.isEmpty(headphoto)){
+			headphoto = "/static/dist/img/default_photo.jpg";
+		}else{
+			
+		}
+		return headphoto;
 	}
 }

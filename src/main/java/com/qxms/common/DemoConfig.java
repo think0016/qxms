@@ -11,6 +11,8 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.render.ViewType;
+import com.jfinal.template.Engine;
 import com.qxms.controller.TestController;
 import com.qxms.controller.sys.DepartmentController;
 import com.qxms.controller.sys.IndexController;
@@ -18,7 +20,6 @@ import com.qxms.controller.sys.MenuController;
 import com.qxms.controller.sys.RoleController;
 import com.qxms.controller.sys.UserController;
 import com.qxms.interceptor.common.CommonHandler;
-import com.qxms.interceptor.common.MenuHandler;
 import com.qxms.interceptor.common.VerifyLoginInterceptor;
 import com.qxms.model._MappingKit;
 
@@ -34,7 +35,7 @@ public class DemoConfig extends JFinalConfig {
 		// 加载少量必要配置，随后可用PropKit.get(...)获取值
 		PropKit.use("commoncfg.properties");
 		me.setDevMode(PropKit.getBoolean("devMode", false));
-		//me.setViewType(ViewType.JSP);		
+		me.setViewType(ViewType.FREE_MARKER);		
 	}
 	
 	/**
@@ -91,5 +92,11 @@ public class DemoConfig extends JFinalConfig {
 		me.add(new ContextPathHandler("ctxroot"));
 		//me.add(new MenuHandler());
 		me.add(new CommonHandler());
+	}
+
+	@Override
+	public void configEngine(Engine me) {
+		// TODO Auto-generated method stub
+		
 	}
 }

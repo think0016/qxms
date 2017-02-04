@@ -113,4 +113,11 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return get("remarks");
 	}
 
+	public void setHeadphoto(java.lang.String headphoto) {
+		set("headphoto", headphoto);
+	}
+
+	public java.lang.String getHeadphoto() {
+		return get("headphoto");
+	}
 }

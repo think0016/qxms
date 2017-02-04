@@ -368,3 +368,1222 @@ Caused by: freemarker.core.InvalidReferenceException: Expression role is undefin
 	at freemarker.template.Template.process(Template.java:259)
 	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:145)
 	... 20 more
+
+2017-02-03 16:45:12
+[WARN]-[Thread: http-bio-8080-exec-3]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /user/server/php/
+
+2017-02-03 17:06:16
+[ERROR]-[Thread: http-bio-8080-exec-1]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.qxms.interceptor.common.VerifyLoginInterceptor.intercept(VerifyLoginInterceptor.java:27)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:82)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 22 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:779)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:333)
+	... 27 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 30 more
+
+2017-02-03 17:07:53
+[ERROR]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.qxms.interceptor.common.VerifyLoginInterceptor.intercept(VerifyLoginInterceptor.java:27)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:82)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 22 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:779)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:333)
+	... 27 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 30 more
+
+2017-02-03 17:09:01
+[ERROR]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.qxms.interceptor.common.VerifyLoginInterceptor.intercept(VerifyLoginInterceptor.java:27)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:82)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 22 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:779)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:333)
+	... 27 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 30 more
+
+2017-02-03 17:10:16
+[ERROR]-[Thread: http-bio-8080-exec-2]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.qxms.interceptor.common.VerifyLoginInterceptor.intercept(VerifyLoginInterceptor.java:27)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 22 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:779)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:333)
+	... 27 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 30 more
+
+2017-02-03 17:18:09
+[ERROR]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 20 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:779)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:335)
+	... 25 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 28 more
+
+2017-02-03 17:18:42
+[ERROR]-[Thread: http-bio-8080-exec-3]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 20 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:779)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:335)
+	... 25 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 28 more
+
+2017-02-03 17:20:22
+[ERROR]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 20 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:779)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:335)
+	... 25 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 28 more
+
+2017-02-03 17:21:22
+[ERROR]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 20 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:784)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:335)
+	... 25 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 28 more
+
+2017-02-03 17:28:21
+[ERROR]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 20 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:784)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:335)
+	... 25 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 28 more
+
+2017-02-03 17:32:40
+[WARN]-[Thread: http-bio-8080-exec-6]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /user/dcdcd/cdcd
+
+2017-02-03 17:33:35
+[WARN]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: 404 Action Not Found: /user/ccc/ggg
+
+2017-02-03 17:34:06
+[ERROR]-[Thread: http-bio-8080-exec-6]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 20 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:784)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:335)
+	... 25 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 28 more
+
+2017-02-03 17:41:54
+[ERROR]-[Thread: http-bio-8080-exec-10]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:87)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	... 20 more
+Caused by: java.lang.NoClassDefFoundError: com/oreilly/servlet/multipart/FileRenamePolicy
+	at com.jfinal.core.Controller.getFiles(Controller.java:774)
+	at com.jfinal.core.Controller.getFile(Controller.java:784)
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:335)
+	... 25 more
+Caused by: java.lang.ClassNotFoundException: com.oreilly.servlet.multipart.FileRenamePolicy
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1713)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1558)
+	... 28 more
+
+2017-02-04 11:09:41
+[ERROR]-[Thread: http-bio-8080-exec-4]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.NullPointerException
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:348)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 11:10:26
+[ERROR]-[Thread: http-bio-8080-exec-5]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.NullPointerException
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:348)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 11:11:47
+[ERROR]-[Thread: http-bio-8080-exec-6]-[com.jfinal.core.ActionHandler.handle()]: /user/uploadheadphoto
+java.lang.NullPointerException
+	at com.qxms.controller.sys.UserController.uploadheadphoto(UserController.java:350)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 16:58:40
+[ERROR]-[Thread: http-bio-8080-exec-4]-[freemarker.log.Log4JLoggerFactory$Log4JLogger.error()]: Template processing error: "Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html."
+
+Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+The problematic instruction:
+----------
+==> ${cache_cnickname} [on line 5, column 59 in common/userAccount.html]
+ in include "/common/userAccount.html" [on line 54, column 13 in index/index.html]
+----------
+
+Java backtrace for programmers:
+----------
+freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 16:58:40
+[ERROR]-[Thread: http-bio-8080-exec-4]-[com.jfinal.core.ActionHandler.handle()]: /
+com.jfinal.render.RenderException: freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:160)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	... 20 more
+
+2017-02-04 16:58:45
+[ERROR]-[Thread: http-bio-8080-exec-4]-[freemarker.log.Log4JLoggerFactory$Log4JLogger.error()]: Template processing error: "Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html."
+
+Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+The problematic instruction:
+----------
+==> ${cache_cnickname} [on line 5, column 59 in common/userAccount.html]
+ in include "/common/userAccount.html" [on line 54, column 13 in index/index.html]
+----------
+
+Java backtrace for programmers:
+----------
+freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 16:58:45
+[ERROR]-[Thread: http-bio-8080-exec-4]-[com.jfinal.core.ActionHandler.handle()]: /
+com.jfinal.render.RenderException: freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:160)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	... 20 more
+
+2017-02-04 16:58:57
+[ERROR]-[Thread: http-bio-8080-exec-4]-[freemarker.log.Log4JLoggerFactory$Log4JLogger.error()]: Template processing error: "Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html."
+
+Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+The problematic instruction:
+----------
+==> ${cache_cnickname} [on line 5, column 59 in common/userAccount.html]
+ in include "/common/userAccount.html" [on line 54, column 13 in index/index.html]
+----------
+
+Java backtrace for programmers:
+----------
+freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 16:58:57
+[ERROR]-[Thread: http-bio-8080-exec-4]-[com.jfinal.core.ActionHandler.handle()]: /
+com.jfinal.render.RenderException: freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:160)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	... 20 more
+
+2017-02-04 17:00:35
+[ERROR]-[Thread: http-bio-8080-exec-7]-[freemarker.log.Log4JLoggerFactory$Log4JLogger.error()]: Template processing error: "Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html."
+
+Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+The problematic instruction:
+----------
+==> ${cache_cnickname} [on line 5, column 59 in common/userAccount.html]
+ in include "/common/userAccount.html" [on line 54, column 13 in index/index.html]
+----------
+
+Java backtrace for programmers:
+----------
+freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 17:00:35
+[ERROR]-[Thread: http-bio-8080-exec-7]-[com.jfinal.core.ActionHandler.handle()]: /
+com.jfinal.render.RenderException: freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:160)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: freemarker.core.InvalidReferenceException: Expression cache_cnickname is undefined on line 5, column 61 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.Expression.getStringValue(Expression.java:118)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	... 20 more
+
+2017-02-04 17:39:26
+[ERROR]-[Thread: http-bio-8080-exec-3]-[freemarker.log.Log4JLoggerFactory$Log4JLogger.error()]: Template processing error: "Expression user is undefined on line 4, column 34 in common/userAccount.html."
+
+Expression user is undefined on line 4, column 34 in common/userAccount.html.
+The problematic instruction:
+----------
+==> ${user.realHeadphoto!} [on line 4, column 32 in common/userAccount.html]
+ in include "/common/userAccount.html" [on line 54, column 13 in index/index.html]
+----------
+
+Java backtrace for programmers:
+----------
+freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.TemplateObject.invalidTypeException(TemplateObject.java:135)
+	at freemarker.core.Dot._getAsTemplateModel(Dot.java:78)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.DefaultToExpression._getAsTemplateModel(DefaultToExpression.java:100)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 17:39:26
+[ERROR]-[Thread: http-bio-8080-exec-3]-[com.jfinal.core.ActionHandler.handle()]: /
+com.jfinal.render.RenderException: freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:160)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.TemplateObject.invalidTypeException(TemplateObject.java:135)
+	at freemarker.core.Dot._getAsTemplateModel(Dot.java:78)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.DefaultToExpression._getAsTemplateModel(DefaultToExpression.java:100)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	... 20 more
+
+2017-02-04 17:39:30
+[ERROR]-[Thread: http-bio-8080-exec-3]-[freemarker.log.Log4JLoggerFactory$Log4JLogger.error()]: Template processing error: "Expression user is undefined on line 4, column 34 in common/userAccount.html."
+
+Expression user is undefined on line 4, column 34 in common/userAccount.html.
+The problematic instruction:
+----------
+==> ${user.realHeadphoto!} [on line 4, column 32 in common/userAccount.html]
+ in include "/common/userAccount.html" [on line 54, column 13 in index/index.html]
+----------
+
+Java backtrace for programmers:
+----------
+freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.TemplateObject.invalidTypeException(TemplateObject.java:135)
+	at freemarker.core.Dot._getAsTemplateModel(Dot.java:78)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.DefaultToExpression._getAsTemplateModel(DefaultToExpression.java:100)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 17:39:30
+[ERROR]-[Thread: http-bio-8080-exec-3]-[com.jfinal.core.ActionHandler.handle()]: /
+com.jfinal.render.RenderException: freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:160)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.TemplateObject.invalidTypeException(TemplateObject.java:135)
+	at freemarker.core.Dot._getAsTemplateModel(Dot.java:78)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.DefaultToExpression._getAsTemplateModel(DefaultToExpression.java:100)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	... 20 more
+
+2017-02-04 17:39:40
+[ERROR]-[Thread: http-bio-8080-exec-3]-[freemarker.log.Log4JLoggerFactory$Log4JLogger.error()]: Template processing error: "Expression user is undefined on line 4, column 34 in common/userAccount.html."
+
+Expression user is undefined on line 4, column 34 in common/userAccount.html.
+The problematic instruction:
+----------
+==> ${user.realHeadphoto!} [on line 4, column 32 in common/userAccount.html]
+ in include "/common/userAccount.html" [on line 54, column 13 in index/index.html]
+----------
+
+Java backtrace for programmers:
+----------
+freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.TemplateObject.invalidTypeException(TemplateObject.java:135)
+	at freemarker.core.Dot._getAsTemplateModel(Dot.java:78)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.DefaultToExpression._getAsTemplateModel(DefaultToExpression.java:100)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+
+2017-02-04 17:39:40
+[ERROR]-[Thread: http-bio-8080-exec-3]-[com.jfinal.core.ActionHandler.handle()]: /
+com.jfinal.render.RenderException: freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:160)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
+	at com.qxms.interceptor.common.CommonHandler.handle(CommonHandler.java:18)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:936)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1004)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: freemarker.core.InvalidReferenceException: Expression user is undefined on line 4, column 34 in common/userAccount.html.
+	at freemarker.core.TemplateObject.assertNonNull(TemplateObject.java:125)
+	at freemarker.core.TemplateObject.invalidTypeException(TemplateObject.java:135)
+	at freemarker.core.Dot._getAsTemplateModel(Dot.java:78)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.DefaultToExpression._getAsTemplateModel(DefaultToExpression.java:100)
+	at freemarker.core.Expression.getAsTemplateModel(Expression.java:89)
+	at freemarker.core.Expression.getStringValue(Expression.java:93)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.include(Environment.java:1508)
+	at freemarker.core.Include.accept(Include.java:169)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.MixedContent.accept(MixedContent.java:92)
+	at freemarker.core.Environment.visit(Environment.java:221)
+	at freemarker.core.Environment.process(Environment.java:199)
+	at freemarker.template.Template.process(Template.java:259)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:158)
+	... 20 more

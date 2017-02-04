@@ -1,11 +1,10 @@
 package com.qxms.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
@@ -51,11 +50,9 @@ public class TestController extends Controller {
 	}
 
 	public static void main(String[] args) {
-		String  s= "    http://blog.sina.com.cn/s/blog_4550f3ca0100qrsd.html";
+		Date date = new Date();
 		
-		System.out.println(StringUtils.indexOf( s,"http://"));
-		
-		
+		System.out.println(new Date().getTime());
 		
 	}
 }
