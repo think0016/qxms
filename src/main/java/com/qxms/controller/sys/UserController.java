@@ -343,12 +343,6 @@ public class UserController extends Controller {
 		
 		UploadFile uf = getFile("headphoto");
 
-		// System.out.println(uf.getContentType());
-		// System.out.println(uf.getOriginalFileName());
-		// System.out.println(uf.getParameterName());
-		// System.out.println(uf.getFile().getPath());
-		// System.out.println(JFinal.me().getServletContext().getRealPath("upload/headphoto/"));
-
 		if (MoeFileUtils.isImg(uf.getContentType())) {
 			String path = JFinal.me().getServletContext().getRealPath("upload/headphoto") + "\\";
 			String filename = ((User) getSession().getAttribute("cache_user")).getUid().toString() + "_"
@@ -356,9 +350,12 @@ public class UserController extends Controller {
 
 			File srcFile = uf.getFile();
 			File destFile = new File(path + filename);
-
+			
 			try {
-				FileUtils.moveFile(srcFile, destFile);
+				//调整尺寸
+				MoeFileUtils.resizeImage(srcFile, srcFile, 160, 160);
+				FileUtils.moveFile(srcFile, destFile);				
+
 				result.put("status", "1");
 				result.put("msg", filename);
 			} catch (IOException e) {
